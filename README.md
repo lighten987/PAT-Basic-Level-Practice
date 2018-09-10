@@ -4,26 +4,26 @@
 任意自然数，偶数砍半，奇数*3-1再砍半，最后为一，求步数 
 
 ***思路：while 数不为1，判断奇偶，对应处理，计数count从0开始++，最后输出count***  
->#include<iostream>  
-using namespace std;  
-int main()  
-{
-	int n;
-	cin>>n;
-	int count = 0;
-	while(n!=1){
-		if(n%2==0)n/=2;
-		else n=(3*n+1)/2;
-		count++;
-	} 
-	cout<<count; 
-	return 0;
-}
-*/ 
-
-/*
-1002
-读入自然数，计算各数字之和，拼音写出每一位
+>#include<iostream>    
+using namespace std;    
+int main()    
+{  
+	int n;  
+	cin>>n;  
+	int count = 0;  
+	while(n!=1){  
+		if(n%2==0)n/=2;  
+		else n=(3*n+1)/2;  
+		count++;  
+	}   
+	cout<<count;   
+	return 0;  
+}  
+*/     
+  
+/*  
+1002  
+读入自然数，计算各数字之和，拼音写出每一位  
 
 思路：数字太大，首先考虑用char数组接收，再去计算和  每一位字符减去‘0’再自加  得到的数按低位放入新数组 
       对于拼音写出，定义字符串数组即可char pinyin[][9]={"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};

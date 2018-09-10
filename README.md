@@ -63,7 +63,7 @@ int main()
 我要通过  字符串满足特定格式就通过，否则不通过  
 
 ***思路：p之前的A的个数*中间的A的个数=最后的A的个数!!!!!!!!!***  
-#include<iostream>  
+>#include<iostream>  
 #include<cstring>  
 using namespace std;  
 int main()  
@@ -102,8 +102,7 @@ int main()
 			cout<<"YES"<<endl;  
 		}  
 		else cout<<"NO"<<endl;  
-	}  
-	
+	}  	
 	return 0;  
 }  
 */  

@@ -3,8 +3,8 @@
 **1001**
 任意自然数，偶数砍半，奇数*3-1再砍半，最后为一，求步数 
 
-***思路：while 数不为1，判断奇偶，对应处理，计数count从0开始++，最后输出count***
-#include<iostream>  
+***思路：while 数不为1，判断奇偶，对应处理，计数count从0开始++，最后输出count***  
+>#include<iostream>  
 using namespace std;  
 int main()  
 {

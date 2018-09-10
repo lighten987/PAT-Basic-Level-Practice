@@ -1855,7 +1855,7 @@ int main()
 		cin>>v[i].zongjia;  
 		mmmax += v[i].zongjia;  
 	}  
-	for(int i = 0; i<N; i++){  
+	for(int i = 0; i<N; i++){    	    
 		v[i].danjia = v[i].zongjia/v[i].cucun;  
 	}  
     sort(v.begin(),v.end(),cmp);  
@@ -1864,7 +1864,8 @@ int main()
     if(count>=mmax){   
     	printf("%.2lf",mmmax);  
 	}  
-	else{   
+	else{ 
+	while(count>0){  
     	if(count>v[k].cucun){  
     		sum += v[k].zongjia;  
     		count -= v[k].cucun;  

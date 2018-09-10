@@ -109,223 +109,220 @@ int main()
 
 /*
 1004
-读入n个学生的姓名学号成绩，输出成绩最高的和最低的对应姓名学号
+读入n个学生的姓名学号成绩，输出成绩最高的和最低的对应姓名学号  
 
-思路：定义一个学生类，开辟存储空间并存入值，比较输出 
-      类中函数变量 有初始化函数，读取成绩函数，成绩值变量为私有变量，只有函数调用 显示打印函数 
+***思路：定义一个学生类，开辟存储空间并存入值，比较输出   
+      类中函数变量 有初始化函数，读取成绩函数，成绩值变量为私有变量，只有函数调用 显示打印函数*** 
 
-#include<iostream>
-#include<cstring>
-using namespace std;
-int main()
-{
-class Student
-{
-	char Name[11];
-	char Number[11];
-	int Grade;
-public:
-	void Init(char *name,char *number,int grade)
-	{
-		strcpy(Name,name);
-		strcpy(Number,number);
-		Grade=grade;	
-	}
-	//比较成绩时调用此函数 
-	int Show_Grade()
-	{
-		return Grade;
-	}
-	//显示信息函数 
-	void Show()
-	{
-		cout<<Name<<" "<<Number<<endl;	
-	} 
-}; 
-	int n;
-	cin>>n;
-	char name[11];
-	char number[11];
-	int grade;
-	Student student[n],max,min;  //不需要动态开辟内存空间 
-	for(int i=0;i<n;i++)
-	{
-		cin>>name>>number>>grade;
-		student[i].Init(name,number,grade); 
-	}
-	max=student[0];
-	for(int i=1;i<n;i++)
-	{
-		if(student[i].Show_Grade()>max.Show_Grade())
-		{
-			max=student[i];
-		}
-	}
-	max.Show();
-	min=student[0];
-	for(int i=1;i<n;i++)
-	{
-		if(student[i].Show_Grade()<min.Show_Grade())
-		{
-			min=student[i];
-		}
-	}
-	min.Show(); 
-	return 0;
-}
+>#include<iostream>  
+#include<cstring>  
+using namespace std;  
+int main()  
+{  
+class Student  
+{  
+	char Name[11];  
+	char Number[11];  
+	int Grade;  
+public:  
+	void Init(char *name,char *number,int grade)  
+	{  
+		strcpy(Name,name);  
+		strcpy(Number,number);  
+		Grade=grade;  	
+	}  
+	//比较成绩时调用此函数     
+	int Show_Grade()  
+	{  
+		return Grade;  
+	}  
+	//显示信息函数     
+	void Show()  
+	{  
+		cout<<Name<<" "<<Number<<endl;  	
+	}   
+};   
+	int n;  
+	cin>>n;  
+	char name[11];  
+	char number[11];  
+	int grade;  
+	Student student[n],max,min;  //不需要动态开辟内存空间     
+	for(int i=0;i<n;i++)  
+	{  
+		cin>>name>>number>>grade;  
+		student[i].Init(name,number,grade);   
+	}  
+	max=student[0];  
+	for(int i=1;i<n;i++)  
+	{  
+		if(student[i].Show_Grade()>max.Show_Grade())  
+		{  
+			max=student[i];  
+		}  
+	}  
+	max.Show();  
+	min=student[0];  
+	for(int i=1;i<n;i++)  
+	{  
+		if(student[i].Show_Grade()<min.Show_Grade())  
+		{  
+			min=student[i];  
+		}  
+	}  
+	min.Show();   
+	return 0;  
+}  
 
-//第二次代码  用vector做 
-#include<iostream>
-#include<vector>
-#include<algorithm>
-using namespace std;
-struct student
-{
-	string name;
-	string id;
-	int score;
-};
-bool cmp(student a,student b)  //想用sort()函数达到降序效果，cmp返回值为0 所以如果前面一个成绩低，就该返回0 
-{
-	return a.score<b.score?0:1; 
-}
-vector<student> v;
-int main()
-{
-	int n;
-	cin>>n;
-	for(int i=0; i<n; i++){
-	//	cin>>v[i].name>>v[i].id>>v[i].score;  //第一种读入方式  第二种，分别定义后再读入再赋值 
-	    string name;
-	    string id;
-	    int score;
-	    cin>>name>>id>>score;
-	    v.push_back(student{name,id,score});
-	}
-	sort(v.begin(),v.end(),cmp);
-	vector<student>::iterator it;
-	it=v.begin();
-	cout<<(*it).name<<" "<<(*it).id<<endl;//这里用不用c_str()都可以  神奇  但是（*it）括号是必须的 
-	it=v.end()-1;
-	cout<<(*it).name<<" "<<(*it).id<<endl;
-	return 0;
-} 
-*/
+//第二次代码  用vector做   
+>#include<iostream>  
+#include<vector>  
+#include<algorithm>  
+using namespace std;  
+struct student  
+{  
+	string name;  
+	string id;  
+	int score;  
+};  
+bool cmp(student a,student b)  //想用sort()函数达到降序效果，cmp返回值为0 所以如果前面一个成绩低，就该返回0   
+{  
+	return a.score<b.score?0:1;   
+}  
+vector<student> v;  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	for(int i=0; i<n; i++){  
+	//	cin>>v[i].name>>v[i].id>>v[i].score;  //第一种读入方式  第二种，分别定义后再读入再赋值     
+	    string name;  
+	    string id;  
+	    int score;  
+	    cin>>name>>id>>score;  
+	    v.push_back(student{name,id,score});  
+	}  
+	sort(v.begin(),v.end(),cmp);  
+	vector<student>::iterator it;  
+	it=v.begin();  
+	cout<<(*it).name<<" "<<(*it).id<<endl;//这里用不用c_str()都可以  神奇  但是（*it）括号是必须的   
+	it=v.end()-1;  
+	cout<<(*it).name<<" "<<(*it).id<<endl;  
+	return 0;  
+}     
+*/  
+  
+/*  
+1005  
+继续（3n+1）猜想 找出给出数中关键数，包含于其他的数  
 
-/*
-1005
-继续（3n+1）猜想 找出给出数中关键数，包含于其他的数
+***思路：每个关键数将路径放入路径数组，输入数与对应数在数组中的值比较，将路径数组中为一的对应值输出，即为关键数***  
 
-思路：每个关键数将路径放入路径数组，输入数与对应数在数组中的值比较，将路径数组中为一的对应值输出，即为关键数 
+//继续(3n+1)猜想 参看答案用vector做的，我想直接用数组做，一个数组存放输入数据，另一个数组带下标记录路径  
+//第三个数组将数据作为第二数组下标查看只出现一次的，放入，降序排序输出即可    
+//第二次代码     
+>#include<iostream>  
+#include<algorithm>  
+using namespace std;  
+bool cmp(int i,int j)  
+{  
+	return i>j;  
+}  
+int main()  
+{  
+	int n;  
+	int shuzu[101] = {0};     
+	int xiabiao[101] = {0};  
+	int out[101] = {0};  
+	cin>>n;  
+	for(int i = 0; i< n; i++){  
+		int temp;  
+		cin>>temp;  
+		shuzu[i]=temp;  
+		xiabiao[temp]++;  
+		while(temp != 1){  
+			if(temp%2 == 0){  
+				temp/=2;  
+				if(temp<=100)  
+				xiabiao[temp]++;  
+			}  
+			else{  
+				temp=(temp*3+1)/2;  
+				if(temp<=100)  
+				xiabiao[temp]++;  
+			}  
+		}  
+	}  
+	int count=0;  
+	for(int j = 0; j< n; j++){  
+		if(xiabiao[shuzu[j]]==1){  
+			out[count++] = shuzu[j];  
+		}  
+	}  
+	sort(out,out+count,cmp);  
+	cout<<out[0];  
+	for(int j = 1;j<count;j++)cout<<" "<<out[j];  
+	return 0;  
+}  
 
-//继续(3n+1)猜想 参看答案用vector做的，我想直接用数组做，一个数组存放输入数据，另一个数组带下标记录路径
-//第三个数组将数据作为第二数组下标查看只出现一次的，放入，降序排序输出即可 
-//第二次代码 
-#include<iostream>
-#include<algorithm>
-using namespace std;
-bool cmp(int i,int j)
-{
-	return i>j;
-}
-int main()
-{
-	int n;
-	int shuzu[101] = {0}; 
-	int xiabiao[101] = {0};
-	int out[101] = {0};
-	cin>>n;
-	for(int i = 0; i< n; i++){
-		int temp;
-		cin>>temp;
-		shuzu[i]=temp;
-		xiabiao[temp]++;
-		while(temp != 1){
-			if(temp%2 == 0){
-				temp/=2;
-				if(temp<=100)
-				xiabiao[temp]++;
-			}
-			else{
-				temp=(temp*3+1)/2;
-				if(temp<=100)
-				xiabiao[temp]++;
-			}
-		}
-	}
-	int count=0;
-	for(int j = 0; j< n; j++){
-		if(xiabiao[shuzu[j]]==1){
-			out[count++] = shuzu[j];
-		}
-	}
-	sort(out,out+count,cmp);
-	cout<<out[0];
-	for(int j = 1;j<count;j++)cout<<" "<<out[j];
-	return 0;
-}
-
-//参考答案
-#include <iostream>
-#include <vector>
-#include <algorithm> 
-using namespace std;
+//参考答案  
+>#include <iostream>  
+#include <vector>  
+#include <algorithm>   
+using namespace std;  
  
-bool compare(int i, int j){   //sort()降序排列 
-	return j<i;
-}
-int main() {
-	int n(0); //待验证整数个数
-	cin >> n;
-	vector<int> a(100);   //记录（3n+1)过程中出现每个数的次数 
-	vector<int> b(n);   //保存每个待验证整数
-	vector<int>::iterator it;
-	for(it=b.begin();it!=b.end();it++){
-		int temp;
-		cin >> *it;
-		temp = *it;
-		a[temp]++;
-		if(temp==1){
-			a[temp]++;
-		}else{
-			while(temp!=1){
-				if(temp%2==0){
-					temp/=2;
-					if(temp<=100)    //超过100无意义，不需记录 
-					a[temp]++;
-				}else{
-					temp=(3*temp+1)/2;
-					if(temp<=100)
-					a[temp]++;
-				}
-			}
-		}
-	}
-	
-	sort(b.begin(),b.end(),compare);  //按降序排序
-	int count(0);  //记录关键数个数 
-	vector<int> key(1);  // 保存关键数 
-	for(it=b.begin();it!=b.end();it++){
-		if(a[*it]==1){
-			key[count++]=*it;
-			key.resize(count+1);
-		} 
-	} 
-	
-	//按要求输出结果 
-	for(it=key.begin();it!=key.end()-1;it++){
-		
-		if(it!=key.end()-2){
-			cout << *it << " ";
-		}
-		else{
-			cout << *it;
-		}
-	}
-	return 0;
-} 
-*/
-
+bool compare(int i, int j){   //sort()降序排列       
+	return j<i;  
+}  
+int main() {  
+	int n(0); //待验证整数个数  
+	cin >> n;  
+	vector<int> a(100);   //记录（3n+1)过程中出现每个数的次数   
+	vector<int> b(n);   //保存每个待验证整数  
+	vector<int>::iterator it;  
+	for(it=b.begin();it!=b.end();it++){  
+		int temp;  
+		cin >> *it;  
+		temp = *it;  
+		a[temp]++;  
+		if(temp==1){  
+			a[temp]++;  
+		}else{  
+			while(temp!=1){  
+				if(temp%2==0){  
+					temp/=2;  
+					if(temp<=100)    //超过100无意义，不需记录   
+					a[temp]++;  
+				}else{  
+					temp=(3*temp+1)/2;  
+					if(temp<=100)  
+					a[temp]++;  
+				}  
+			}  
+		}  
+	}  
+	sort(b.begin(),b.end(),compare);  //按降序排序  
+	int count(0);  //记录关键数个数        
+	vector<int> key(1);  // 保存关键数   
+	for(it=b.begin();it!=b.end();it++){  
+		if(a[*it]==1){  
+			key[count++]=*it;  
+			key.resize(count+1);  
+		}   
+	}   
+	//按要求输出结果   
+	for(it=key.begin();it!=key.end()-1;it++){  
+		if(it!=key.end()-2){     
+			cout << *it << " ";  
+		}  
+		else{  
+			cout << *it;  
+		}  
+	}  
+	return 0;  
+}     
+*/  
+ 
 /*
 1006
 换格式输出整数

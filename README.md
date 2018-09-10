@@ -25,88 +25,88 @@ int main()
 1002  
 读入自然数，计算各数字之和，拼音写出每一位  
 
-思路：数字太大，首先考虑用char数组接收，再去计算和  每一位字符减去‘0’再自加  得到的数按低位放入新数组 
-      对于拼音写出，定义字符串数组即可char pinyin[][9]={"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};
-#include<iostream>
-using namespace std;
-int main()
-{
-	string c;
-	cin>>c;
-	string pinyin[10] = {"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};
-	int count = 0;
-	//计算总和 
-	for(int i=0;i<c.size();i++)
-	{
-		count += c[i]-'0';
-	}
-	//从低位依次放入新数组
-	int a[100];
-	int i = 0;
-	while(count!=0)
-	{
-		a[i] = count%10;
-		count /= 10;
-		i++; 	
-	}
-	for(int j = i-1;j>0;j--)
-	{
-		cout<<pinyin[a[j]]<<" ";
-	}
-	cout<<pinyin[a[0]]; 
-	return 0;
-}
-*/
+***思路：数字太大，首先考虑用char数组接收，再去计算和  每一位字符减去‘0’再自加  得到的数按低位放入新数组 ***  
+      对于拼音写出，定义字符串数组即可char pinyin[][9]={"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};  
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	string c;  
+	cin>>c;  
+	string pinyin[10] = {"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};  
+	int count = 0;  
+	//计算总和   
+	for(int i=0;i<c.size();i++)  
+	{  
+		count += c[i]-'0';  
+	}  
+	//从低位依次放入新数组  
+	int a[100];  
+	int i = 0;  
+	while(count!=0)  
+	{  
+		a[i] = count%10;  
+		count /= 10;  
+		i++;    	
+	}  
+	for(int j = i-1;j>0;j--)  
+	{  
+		cout<<pinyin[a[j]]<<" ";  
+	}  
+	cout<<pinyin[a[0]];   
+	return 0;  
+}  
+*/  
+  
+/*  
+1003  
+我要通过  字符串满足特定格式就通过，否则不通过  
 
-/*
-1003
-我要通过  字符串满足特定格式就通过，否则不通过
-
-思路：p之前的A的个数*中间的A的个数=最后的A的个数!!!!!!!!!
-#include<iostream>
-#include<cstring>
-using namespace std;
-int main()
-{
-	int n;
-	cin>>n;
-	for(int i=0;i<n;i++)
-	{
-		char str[100];
-		scanf("%s",str);
-//		cin.getline(str,100);
-		int nump=0,numt=0,other=0,localp,localt;
-		int len=strlen(str);
-		for(int j=0;j<len;j++)
-		{
-			if(str[j]=='P')  //第一个p出现时，意味着前面都是A，且刚好个数即为下标数 
-			{
-				nump++;
-				localp=j;
-			}
-			else if(str[j]=='T')
-			{
-				numt++;
-				localt=j;
-			}
-			else if(str[j]!='A')
-			other++;
-		}
-		if((nump!=1)||(numt!=1)||(other!=0)||(localt-localp<=1))//P和T的个数必须为一，没有其他字母，P和T中间至少有一个A 
-		{
-			cout<<"NO"<<endl;
-			continue;  //此次循环结束，否则会输出两次NO 
-		}
-		if(localp*(localt-localp-1)==(len-localt-1))
-		{
-			cout<<"YES"<<endl;
-		}
-		else cout<<"NO"<<endl;
-	}
+***思路：p之前的A的个数*中间的A的个数=最后的A的个数!!!!!!!!!***  
+#include<iostream>  
+#include<cstring>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	cin>>n;    
+	for(int i=0;i<n;i++)      
+	{    
+		char str[100];  
+		scanf("%s",str);  
+//		cin.getline(str,100);  
+		int nump=0,numt=0,other=0,localp,localt;  
+		int len=strlen(str);  
+		for(int j=0;j<len;j++)  
+		{  
+			if(str[j]=='P')  //第一个p出现时，意味着前面都是A，且刚好个数即为下标数   
+			{  
+				nump++;  
+				localp=j;  
+			}  
+			else if(str[j]=='T')  
+			{  
+				numt++;  
+				localt=j;  
+			}  
+			else if(str[j]!='A')  
+			other++;  
+		}  
+		if((nump!=1)||(numt!=1)||(other!=0)||(localt-localp<=1))//P和T的个数必须为一，没有其他字母，P和T中间至少有一个A    
+		{  
+			cout<<"NO"<<endl;  
+			continue;  //此次循环结束，否则会输出两次NO     
+		}  
+		if(localp*(localt-localp-1)==(len-localt-1))  
+		{  
+			cout<<"YES"<<endl;  
+		}  
+		else cout<<"NO"<<endl;  
+	}  
 	
-	return 0;
-}
-*/
+	return 0;  
+}  
+*/  
 
 /*
 1004

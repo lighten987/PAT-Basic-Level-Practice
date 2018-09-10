@@ -270,7 +270,6 @@ int main()
 #include <vector>  
 #include <algorithm>   
 using namespace std;  
- 
 bool compare(int i, int j){   //sort()降序排列       
 	return j<i;  
 }  
@@ -324,265 +323,262 @@ int main() {
 */  
  
 /*
-1006
-换格式输出整数
+1006  
+换格式输出整数  
 
-思路：分别读取百十个位，用循环去显示对应字母 
+***思路：分别读取百十个位，用循环去显示对应字母***
 
-#include<iostream>
-using namespace std;
-int main()
-{
-	int n;
-	cin>>n;
-	int b,s,g;
-	b=n/100;
-	s=(n-b*100)/10;
-	g=n%10; 
-	for(int i=0;i<b;i++)cout<<'B';
-	for(int i=0;i<s;i++)cout<<'S';
-	for(int i=1;i<=g;i++)cout<<i;
-	return 0;
-}
-*/
-
-/*
-1007
-素数对猜想  给定整数 在范围求出相邻奇数对的对数
-
-思路：bool判定素数函数 在整数范围内用循环i遍历，i与i+2都为素数 count计数 
-      为了实现程序时间较快  判断素数程序用cmath头文件包含的sqrt()开根号函数
-#include<iostream>
-#include<math.h>
-using namespace std;
-bool IsLeap(int n)   //判断素数程序 
-{		
-	for(int i=2;i<=sqrt(n);i++)
-	{
-		if(n%i==0)return false;			
-	}
-	return true;
-}
-int main()
-{
-	int n,j=0;
-	cin>>n;
-	for(int i=3;i<=n-2;i++){
-		if(IsLeap(i)&&IsLeap(i+2))
-		{
-			j++;
-		}
-	}
-	cout<<j;     
-	return 0;
-} 
-*/
-
-/*
-1008
-数组元素循环右移问题
-
-思路：将整体右移m位（初始定义数组长度保证足够）将多位移至开头空位
-      注意，开头空位获得溢出位值时，用取余去等值
-      感觉上只能用指针操作啊！！！ 
-#include<iostream>
-using namespace std;
-int main()
-{
-	int a[200];
-	int m;
-	int count;
-	cin>>count>>m;
-	//数组封装完成 
-	for(int i=0;i<count;i++)
-	{
-		cin>>a[i];
-	}
-	int *p=a;
-	if(m==0)
-	{
-	  for(int i=0;i<count-1;i++)
-	{
-		cout<<a[i]<<" ";
-	}
-	cout<<a[count-1];
-	}
-	else{
-	//共count个整体后移m位 
-	int k=m,v=count;
-	for(;v>=0;v--)
-	{
-		*(p+v+m)=*(p+v);			 
-	}	
-	//前m个 
-	for(int j=count;j<count+m;j++)
-	{
-		*(p+j%count)=*(p+j);			 
-	}
-	for(int i=0;i<count-1;i++)
-	{
-		cout<<a[i]<<" ";
-	}
-    cout<<a[count-1];
-	}
-	return 0;
-} 
-*/ 
-
-/*
-1009 
-说反话  给出一串单词 逆序输出单词，单词顺序不变
-
-思路：字符数组输入，遇到" "(空格)切分成字符串，用vector读取单词，逆序输出 
-#include<iostream>
-#include<vector>
-#include<cstring>
-using namespace std;
-int main()
-{
-	vector<string>v;
-	char s[81];  //长度设为80会部分报错！！ 
-	cin.getline(s,81);
-	int len=strlen(s);
-	string danci="";
-	for(int i=0;i<len;i++)
-	{
-		if(s[i]=='\0')
-		{
-			break;
-		}
-		if(s[i]!=' ')
-		{
-			danci+=s[i];   //全场最骚！！！ 
-		}
-		else{
-			v.push_back(danci);
-			danci="";
-		}
-		
-	}
-	v.push_back(danci);  //break出来时还有最后一个单词
-	for(int i=v.size()-1;i>=0;i--)
-    {
-        if(i!=0)
-            cout<<v[i]<<" ";
-        else
-            cout<<v[i];
-    } 
-	return 0;
-}
-
-//第二次代码
-#include<iostream>
-#include<vector>
-#include<cstring>
-using namespace std;
-vector<string>v;
-int main()
-{
-	char c[81];
-	cin.getline(c,81);
-	int len = strlen(c);
-	string danci = "";
-	for(int i=0;i<len;i++){
-		if(c[i] == '\0'){
-			break;
-		}
-		else if(c[i] != ' '){  //字符 '' 
-			danci+=c[i];
-		}
-		else{
-			v.push_back(danci);
-			danci = "";
-		}
-	}
-	v.push_back(danci);
-	for(int j= v.size()-1;j>0;j--)cout<<v[j]<<" ";
-	cout<<v[0];
-	return 0;
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	int b,s,g;  
+	b=n/100;  
+	s=(n-b*100)/10;  
+	g=n%10;   
+	for(int i=0;i<b;i++)cout<<'B';  
+	for(int i=0;i<s;i++)cout<<'S';  
+	for(int i=1;i<=g;i++)cout<<i;  
+	return 0;  
 }  
-*/
+*/  
 
-/*
-1010
-一元多项式求导  将系数与指数告知，输出求导后系数与指数
+/*  
+1007  
+素数对猜想  给定整数 在范围求出相邻奇数对的对数  
 
-思路：对于一串数字的读取，未知长度，用vector向量 
+***思路：bool判定素数函数 在整数范围内用循环i遍历，i与i+2都为素数 count计数    
+      为了实现程序时间较快  判断素数程序用cmath头文件包含的sqrt()开根号函数***
+>#include<iostream>   
+#include<math.h>   
+using namespace std;   
+bool IsLeap(int n)   //判断素数程序     
+{  		
+	for(int i=2;i<=sqrt(n);i++)  
+	{  
+		if(n%i==0)return false;	   		
+	}  
+	return true;  
+}  
+int main()  
+{  
+	int n,j=0;  
+	cin>>n;  
+	for(int i=3;i<=n-2;i++){  
+		if(IsLeap(i)&&IsLeap(i+2))  
+		{  
+			j++;  
+		}  
+	}  
+	cout<<j;       
+	return 0;  
+}   
+*/  
 
-//我的答案  部分正确 
-#include<iostream>
-#include<vector>
-using namespace std;
- 
-int main()
-{
-	vector<int>v;
-	int n;
-	while(cin>>n)
-	{
-		v.push_back(n);
-	} 
-	if(!v.empty())
-	{
-		for(int i=1;i<=v.size();i+=2)
-		{
-			if(v[i]>1)
-			{
-				v[i-1]*=v[i];
-				v[i]--;
-				cout<<v[i-1]<<" "<<v[i]<<" ";
-			}
-			if(v[i]==1)
-			{
-				cout<<v[i-1]<<" "<<"0";
-			}
-			if(v[i]==0)
-			{
-				cout<<"0 0";
-			}
-		}	
-	}
-	else
-	{
-		cout<<"0 0";
-	}
-	return 0;
-}
-//参考答案
-#include<iostream>
-#include<vector>
-using namespace std;
- 
-int main()
-{
-	vector<int> v;
-	int n;
-	while(cin>>n)
-		v.push_back(n);
-	if(!v.empty())
-	{
-		for(int i = 0;i<v.size();i=i+2)
-		{
-			v[i] *= v[i+1];
-			v[i+1]--;
-			if(v[i]!=0)
-			{
-				if(i !=0 )
-					cout<< " ";
-				cout<<v[i]<<" "<<v[i+1];
-			}
-			else
-			{
-				if(v.size()==2)
-					cout<<"0 0";
-			}
-		}
-	}
-	else
-		cout<<"0 0";
-	return 0;
-}
-*/
+/*  
+1008  
+数组元素循环右移问题  
+
+***思路：将整体右移m位（初始定义数组长度保证足够）将多位移至开头空位   
+      注意，开头空位获得溢出位值时，用取余去等值   
+      感觉上只能用指针操作啊！！！ ***   
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int a[200];  
+	int m;  
+	int count;  
+	cin>>count>>m;    
+	//数组封装完成   
+	for(int i=0;i<count;i++)  
+	{  
+		cin>>a[i];  
+	}  
+	int *p=a;  
+	if(m==0)  
+	{  
+	  for(int i=0;i<count-1;i++)  
+	{  
+		cout<<a[i]<<" ";  
+	}  
+	cout<<a[count-1];  
+	}  
+	else{  
+	//共count个整体后移m位   
+	int k=m,v=count;  
+	for(;v>=0;v--)  
+	{  
+		*(p+v+m)=*(p+v);  			 
+	}  	
+	//前m个   
+	for(int j=count;j<count+m;j++)  
+	{  
+		*(p+j%count)=*(p+j);  			 
+	}  
+	for(int i=0;i<count-1;i++)  
+	{  
+		cout<<a[i]<<" ";  
+	}  
+    cout<<a[count-1];  
+	}  
+	return 0;  
+}   
+*/   
+
+/*  
+1009   
+说反话  给出一串单词 逆序输出单词，单词顺序不变  
+
+***思路：字符数组输入，遇到" "(空格)切分成字符串，用vector读取单词，逆序输出***   
+>#include<iostream>    
+#include<vector>   
+#include<cstring>  
+using namespace std;  
+int main()  
+{  
+	vector<string>v;  
+	char s[81];  //长度设为80会部分报错！！   
+	cin.getline(s,81);  
+	int len=strlen(s);  
+	string danci="";  
+	for(int i=0;i<len;i++)  
+	{  
+		if(s[i]=='\0')  
+		{  
+			break;  
+		}  
+		if(s[i]!=' ')  
+		{  
+			danci+=s[i];   //全场最骚！！！   
+		}  
+		else{  
+			v.push_back(danci);  
+			danci="";  
+		}  	
+	}  
+	v.push_back(danci);  //break出来时还有最后一个单词  
+	for(int i=v.size()-1;i>=0;i--)   
+    {   
+        if(i!=0)  
+            cout<<v[i]<<" ";  
+        else  
+            cout<<v[i];  
+    }   
+	return 0;  
+}  
+
+//第二次代码  
+>#include<iostream>    
+#include<vector>  
+#include<cstring>  
+using namespace std;  
+vector<string>v;  
+int main()  
+{  
+	char c[81];  
+	cin.getline(c,81);  
+	int len = strlen(c);  
+	string danci = "";  
+	for(int i=0;i<len;i++){  
+		if(c[i] == '\0'){  
+			break;  
+		}  
+		else if(c[i] != ' '){  //字符 ''   
+			danci+=c[i];  
+		}  
+		else{  
+			v.push_back(danci);  
+			danci = "";  
+		}  
+	}  
+	v.push_back(danci);  
+	for(int j= v.size()-1;j>0;j--)cout<<v[j]<<" ";  
+	cout<<v[0];  
+	return 0;  
+}     
+*/  
+
+/*  
+1010  
+一元多项式求导  将系数与指数告知，输出求导后系数与指数  
+
+***思路：对于一串数字的读取，未知长度，用vector向量***   
+
+//我的答案  部分正确   
+>#include<iostream>  
+#include<vector>  
+using namespace std;  
+int main()  
+{  
+	vector<int>v;  
+	int n;  
+	while(cin>>n)  
+	{  
+		v.push_back(n);  
+	}   
+	if(!v.empty())  
+	{  
+		for(int i=1;i<=v.size();i+=2)  
+		{  
+			if(v[i]>1)  
+			{  
+				v[i-1]*=v[i];  
+				v[i]--;  
+				cout<<v[i-1]<<" "<<v[i]<<" ";  
+			}  
+			if(v[i]==1)  
+			{  
+				cout<<v[i-1]<<" "<<"0";  
+			}  
+			if(v[i]==0)  
+			{  
+				cout<<"0 0";  
+			}  
+		}  	
+	}  
+	else  
+	{  
+		cout<<"0 0";  
+	}  
+	return 0;  
+}  
+//参考答案  
+>#include<iostream>    
+#include<vector>    
+using namespace std;    
+int main()  
+{  
+	vector<int> v;  
+	int n;  
+	while(cin>>n)  
+		v.push_back(n);  
+	if(!v.empty())  
+	{  
+		for(int i = 0;i<v.size();i=i+2)  
+		{  
+			v[i] *= v[i+1];  
+			v[i+1]--;  
+			if(v[i]!=0)  
+			{  
+				if(i !=0 )  
+					cout<< " ";  
+				cout<<v[i]<<" "<<v[i+1];  
+			}  
+			else  
+			{  
+				if(v.size()==2)  
+					cout<<"0 0";  
+			}  
+		}  
+	}  
+	else  
+		cout<<"0 0";  
+	return 0;  
+}  
+*/  
 
 /*
 1011

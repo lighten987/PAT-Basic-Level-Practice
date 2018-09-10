@@ -5,7 +5,8 @@
 
 ***思路：while 数不为1，判断奇偶，对应处理，计数count从0开始++，最后输出count***  
 >#include<iostream>    
-using namespace std;    
+using namespace std; 
+	
 int main()    
 {  
 	int n;  
@@ -29,6 +30,7 @@ int main()
       对于拼音写出，定义字符串数组即可char pinyin[][9]={"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};  
 >#include<iostream>  
 using namespace std;  
+	
 int main()  
 {  
 	string c;  
@@ -66,6 +68,7 @@ int main()
 >#include<iostream>  
 #include<cstring>  
 using namespace std;  
+
 int main()  
 {  
 	int n;  
@@ -117,6 +120,7 @@ int main()
 >#include<iostream>  
 #include<cstring>  
 using namespace std;  
+
 int main()  
 {  
 class Student  
@@ -580,272 +584,262 @@ int main()
 }  
 */  
 
-/*
-1011
-A+B与C判断大小
+/*  
+1011  
+A+B与C判断大小  
 
-思路：long double试试 放入二维数组 
+***思路：long double试试 放入二维数组***   
 
-#include<iostream>
-using namespace std;
-int main()
-{
-	long double a[10][4];
-	int n;
-	cin>>n;
-	for(int i=0;i<n;i++)
-	{
-		for(int k=0;k<3;k++)
-		{
-			cin>>a[i][k];
-		}
-	}
-	for(int i=0;i<n;i++)
-	{
-		if(a[i][0]+a[i][1]>a[i][2])
-		{
-			cout<<"Case #"<<i+1<<": true"<<endl;
-		}
-		else cout<<"Case #"<<i+1<<": false"<<endl;
-	}
-	return 0;
-}
-*/
-
-/*
-1012   有一个答案不对  最后一个测试点是A2返回值为计算出来的0，却被判否 
-数字分类 将一连串数字按要求分别得出结果并对应显示
-
-思路：调用函数完成各个模块，如时间不够再思考
-#include<iostream>
-#include<cstring>
-#include<iomanip>  //控制输出位数 cout<<"a="<<fixed<<setprecision(n)<<a<<endl;  小数点后n位输出，且不够会补零 
-#include<math.h>   //用到pow()，实现交叉求和 
-using namespace std;
-//A1输出函数 
-int A1(int *a,int n)
-{
-	int sum=0;
-	for(int i=0;i<n;i++)
-	{
-		if(a[i]%5==0&&a[i]%2==0)
-		{
-		sum+=a[i];	
-		}
-	}
-	return sum;
-} 
-
-//A2输出函数
-int A2(int *a,int n)
-{
-	int sum=0,k=1;
-	for(int i=0;i<n;i++)
-	{
-		if(a[i]%5==1)
-		{
-		sum+=a[i]*pow(-1,k+1);
-		k++;	
-		}
-	}
-	return sum;
-	
-}
-
-//A3输出函数
-int A3(int *a,int n)
-{
-	int sum=0;
-		for(int i=0;i<n;i++)
-	{
-		if(a[i]%5==2)
-		{
-		sum++;	
-		}
-	}
-	return sum;	
-} 
-
-//A4输出函数
-float A4(int *a,int n)
-{
-	float sum=0.0;int k=0;
-		for(int i=0;i<n;i++)
-	{
-		if(a[i]%5==3)
-		{
-		sum+=a[i];
-		k++;	
-		}
-	}
-	if(k!=0)
-	return sum/k;
-	else return 0;	
-}
-
-//A5输出函数
-int A5(int *a,int n)
-{
-	int sum=0,max=0;
-		for(int i=0;i<n;i++)
-	{
-		if(a[i]%5==4)
-		{
-		sum=a[i];
-		if(max<sum)
-		{
-			max=sum;
-		}	
-		}
-	}
-	return max;	
+>#include<iostream>    
+using namespace std;  
+int main()  
+{  
+	long double a[10][4];  
+	int n;   
+	cin>>n;   
+	for(int i=0;i<n;i++)  
+	{  
+		for(int k=0;k<3;k++)  
+		{  
+			cin>>a[i][k];  
+		}  
+	}  
+	for(int i=0;i<n;i++)  
+	{  
+		if(a[i][0]+a[i][1]>a[i][2])  
+		{  
+			cout<<"Case #"<<i+1<<": true"<<endl;  
+		}  
+		else cout<<"Case #"<<i+1<<": false"<<endl;  
+	}  
+	return 0;  
 }  
-int main()
-{
-	int n;
-	cin>>n;
-	int shuzu[1002];
-	for(int i=0;i<n;i++)
-	{
-		cin>>shuzu[i];
-	}
-	//读数并放入数组完成 
-	if(A1(shuzu,n)!=0)
-	{
-		cout<<A1(shuzu,n)<<" ";
-	}
-	else cout<<"N"<<" ";
-		cout<<A2(shuzu,n)<<" ";
-	if(A3(shuzu,n)!=0)
-	{
-		cout<<A3(shuzu,n)<<" ";
-	}
-	else cout<<"N"<<" ";
-	if(A4(shuzu,n)!=0)
-	{
-	    printf("%.1f ",A4(shuzu,n));
-//		cout<<fixed<<setprecision(1)<<A4(shuzu,n)<<" ";		
-	}
-	else cout<<"N"<<" ";
-	if(A5(shuzu,n)!=0)
-	{
-		cout<<A5(shuzu,n);
-	}
-	else cout<<"N"; 
-	return 0;
-}
-//标准答案
-#include<iostream>
-int main()
-{
-    int i,n,a[1001],sum1,sum2,count1,count2;
-    scanf("%d",&n);
-    sum1=sum2=count1=count2=0;
-    double avg,sum3=0;
-    int flag=1,max=0,t=0;
-  for(i=1;i<=n;i++)
-  {
+*/  
+  
+/*  
+1012   有一个答案不对  最后一个测试点是A2返回值为计算出来的0，却被判否   
+数字分类 将一连串数字按要求分别得出结果并对应显示  
 
-      scanf("%d",&a[i]);
-      if(a[i]%5==0&&a[i]%2==0)
-        sum1+=a[i];
-      if(a[i]%5==1){
-        sum2+=a[i]*flag;
-        flag=flag*-1;
-        t++;
-      }
-      if(a[i]%5==2)
-        count1++;
-      if(a[i]%5==3){
-        sum3+=a[i];
-        count2++;
-        }
-      if(a[i]%5==4)
-      {
-          if(a[i]>max)
-            max=a[i];
-      }
-  }
-  avg=sum3/count2;
-  if(sum1==0)
-    printf("N ");
-  else
-    printf("%d ",sum1);
-  if(t==0)
-    printf("N ");
-  else
-    printf("%d ",sum2);
-  if(count1==0)
-    printf("N ");
-  else
-    printf("%d ",count1);
-  if(count2==0)
-    printf("N ");
-  else
-    printf("%.1lf ",avg);
-  if(max==0)
-    printf("N");
-  else
-    printf("%d",max);
-
-  return 0;
-}
+***思路：调用函数完成各个模块，如时间不够再思考***  
+>#include<iostream>  
+#include<cstring>  
+#include<iomanip>  //控制输出位数 cout<<"a="<<fixed<<setprecision(n)<<a<<endl;  小数点后n位输出，且不够会补零   
+#include<math.h>   //用到pow()，实现交叉求和   
+using namespace std;  
+//A1输出函数   
+int A1(int *a,int n)  
+{  
+	int sum=0;  
+	for(int i=0;i<n;i++)  
+	{  
+		if(a[i]%5==0&&a[i]%2==0)  
+		{  
+		sum+=a[i];  	
+		}  
+	}  
+	return sum;  
+}    
+//A2输出函数  
+int A2(int *a,int n)  
+{  
+	int sum=0,k=1;  
+	for(int i=0;i<n;i++)  
+	{  
+		if(a[i]%5==1)  
+		{  
+		sum+=a[i]*pow(-1,k+1);  
+		k++;	  
+		}  
+	}  
+	return sum;  	
+}  
+//A3输出函数  
+int A3(int *a,int n)  
+{  
+	int sum=0;  
+		for(int i=0;i<n;i++)  
+	{  
+		if(a[i]%5==2)  
+		{  
+		sum++;	  
+		}  
+	}  
+	return sum;  	
+}   
+//A4输出函数  
+float A4(int *a,int n)  
+{  
+	float sum=0.0;int k=0;  
+		for(int i=0;i<n;i++)  
+	{  
+		if(a[i]%5==3)  
+		{  
+		sum+=a[i];  
+		k++;  	
+		}  
+	}  
+	if(k!=0)  
+	return sum/k;  
+	else return 0;  	
+}  
+//A5输出函数  
+int A5(int *a,int n)  
+{  
+	int sum=0,max=0;  
+		for(int i=0;i<n;i++)  
+	{  
+		if(a[i]%5==4)  
+		{  
+		sum=a[i];  
+		if(max<sum)  
+		{  
+			max=sum;  
+		}  	
+		}  
+	}  
+	return max;  	 
+}    
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	int shuzu[1002];  
+	for(int i=0;i<n;i++)  
+	{  
+		cin>>shuzu[i];  
+	}  
+	//读数并放入数组完成   
+	if(A1(shuzu,n)!=0)  
+	{  
+		cout<<A1(shuzu,n)<<" ";  
+	}  
+	else cout<<"N"<<" ";  
+		cout<<A2(shuzu,n)<<" ";  
+	if(A3(shuzu,n)!=0)  
+	{  
+		cout<<A3(shuzu,n)<<" ";  
+	}  
+	else cout<<"N"<<" ";   
+	if(A4(shuzu,n)!=0)  
+	{  
+	    printf("%.1f ",A4(shuzu,n));  
+//		cout<<fixed<<setprecision(1)<<A4(shuzu,n)<<" ";	  	
+	}  
+	else cout<<"N"<<" ";  
+	if(A5(shuzu,n)!=0)  
+	{  
+		cout<<A5(shuzu,n);  
+	}  
+	else cout<<"N";   
+	return 0;  
+}  
+//标准答案  
+>#include<iostream>  
+int main()  
+{  
+    int i,n,a[1001],sum1,sum2,count1,count2;  
+    scanf("%d",&n);  
+    sum1=sum2=count1=count2=0;  
+    double avg,sum3=0;  
+    int flag=1,max=0,t=0;  
+  for(i=1;i<=n;i++)  
+  {  
+      scanf("%d",&a[i]);  
+      if(a[i]%5==0&&a[i]%2==0)  
+        sum1+=a[i];  
+      if(a[i]%5==1){  
+        sum2+=a[i]*flag;  
+        flag=flag*-1;  
+        t++;  
+      }  
+      if(a[i]%5==2)  
+        count1++;  
+      if(a[i]%5==3){  
+        sum3+=a[i];  
+        count2++;  
+        }  
+      if(a[i]%5==4)  
+      {  
+          if(a[i]>max)  
+            max=a[i];  
+      }  
+  }  
+  avg=sum3/count2;  
+  if(sum1==0)  
+    printf("N ");  
+  else  
+    printf("%d ",sum1);  
+  if(t==0)  
+    printf("N ");  
+  else  
+    printf("%d ",sum2);  
+  if(count1==0)   
+    printf("N ");  
+  else  
+    printf("%d ",count1);  
+  if(count2==0)  
+    printf("N ");  
+  else  
+    printf("%.1lf ",avg);  
+  if(max==0)  
+    printf("N");  
+  else  
+    printf("%d",max);  
+  return 0;  
+}  
  
-//第二次代码
-#include<iostream>
-using namespace std;
-int main()
-{
-	int N;
-	cin>>N;
-	int flag1 = 0, flag2 = 0, flag3 = 0, flag4 = 0, flag5 = 0;  //标志位
-	int out1 = 0,out2 = 0, count3 = 0, count4 = 0, max = 0;
-	int fflag = 1;
-	double out4=0.0;
-	
-	for(int i=0; i<N; i++){
-		int temp;
-		cin>>temp;
-		if(temp%5 == 0){
-			if(temp%2 == 0){
-				flag1 = 1;
-				out1 += temp;
-			}
-		}
-		else if(temp%5 == 1){
-				flag2 = 1;
-				out2  += temp*fflag;   // 函数pow(-1,k)
-				fflag = fflag*(-1);
-		}
-		else if(temp%5 == 2){
-				flag3 = 1;
-				count3++;
-		}
-		else if(temp%5 == 3){
-				flag4 = 1;
-				count4++;
-				out4 += temp;
-		}
-		else if(temp%5 == 4){
-				flag5 = 1;
-				if(temp>max) max = temp;
-		}
-		
-	}
-	
-	if(flag1 == 0)cout<<"N ";   //if条件语句中一定记得 == 
-	else cout<<out1<<" ";
-	if(flag2 == 0)cout<<"N ";
-	else cout<<out2<<" ";
-	if(flag3 == 0)cout<<"N ";
+//第二次代码  
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+ 	int N;  
+	cin>>N;  
+	int flag1 = 0, flag2 = 0, flag3 = 0, flag4 = 0, flag5 = 0;  //标志位  
+	int out1 = 0,out2 = 0, count3 = 0, count4 = 0, max = 0;  
+	int fflag = 1;  
+	double out4=0.0;  
+	for(int i=0; i<N; i++){  
+		int temp;  
+		cin>>temp;  
+		if(temp%5 == 0){  
+			if(temp%2 == 0){  
+				flag1 = 1;  
+				out1 += temp;  
+			}  
+		}  
+		else if(temp%5 == 1){  
+				flag2 = 1;  
+				out2  += temp*fflag;   // 函数pow(-1,k)  
+				fflag = fflag*(-1);  
+		}  
+		else if(temp%5 == 2){  
+				flag3 = 1;  
+				count3++;  
+		}  
+		else if(temp%5 == 3){  
+				flag4 = 1;  
+				count4++;  
+				out4 += temp;   
+		}  
+		else if(temp%5 == 4){  
+				flag5 = 1;  
+				if(temp>max) max = temp;  
+		}  	
+	}  
+	if(flag1 == 0)cout<<"N ";   //if条件语句中一定记得 ==   
+	else cout<<out1<<" ";  
+	if(flag2 == 0)cout<<"N ";  
+	else cout<<out2<<" ";  
+	if(flag3 == 0)cout<<"N ";  
 	else cout<<count3<<" ";
-	if(flag4 == 0)cout<<"N ";
-	else printf("%.1lf ",out4/count4);
-	if(flag5 == 0)cout<<"N";
-	else cout<<max;
-	return 0;
-}  
-*/ 
+	if(flag4 == 0)cout<<"N ";  
+	else printf("%.1lf ",out4/count4);  
+	if(flag5 == 0)cout<<"N";  
+	else cout<<max;  
+	return 0;  
+}     
+*/   
 
 /*
 1013

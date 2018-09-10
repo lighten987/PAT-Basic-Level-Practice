@@ -5,8 +5,7 @@
 
 ***思路：while 数不为1，判断奇偶，对应处理，计数count从0开始++，最后输出count***  
 >#include<iostream>    
-using namespace std; 
-	
+using namespace std; 	
 int main()    
 {  
 	int n;  
@@ -29,8 +28,7 @@ int main()
 ***思路：数字太大，首先考虑用char数组接收，再去计算和  每一位字符减去‘0’再自加  得到的数按低位放入新数组 ***  
       对于拼音写出，定义字符串数组即可char pinyin[][9]={"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};  
 >#include<iostream>  
-using namespace std;  
-	
+using namespace std;  	
 int main()  
 {  
 	string c;  
@@ -68,7 +66,6 @@ int main()
 >#include<iostream>  
 #include<cstring>  
 using namespace std;  
-
 int main()  
 {  
 	int n;  
@@ -120,7 +117,6 @@ int main()
 >#include<iostream>  
 #include<cstring>  
 using namespace std;  
-
 int main()  
 {  
 class Student  
@@ -842,1078 +838,1049 @@ int main()
 */   
 
 /*
-1013
-数素数  给定素数个数的上下限范围，按格式输出中间的素数值
+1013  
+数素数  给定素数个数的上下限范围，按格式输出中间的素数值  
 
-
-思路：在范围内循环遍历，用判断素数函数决定是否输出，编号取余决定输出空格还是换行
-//我的答案，输出答案部分格式错误，找不到问题 
-#include<iostream>
-#include<math.h>
-using namespace std;
-bool IsLeap(int n)   //判断素数程序 
-{		
-	for(int i=2;i<=sqrt(n);i++)
-	{
-		if(n%i==0)return false;			
-	}
-	return true;
-}
-int main()
-{
-	int low,high;
-	cin>>low>>high;
-	int k=0;
-	if(low<=high){
-	int sum=2;
-	for(int i=1;i<=high;sum++)
-	{
-		if(IsLeap(sum))
-		{
-			if(i>=low&&i<=high)
-			{
-				k++;
-				cout<<sum;
-				if(k%10!=0)
-				{
-					cout<<" ";
-				}
-				else cout<<endl;
-			}
-			i++;
-		}
-	 } 
-	}
-	else cout<<"0";
-	return 0;
-}
-
-//参考答案
- #include<stdio.h>
-int isprime(int n);
-int main()
-{
-  int i,a,b,x=1,sum=2;
-  scanf("%d %d",&a,&b);
-  if (a<=b)
- {
-  for (;x<=b;sum++)
-  {
-    if (isprime(sum))
-    {
-      if (x>=a&&x<=b)
-      {
-      printf("%d",sum);
-      if ((x-a+1)%10==0&&x!=a&&x!=b)
-        printf("\n");
-        else
-        {
-          if (x!=b&&(x-a+1)%10!=0)
-          printf(" ");
-        }
-        }
-        x++;
-    }
-  }
-  }
-  else
-  {
-    printf("0");
-  }
-  return 0;
-}
-int isprime(int n)
-{
-  int i;
-    for(i=2;i<=sqrt(n);i++)
-    {
-      if(n%i == 0)
-      return 0;
-    }
-  return 1;
-} 
-//第二次代码
-#include<iostream>
-#include<cmath>
-using namespace std;
-bool IsLeap(int n)
-{
-	for(int i=2; i<=sqrt(n); i++){
-		if(n%i == 0)return 0;
-	}
-	return 1;
-} 
-int main()
-{
-	int start,end;
-	cin>>start>>end;
-	int count = 0;
-	int k = 1;
-	int temp = 2;
-	while(count<end-1){	
-		if(IsLeap(temp)){
-			count++;
-			if(count>=start){
-				if(k%10 != 0){
-					cout<<temp<<" ";
-					k++;
-				}
-				else{
-					cout<<temp<<endl;
-					k++;
-				}
-			}		
-		}
-		temp++;
-	}
-	for(int i=temp;;i++){
-		if(IsLeap(i)){
-			cout<<i;
-			break;
-		}
-	}
-	return 0;
-}  
-*/
-
-/*
-1014
-福尔摩斯的约会 给定四个字符串，找到第一对第二对字符，对应输出具体含义
-
-思路：用四个字符串读取字符串，遍历并找到相同的大写字母，对应输出
-读题错误，字符串对应位置是相同的，不用两个循环，一个循环就够了 
-对于字符串的长度，用s.length()函数 
-
-#include <iostream>
-#include <cstring>
-using namespace std;
- 
-int main()
-{
-	string s1, s2, s3, s4;
-	cin>>s1>>s2>>s3>>s4;
-	int i, j, count = 0;
-	for(i = 0; i < s1.length() && i < s2.length(); ++i)
-	{
-		if(s1[i] >= 'A' && s1[i] <= 'G' && s1[i] == s2[i] && count == 0)
-		{
-			switch(s1[i] - 'A')
-			{
-				case 0:cout<<"MON ";break;
-				case 1:cout<<"TUE ";break;
-				case 2:cout<<"WED ";break;
-				case 3:cout<<"THU ";break;
-				case 4:cout<<"FRI ";break;
-				case 5:cout<<"SAT ";break;
-				case 6:cout<<"SUN ";break;
-			}
-			count++;
-		}
-		else if((s1[i] >= '0' && s1[i] <= '9' && s1[i] == s2[i] && count == 1) ||
-		   (s1[i] >= 'A' && s1[i] <= 'N' && s1[i] == s2[i] && count == 1)   )
-		{
-			if(s1[i] >= '0' && s1[i] <= '9')
-				cout<<"0"<<s1[i]-'0'<<":";
-			else if(s1[i] >= 'A' && s1[i] <= 'N')
-				cout<<s1[i]-'A'+10<<":";
-			count++;
-		}
-	}
-	for(i = 0; i < s3.length() && i < s4.length(); ++i)
-	{
-		if( (s3[i] >= 'a' && s3[i] <= 'z' && s3[i] == s4[i]) ||
-			(s3[i] >= 'A' && s3[i] <= 'Z' && s3[i] == s4[i]) )
-		{
-			if(i < 9)
-				cout<<"0"<<i<<endl;
-			else
-				cout<<i<<endl;
-			break;
-		}
-	}
-	return 0;
-}
-*/
-
-/*
-1015   有三个运行超时  用scanf和printf函数输入输出会好点 
-德才论  按规则输出考生成绩信息
-
-思路：定义一个类，包含考号，德才成绩，初始化函数，读取德与才的函数，总分函数，显示函数
-
-#include<iostream>
-#include<cstring>
-using namespace std;
-
-class Kaosheng
-{
-	char Num[9];
-	int De_Score;
-	int Cai_Score;
-public:
-	void Init(char *num,int defen,int caifen)
-	{
-		strcpy(Num,num);
-		De_Score=defen;
-		Cai_Score=caifen;
-	}
-	int Get_DS()
-	{
-		return De_Score;
-	}
-	int Get_CS()
-	{
-		return Cai_Score;
-	}
-	int total()
-	{
-		return De_Score+Cai_Score;
-	}
-	void show()
-	{
-		cout<<Num<<" "<<De_Score<<" "<<Cai_Score<<endl;
-	}
-}; 
-int main()
-{
-	int n;
-	int low_level;
-	int youxian_level;
-	cin>>n>>low_level>>youxian_level;
-	Kaosheng kaosheng[n],*p1[n],*p2[n],*p3[n],*p4[n],temp;
-	char num[9];
-	int df;
-	int cf;
-	for(int i=0;i<n;i++)
-	{
-		cin>>num>>df>>cf;
-		kaosheng[i].Init(num,df,cf);
-	}
-	int k=0,m=0,q=0,j=0;
-	for(int i=0;i<n;i++)
-	{
-	if((kaosheng[i].Get_DS()>=low_level)&&(kaosheng[i].Get_CS()>=low_level))
-		{
-		
-		if((kaosheng[i].Get_DS()>=youxian_level)&&(kaosheng[i].Get_CS()>=youxian_level))
-		{
-			p1[k]=&kaosheng[i];
-			k++;
-		}
-		else if((kaosheng[i].Get_DS()>=youxian_level)&&(low_level<=kaosheng[i].Get_CS()<youxian_level))
-		{
-			p2[m]=&kaosheng[i];
-			m++;
-		}
-		else if((low_level<=kaosheng[i].Get_CS()<youxian_level)&&(low_level<=kaosheng[i].Get_DS()<youxian_level)&&(kaosheng[i].Get_DS()>=kaosheng[i].Get_CS()))
-		{
-			p3[q]=&kaosheng[i];
-			q++;
-		}
-		else if((low_level<=kaosheng[i].Get_CS()<youxian_level)&&(low_level<=kaosheng[i].Get_DS()<youxian_level)&&(kaosheng[i].Get_DS()<kaosheng[i].Get_CS()))
-		{
-			p4[j]=&kaosheng[i];
-			j++;
-		}
-		}
-     else continue;
-	}
-	cout<<k+m+q+j<<endl; 
-	for(int i=0;i<k-1;i++)
-	{
-		for(int w=i+1;w<k;w++)
-		{
-			if(p1[w]->total()>p1[i]->total())
-			{
-				temp=*p1[w];
-				*p1[w]=*p1[i];
-				*p1[i]=temp;
-			}
-		}
-	}
-	for(int i=0;i<k-1;i++)
-	{
-		for(int w=i+1;w<k;w++)
-		{
-			if((p1[w]->total()==p1[i]->total())&&(p1[w]->Get_DS()>=p1[i]->Get_DS()))
-			{
-				temp=*p1[w];
-				*p1[w]=*p1[i];
-				*p1[i]=temp;
-			}
-		}
-	}
-	for(int i=0;i<k;i++)
-	{
-		p1[i]->show();
-	}
-	
-	for(int i=0;i<m-1;i++)
-	{
-		for(int w=i+1;w<m;w++)
-		{
-			if(p2[w]->total()>=p2[i]->total())
-			{
-				temp=*p2[w];
-				*p2[w]=*p2[i];
-				*p2[i]=temp;
-			}
-		}
-	}
-	for(int i=0;i<m;i++)
-	{
-		p2[i]->show();
-	}
-	
-	for(int i=0;i<q-1;i++)
-	{
-		for(int w=i+1;w<q;w++)
-		{
-			if(p3[w]->total()>=p3[i]->total())
-			{
-				temp=*p3[w];
-				*p3[w]=*p3[i];
-				*p3[i]=temp;
-			}
-		}
-	}
-	for(int i=0;i<q;i++)
-	{
-		p3[i]->show();
-	}
-	
-	for(int i=0;i<j-1;i++)
-	{
-		for(int w=i+1;w<j;w++)
-		{
-			if(p4[w]->total()>=p4[i]->total())
-			{
-				temp=*p4[w];
-				*p4[w]=*p4[i];
-				*p4[i]=temp;
-			}
-		}
-	}
-	for(int i=0;i<j;i++)
-	{
-		p4[i]->show();
-	}
-	return 0;
-}
-//标准答案
-#include <cstdio>
-#include <algorithm>
-#include <vector>
-#include <string>
+***思路：在范围内循环遍历，用判断素数函数决定是否输出，编号取余决定输出空格还是换行***
+//我的答案，输出答案部分格式错误，找不到问题   
+>#include<iostream>  
+#include<math.h>  
 using namespace std;  
-typedef struct Student
-{
-	string  ID;
-	int  De;
-	int Cai;
-}Student;
- 
-inline bool compare(Student a,Student b)
-{
-	if ((a.Cai+a.De)!=(b.Cai+b.De))
-    return a.Cai+a.De>b.Cai+b.De;
-	else if (a.De!=b.De)
-	return a.De>b.De;
-	else
-	return a.ID<b.ID;
-}
-inline void print(Student s)
-{
-	printf("%s %d %d\n",s.ID.c_str(),s.De,s.Cai);
-} 
-int main()
-{
-     int N,L,H;
-	 char id[10];
-	 Student  S;
-	 string  ID;
-	 vector<Student>    vec1;
-	 vector<Student>    vec2;
-	 vector<Student>    vec3;
-	 vector<Student>    vec4;
-	 scanf("%d %d %d",&N,&L,&H);
- 
-	 while(N--)
-	 {
-		 scanf("%s%d%d",id,&S.De,&S.Cai);
-		 S.ID.assign(id);
-		if (S.De>=L&&S.Cai>=L)
-		{
-			if (S.De>=H&&S.Cai>=H)
-				vec1.push_back(S);
-			else
-			if (S.De>=H&&S.Cai<H)
-			    vec2.push_back(S);
-			else
-		   if (S.De<H&&S.Cai<H&&S.De>=S.Cai)
-		        vec3.push_back(S);
-			else
-				vec4.push_back(S);	
-		}
-	 }
-	 sort(vec1.begin(),vec1.end(),compare);
-	 sort(vec2.begin(),vec2.end(),compare);
-     sort(vec3.begin(),vec3.end(),compare);
-     sort(vec4.begin(),vec4.end(),compare);
-	 printf("%d\n",vec1.size()+vec2.size()+vec3.size()+vec4.size());
-	 for_each(vec1.begin(),vec1.end(),print);
-	 for_each(vec2.begin(),vec2.end(),print);
-	 for_each(vec3.begin(),vec3.end(),print);
-	 for_each(vec4.begin(),vec4.end(),print);
-	//  system("PAUSE");
-	return 0;
-}
-//第二次代码
-//两个地方需要注意 有两个测试点会运行超时，用printf进行输出 第二个 结构体的string不能直接输出，需要转字符串 c_str() 
-#include<iostream>
-#include<vector>
-#include<algorithm>
-#include<cstring>
-using namespace std;
-struct node
-{
-	string id;
-	int s_de;
-	int s_cai;
-	int all;	
-}; 
-bool cmp(node a, node b)
-{
-	return (a.all!=b.all)?a.all>b.all:((a.s_de!=b.s_de)?a.s_de>b.s_de: a.id<b.id);
-}
-vector<node> v1,v2,v3,v4;//v1为才德全尽 v2德分到线 v3德不低于才 v4仅都及格 
-int main()
-{
-	int num,low,high;
-	cin>>num>>low>>high;
-	
-	for(int i = 0; i<num; i++){
-		node temp;
-		cin>>temp.id>>temp.s_de>>temp.s_cai;
-		temp.all = temp.s_de + temp.s_cai;
-		if(temp.s_de>=high && temp.s_cai>=high){
-			v1.push_back(temp);
-		}
-		else if(temp.s_de>=high && temp.s_cai>=low){
-			v2.push_back(temp);
-		}
-		else if(temp.s_de>=low && temp.s_cai>= low && temp.s_de>=temp.s_cai){
-			v3.push_back(temp);
-		}
-		else if(temp.s_de>=low && temp.s_cai>= low){
-			v4.push_back(temp);
-		}
-	} 
-	
-	sort(v1.begin(),v1.end(),cmp);
-	sort(v2.begin(),v2.end(),cmp);
-	sort(v3.begin(),v3.end(),cmp);
-	sort(v4.begin(),v4.end(),cmp);
-	int sum = v1.size()+v2.size()+v3.size()+v4.size();
-	
-	cout<<sum<<endl;
-	for(int i = 0; i<v1.size(); i++){
-		printf("%s %d %d\n",v1[i].id.c_str(), v1[i].s_de, v1[i].s_cai);
-//		cout<<v1[i].id<<" "<<v1[i].s_de<<" "<<v1[i].s_cai<<endl;
-	}
-	for(int i = 0; i<v2.size(); i++){
-		printf("%s %d %d\n",v2[i].id.c_str(), v2[i].s_de, v2[i].s_cai);
-//		cout<<v2[i].id<<" "<<v2[i].s_de<<" "<<v2[i].s_cai<<endl;
-	}
-	for(int i = 0; i<v3.size(); i++){
-		printf("%s %d %d\n",v3[i].id.c_str(), v3[i].s_de, v3[i].s_cai);
-//		cout<<v3[i].id<<" "<<v3[i].s_de<<" "<<v3[i].s_cai<<endl;
-	}
-	for(int i = 0; i<v4.size(); i++){
-		printf("%s %d %d\n",v4[i].id.c_str(), v4[i].s_de, v4[i].s_cai);
-//		cout<<v4[i].id<<" "<<v4[i].s_de<<" "<<v4[i].s_cai<<endl;
-	}
-	return 0;
+bool IsLeap(int n)   //判断素数程序   
+{		  
+	for(int i=2;i<=sqrt(n);i++)  
+	{  
+		if(n%i==0)return false;	  		
+	}  
+	return true;  
 }  
-*/ 
+int main()  
+{  
+	int low,high;  
+	cin>>low>>high;  
+	int k=0;  
+	if(low<=high){  
+	int sum=2;  
+	for(int i=1;i<=high;sum++)  
+	{  
+		if(IsLeap(sum))  
+		{  
+			if(i>=low&&i<=high)  
+			{  
+				k++;  
+				cout<<sum;  
+				if(k%10!=0)  
+				{  
+					cout<<" ";  
+				}  
+				else cout<<endl;  
+			}  
+			i++;  
+		}  
+	 }   
+	}  
+	else cout<<"0";  
+	return 0;  
+}  
 
-/*
-1016
-部分A+B 给定两个整数，将对应数字出现次数按规律成新的数字，求和
-
-思路：用char数组或者字符串去存入两个char型整数，然后比较字符出现次数，字符转为数字
-      用公式计算出对应结果，用到pow(a,b)函数 a的b次方 
-#include<iostream> 
-#include<cmath>
-using namespace std;
-int main()
-{
-    string A,B;
-    char Da,Db;
-    int a=0,b=0,sum=0;
-    cin>>A>>Da>>B>>Db;
-    for(int i=0; i<A.size(); i++) 
-    {
-        if(A[i]==Da)
-            a++;
-    }
-    for(int i=0; i<B.size(); i++)
-    {
-        if(B[i]==Db)
-            b++;
-    }
-    for(int i=0; i<a; i++)
-        sum+=(Da-'0')*pow(10,i);   //10的i次方 
-    for(int i=0; i<b; i++)
-        sum+=(Db-'0')*pow(10,i);
-    cout<<sum<<endl;
-}      
-*/ 
-
-/*
-1017  有一个答案错误 
-A除以B  不超过1000位的A读入，算商和余数
-
-思路：放入字符型数组，再放入整型数组 
-
-#include<iostream>
-#include<cstring>
-using namespace std;
-int main()
-{	
-	char c[1001];
-	int a[1001];
-	cin>>c;	
-	int m;
-	cin>>m;
-	for(int i=0;i<strlen(c);i++)
-	{
-		a[i]=c[i]-'0';
-	}
-	int yu=0,shang;
-	for(int i=0;i<strlen(c);i++)
-	{
-		shang=(yu*10+a[i])/m;		
-		yu=(yu*10+a[i])%m;
-		if(shang==0&&i==0){
-		}
-		else cout<<shang;
-	}
-	cout<<" "<<yu;
-	return 0;
-}
-//标准答案
-#include<iostream>
-#include<string.h>
-#include<math.h>
-#include<stdlib.h>
-int main(){
-    char a[2000];
-    scanf("%s",a);
-    int b;
-    scanf("%d",&b);
-    int n = strlen(a);
-    int temp=0;
-    int flag = 0;
-    for(int i=0;i<n;i++){
-        temp = (a[i]-'0')+temp*10;
-        if(temp>=b){
-            printf("%d",temp/b);
-            flag = 1;
-        }
-        else if(flag){
-            printf("0");
-        }
-        temp = temp%b;
-    }
-    if(flag==0)
-        printf("0");
-    printf(" %d",temp);
-} 
-*/
-
-/*    运算符重载只能跟类一起玩 
-1018    部分正确 
-锤子剪刀布 输出甲乙胜平负的次数和胜最多的手势
-思路：读取次数后循环遍历，每次计数并对应胜利手势结果数组位置+1 
- 
-#include<iostream>
-using namespace std;
-bool judgeda(char c1,char c2)
-{
-	if(((c1=='C')&&(c2=='J'))||((c1=='J')&&(c2=='B'))||((c1=='B')&&(c2=='C')))
-	return true;
-	else return false;
-} 
-bool judgedeng(char c1,char c2)
-{
-	if(((c1=='C')&&(c2=='C'))||((c1=='J')&&(c2=='J'))||((c1=='B')&&(c2=='B')))
-	return true;
-	else return false;
-}
-bool judgexiao(char c1,char c2)
-{
-	if(((c1=='J')&&(c2=='C'))||((c1=='B')&&(c2=='J'))||((c1=='C')&&(c2=='B')))
-	return true;
-	else return false;
-}
-int main()
-{
-	int n;
-	cin>>n;
-	char c1,c2;   //用于读取字符（手势）  
-	int jia[3]={0};   //用于放入胜平负次数    多定义一个空位 
-	int yi[3]={0};
-	int jiashoushi[3]={0};//用于记录胜利时手势结果 C J B
-	int yishoushi[3]={0}; 
-	for(int i=0;i<n;i++)
-	{
-		cin>>c1>>c2;
-		if(judgeda(c1,c2))
-		{
-			jia[0]++;
-			yi[2]++;
-			if(c1=='C')
-			{
-				jiashoushi[0]++;
-			}
-			else if(c1=='J')
-			{
-				jiashoushi[1]++;
-			}
-			else if(c1=='B')
-			{
-				jiashoushi[2]++;
-			}
-		}
-		else if(judgexiao(c1,c2)) 
-		{
-			jia[2]++;
-			yi[0]++;
-			if(c2=='C')
-			{
-				yishoushi[0]++;
-			}
-			else if(c2=='J')
-			{
-				yishoushi[1]++;
-			}
-			else if(c2=='B')
-			{
-				yishoushi[2]++;
-			}
-		}
-		else if(judgedeng(c1,c2)) 
-		{
-			jia[1]++;
-			yi[1]++;
-		}
-	} 
-	cout<<jia[0]<<" "<<jia[1]<<" "<<jia[2]<<endl;
-	cout<<yi[0]<<" "<<yi[1]<<" "<<yi[2]<<endl;
-	//遍历甲获胜手势中最多的  C J B
-	int max1=0;
-	for(int i=0;i<2;i++)
-	{
-		if(jiashoushi[i]<=jiashoushi[i+1])
-		{
-			max1=i+1;
-		}
-		 
-	}
-	if(max1==0)
-	{
-		cout<<"C"<<" ";
-	}
-	else if(max1==1)
-	{
-		cout<<"J"<<" ";
-	}
-	else if(max1==2)
-	{
-		cout<<"B"<<" ";
-	}
-	
-	int max2=0;
-	for(int i=0;i<2;i++)
-	{
-		if(yishoushi[i]<=yishoushi[i+1])
-		{
-			max2=i+1;
-		}
-		
-	}
-	if(max2==0)
-	{
-		cout<<"C";
-	}
-	else if(max2==1)
-	{
-		cout<<"J";
-	}
-	else if(max2==2)
-	{
-		cout<<"B";
-	}
-	return 0;
-}
-//标准答案
-#include <iostream>
-#include <stdio.h>
-
-using namespace std;
-
-int main()
-{
-    int n;
-    scanf("%d", &n);
-    int jiaWin = 0, jiaLose = 0, draw = 0;
-    int jiaJWin = 0, jiaCWin = 0, jiaBWin = 0;
-    int yiJWin = 0, yiCWin = 0, yiBWin = 0;
-    char jia, yi;
-    for(int i = 0; i < n; i++){
-        scanf(" %c %c", &jia, &yi);
-        if(jia == 'C'){
-            if(yi == 'C'){
-                draw++;
-            }
-            else if(yi == 'J'){
-                jiaWin++;
-                jiaCWin++;
-            }
-            else if(yi == 'B'){
-                jiaLose++;
-                yiBWin++;
-            }
-        }
-        else if(jia == 'J'){
-            if(yi == 'C'){
-                jiaLose++;
-                yiCWin++;
-            }
-            else if(yi == 'J'){
-                draw++;
-            }
-            else if(yi == 'B'){
-                jiaWin++;
-                jiaJWin++;
-            }
-        }
-        else if(jia == 'B'){
-            if(yi == 'C'){
-                jiaWin++;
-                jiaBWin++;
-            }
-            else if(yi == 'J'){
-                jiaLose++;
-                yiJWin++;
-            }
-            else if(yi == 'B'){
-                draw++;
-            }
-        }
-    }
-    printf("%d %d %d\n", jiaWin, draw, jiaLose);
-    printf("%d %d %d\n", jiaLose, draw, jiaWin);
-    printf("%c ", jiaBWin >= jiaCWin ? (jiaBWin >= jiaJWin ? 'B' : 'J') : (jiaCWin >= jiaJWin ? 'C' : 'J'));
-    printf("%c\n", yiBWin >= yiCWin ? (yiBWin >= yiJWin ? 'B' : 'J') : (yiCWin >= yiJWin ? 'C' : 'J'));
-    return 0;
-}
-//第二次代码
-#include<iostream>
-#include<vector>
-#include<algorithm>
-#include<cstring>
-using namespace std;
-void out(int a[])
-{
-	int max1 = -1;
-	int num1 = 0;
-	for(int i = 0; i<3 ;i++){   //直接用3 
-		if(a[i]>max1){
-			max1=a[i];
-			num1 = i;
-		} 
-	}
-	if(num1 == 0) cout<<"B";
-	else if(num1 == 1) cout<<"C";
-	else if(num1 == 2) cout<<"J";	
-} 
-int main()
-{
-	int N;
-	cin>>N;
-	int count1 = 0, count2 = 0, count3 = 0;
-	int j[3] = {0}, y[3] = {0};
-	char jia, yi;
-	
-	for(int i = 0; i<N; i++){
-		cin>>jia>>yi;
-		if((jia == 'C' && yi == 'J') || (jia == 'J' && yi == 'B') || (jia == 'B' && yi == 'C')){
-			count1++;
-			if(jia == 'B') j[0]++;
-			else if(jia == 'C') j[1]++;
-			else if(jia == 'J') j[2]++;	
-		}
-		else if((jia == 'C' && yi == 'C') || (jia == 'J' && yi == 'J') || (jia == 'B' && yi == 'B')){
-			count2++;
-		}
-		else if((jia == 'C' && yi == 'B') || (jia == 'J' && yi == 'C') || (jia == 'B' && yi == 'J')){
-			count3++;
-			if(yi == 'B') y[0]++;
-			else if(yi == 'C') y[1]++;
-			else if(yi == 'J') y[2]++;
-		}
-	} 
-	
-	printf("%d %d %d\n", count1, count2, count3);
-	printf("%d %d %d\n", count3, count2, count1);
-	
-	out(j);
-	cout<<" ";
-	out(y);
-	return 0;
-} 
-*/
-
-/*
-1019
-数字黑洞 将四位数字按序做差得到新数，一直循环直到6174 
-  
-思路：字符串操作猛如虎 
-
-//参考答案 玩转字符串  头文件 #include <algorithm>
-#include<iostream>
-#include<cstring>
-#include<algorithm>
-using namespace std;
-int main()
-{
-	string s,s1,s2;
-	cin>>s;
-	s.insert(0,4-s.length(),'0');  //不足四位填充完整 
-	while(true)  //条件达到就break出去，不然执行死循环 
-	{
-		string temp=s;
-		sort(s.rbegin(),s.rend());  //将s降序排列 有s 
-		s1=s; 
-		sort(temp.begin(),temp.end());
-		s2=temp;                    //将temp升序排列
-		if(s1==s2)
-		{
-			cout<<s1<<" - "<<s2<<" = 0000"<<endl;
-			break;   //第一处跳出循环 
-		} 
-		else
-		{
-			int ts1 = stoi(s1);  //字符串转成数字
-			int ts2=stoi(s2);
-			int dec=ts1-ts2;
-			cout<<s1<<" - "<<s2<<" = ";
-			printf("%04d",dec);  //对于输出结果的控制，用printf操作
-		 
-			s[0] = (char)(dec/1000 + '0');
-            dec%=1000;
-            s[1] = (char)(dec/100 + '0');
-            dec%=100;
-            s[2] = (char)(dec/10 + '0');
-            dec%=10;
-            s[3] = (char)(dec + '0');
-        
-		//	s=to_string(ts1-ts2); 
-		//	s.insert(0, 4-s.length(), '0');
-		 } 
-		 if(s=="6174")break;  //第二处跳出循环
-		 else cout<<endl; 
-	}	
-	return 0;
-}
-//第二次仍然不完美
-//递归函数思想做数字黑洞
-#include<iostream>
-#include<algorithm>
-#include<cstring>
-bool cmp(char a, char b)
-{
-	return a>b;
-}
-using namespace std; 
-int main()
-{
-    char a[4];
-	for(int i = 0; i<4; i++){
-		cin>>a[i];
-	}	
-	
-	while(true){
-		if(a[0]==a[1] && a[0]==a[2] && a[0]==a[3]){
-		printf("%c%c%c%c - %c%c%c%c = 0000",a[0],a[0],a[0],a[0],a[0],a[0],a[0],a[0]);
-		break;
-	    }
-	    else{
-	char b[4];
-	char c[4];
-	for(int i = 0; i<4; i++){
-		b[i] = a[i];
-	}
-	sort(a,a+strlen(a),cmp);  
-	sort(b,b+strlen(a));
-	
-	int temp;
-	temp = ((a[3]-'0') + (a[2]-'0')*10 + (a[1]-'0')*100 + (a[0]-'0')*1000) - ((b[3]-'0') + (b[2]-'0')*10 + (b[1]-'0')*100 + (b[0]-'0')*1000);
-	
-	for(int i = 0; i<4; i++){
-		printf("%c",a[i]);
-	}
-	printf(" - ");
-	for(int i = 0; i<4; i++){
-		printf("%c",b[i]);
-	}
-	printf(" = %04d\n",temp);
-	if(temp == 6174) break;
-	else{
-		a[0] =(char) (temp/1000 + '0');
-	    a[1] =(char) (temp/100%10 + '0');
-	    a[2] =(char) (temp/10%10 +'0');
-     	a[3] =(char) (temp%10 + '0');
-	}
-	}
-	}
-	return 0;
-} 
-*/
-
-/*
-1020
-月饼 给出不同月饼的库存量，总售价，市场总需求，算最大收益
-
-思路:用a[n][2]分别放入数据，并计算  用三个数组也可以 
-
-#include<iostream>
-using namespace std;
-int main()
-{
-	int n;
-	cin>>n;
-	float a1[n];
-	float a2[n];
-	float b[n];
-	int zongliang;
-	cin>>zongliang;
-	for(int i=0;i<n;i++)  //读入库存量 
-	{
-		cin>>a1[i];
-	}
-	for(int j=0;j<n;j++)  //读入总售价 
-	{
-		cin>>a2[j];
-	}
-	for(int q=0;q<n;q++)  //读入收益单价 
-	{
-		b[q]=a2[q]/a1[q];
-	}
-	//按收益单价进行排序
-	for(int i=0;i<n-1;i++)
-	{
-		for(int j=i+1;j<n;j++)
-		{
-			if(b[i]<b[j])
-			{
-				float temp1,temp2,temp3;
-				temp1=b[i];
-				b[i]=b[j];
-				b[j]=temp1;
-				temp2=a1[i];
-				a1[i]=a1[j];
-				a1[j]=temp2;
-				temp3=a2[i];
-				a2[i]=a2[j];
-				a2[j]=temp3;
-			}
-		}
-	} 
-	float lirun=0.0;
-	for(int i=0;i<n;i++)
-	{
-		
-		if(zongliang>a1[i])
-		{
-			lirun+=a2[i];
-			zongliang=zongliang-a1[i];
-			continue;
-		}
-		else   //if((zongliang>0)&&(zongliang<a[i][0]))
-		{
-			lirun=lirun+zongliang*b[i];
-			break;
-		}
-	}
-	printf("%.2f",lirun);
-	return 0;
-}
-//第二次代码
-//月饼题 用结构体vector做  考虑市场需求太大，无法全部满足 测试点3 
-#include<iostream>
-#include<algorithm>
-#include<cstring>
-#include<vector>
-using namespace std; 
-struct node
-{
-	double cucun;
-	double zongjia;
-	double danjia;
-	
-}; 
-bool cmp(node a, node b)
-{
-	return a.danjia>b.danjia;
-}
-
-int main()
-{
-	int N;
-	double count;
-	cin>>N>>count;
-	double mmax = 0.0;
-	double mmmax = 0.0;
-	vector<node> v(N);
-	
-	for(int i = 0; i<N; i++){
-		cin>>v[i].cucun;
-		mmax +=  v[i].cucun; 
-	}
-	for(int i = 0; i<N; i++){
-		cin>>v[i].zongjia;
-		mmmax += v[i].zongjia;
-	}
-	for(int i = 0; i<N; i++){
-		v[i].danjia = v[i].zongjia/v[i].cucun;
-	}
-    sort(v.begin(),v.end(),cmp);
-    int k = 0;
-    double sum = 0.0;
-    if(count>=mmax){
-    	printf("%.2lf",mmmax);
-	}
-	else{
-    while(count>0){
-    	if(count>v[k].cucun){
-    		sum += v[k].zongjia;
-    		count -= v[k].cucun;
-    		k++;
-		}
-		else if(count<=v[k].cucun){
-			sum += count*v[k].zongjia/v[k].cucun;
-		//	count = 0;
-		    break; 
-		}
-	}
-	printf("%.2lf",sum);
-	}
-	return 0;
+//参考答案  
+>#include<stdio.h>  
+int isprime(int n);  
+int main() 
+{  
+  int i,a,b,x=1,sum=2;  
+  scanf("%d %d",&a,&b);  
+  if (a<=b)  
+ {  
+  for (;x<=b;sum++)  
+  {  
+    if (isprime(sum))  
+    {  
+      if (x>=a&&x<=b)   
+      {  
+      printf("%d",sum);  
+      if ((x-a+1)%10==0&&x!=a&&x!=b)  
+        printf("\n");  
+        else  
+        {  
+          if (x!=b&&(x-a+1)%10!=0)  
+          printf(" ");  
+        }  
+        }  
+        x++;  
+    }  
+  }  
+  }  
+  else  
+  {  
+    printf("0");  
+  }  
+  return 0;  
+}  
+int isprime(int n)  
+{  
+  int i;  
+    for(i=2;i<=sqrt(n);i++)  
+    {  
+      if(n%i == 0)  
+      return 0;  
+    }  
+  return 1;  
+}   
+//第二次代码  
+>#include<iostream>  
+#include<cmath>  
+using namespace std;  
+bool IsLeap(int n)  
+{  
+	for(int i=2; i<=sqrt(n); i++){  
+		if(n%i == 0)return 0;  
+	}  
+	return 1;  
+}   
+int main()  
+{  
+	int start,end;  
+	cin>>start>>end;  
+	int count = 0;  
+	int k = 1;  
+	int temp = 2;  
+	while(count<end-1){	  
+		if(IsLeap(temp)){  
+			count++;  
+			if(count>=start){  
+				if(k%10 != 0){  
+					cout<<temp<<" ";  
+					k++;  
+				}    
+				else{  
+					cout<<temp<<endl;  
+					k++;  
+				}  
+			}  		
+		}  
+		temp++;  
+	}  
+	for(int i=temp;;i++){  
+		if(IsLeap(i)){  
+			cout<<i;  
+			break;  
+		}  
+	}  
+	return 0;  
 }    
 */
+
+/*
+1014  
+福尔摩斯的约会 给定四个字符串，找到第一对第二对字符，对应输出具体含义  
+
+***思路：用四个字符串读取字符串，遍历并找到相同的大写字母，对应输出  
+读题错误，字符串对应位置是相同的，不用两个循环，一个循环就够了   
+对于字符串的长度，用s.length()函数***   
+
+>#include <iostream>  
+#include <cstring>  
+using namespace std;  
+int main()  
+{  
+	string s1, s2, s3, s4;  
+	cin>>s1>>s2>>s3>>s4;  
+	int i, j, count = 0;  
+	for(i = 0; i < s1.length() && i < s2.length(); ++i)  
+	{  
+		if(s1[i] >= 'A' && s1[i] <= 'G' && s1[i] == s2[i] && count == 0)  
+		{  
+			switch(s1[i] - 'A')  
+			{  
+				case 0:cout<<"MON ";break;  
+				case 1:cout<<"TUE ";break;  
+				case 2:cout<<"WED ";break;  
+				case 3:cout<<"THU ";break;  
+				case 4:cout<<"FRI ";break;  
+				case 5:cout<<"SAT ";break;  
+				case 6:cout<<"SUN ";break;  
+			}  
+			count++;  
+		}  
+		else if((s1[i] >= '0' && s1[i] <= '9' && s1[i] == s2[i] && count == 1) ||
+		   (s1[i] >= 'A' && s1[i] <= 'N' && s1[i] == s2[i] && count == 1)   )  
+		{  
+			if(s1[i] >= '0' && s1[i] <= '9')  
+				cout<<"0"<<s1[i]-'0'<<":";  
+			else if(s1[i] >= 'A' && s1[i] <= 'N')  
+				cout<<s1[i]-'A'+10<<":";  
+			count++;  
+		}  
+	}  
+	for(i = 0; i < s3.length() && i < s4.length(); ++i)  
+	{  
+		if( (s3[i] >= 'a' && s3[i] <= 'z' && s3[i] == s4[i]) ||
+			(s3[i] >= 'A' && s3[i] <= 'Z' && s3[i] == s4[i]) )  
+		{   
+			if(i < 9)  
+				cout<<"0"<<i<<endl;  
+			else  
+				cout<<i<<endl;  
+			break;  
+		}  
+	}  
+	return 0;  
+}  
+*/
+
+/*    
+1015   有三个运行超时  用scanf和printf函数输入输出会好点   
+德才论  按规则输出考生成绩信息  
+
+***思路：定义一个类，包含考号，德才成绩，初始化函数，读取德与才的函数，总分函数，显示函数***  
+
+>#include<iostream>  
+#include<cstring>  
+using namespace std;  
+class Kaosheng  
+{  
+	char Num[9];  
+	int De_Score;  
+	int Cai_Score;  
+public:  
+	void Init(char *num,int defen,int caifen)  
+	{  
+		strcpy(Num,num);  
+		De_Score=defen;  
+		Cai_Score=caifen;  
+	}  
+	int Get_DS()  
+	{  
+		return De_Score;  
+	}  
+	int Get_CS()  
+	{  
+		return Cai_Score;  
+	}  
+	int total()  
+	{  
+		return De_Score+Cai_Score;  
+	}  
+	void show()  
+	{  
+		cout<<Num<<" "<<De_Score<<" "<<Cai_Score<<endl;  
+	}  
+};   
+int main()  
+{  
+	int n;  
+	int low_level;  
+	int youxian_level;  
+	cin>>n>>low_level>>youxian_level;  
+	Kaosheng kaosheng[n],*p1[n],*p2[n],*p3[n],*p4[n],temp;  
+	char num[9];   
+	int df;  
+	int cf;  
+	for(int i=0;i<n;i++)  
+	{  
+		cin>>num>>df>>cf;  
+		kaosheng[i].Init(num,df,cf);  
+	}  
+	int k=0,m=0,q=0,j=0;  
+	for(int i=0;i<n;i++)  
+	{   
+	if((kaosheng[i].Get_DS()>=low_level)&&(kaosheng[i].Get_CS()>=low_level))  
+		{  
+		if((kaosheng[i].Get_DS()>=youxian_level)&&(kaosheng[i].Get_CS()>=youxian_level))  
+		{  
+			p1[k]=&kaosheng[i];  
+			k++;  
+		}  
+		else if((kaosheng[i].Get_DS()>=youxian_level)&&(low_level<=kaosheng[i].Get_CS()<youxian_level))  
+		{  
+			p2[m]=&kaosheng[i];  
+			m++;  
+		}  
+		else if((low_level<=kaosheng[i].Get_CS()<youxian_level)&&(low_level<=kaosheng[i].Get_DS()<youxian_level)&&(kaosheng[i].Get_DS()>=kaosheng[i].Get_CS()))  
+		{  
+			p3[q]=&kaosheng[i];  
+			q++;  
+		}  
+		else if((low_level<=kaosheng[i].Get_CS()<youxian_level)&&(low_level<=kaosheng[i].Get_DS()<youxian_level)&&(kaosheng[i].Get_DS()<kaosheng[i].Get_CS()))  
+		{  
+			p4[j]=&kaosheng[i];  
+			j++;  
+		}  
+		}  
+     else continue;  
+	}  
+	cout<<k+m+q+j<<endl;   
+	for(int i=0;i<k-1;i++)  
+	{  
+		for(int w=i+1;w<k;w++)  
+		{  
+			if(p1[w]->total()>p1[i]->total())  
+			{  
+				temp=*p1[w];  
+				*p1[w]=*p1[i];  
+				*p1[i]=temp;  
+			}  
+		}  
+	}  
+	for(int i=0;i<k-1;i++)  
+	{  
+		for(int w=i+1;w<k;w++)  
+		{  
+			if((p1[w]->total()==p1[i]->total())&&(p1[w]->Get_DS()>=p1[i]->Get_DS()))  
+			{  
+				temp=*p1[w];  
+				*p1[w]=*p1[i];  
+				*p1[i]=temp;  
+			}  
+		}  
+	}  
+	for(int i=0;i<k;i++)  
+	{  
+		p1[i]->show();    
+	}    
+	for(int i=0;i<m-1;i++)  
+	{  
+		for(int w=i+1;w<m;w++)  
+		{  
+			if(p2[w]->total()>=p2[i]->total())  
+			{  
+				temp=*p2[w];  
+				*p2[w]=*p2[i];  
+				*p2[i]=temp;  
+			}  
+		}  
+	}  
+	for(int i=0;i<m;i++)  
+	{  
+		p2[i]->show();  
+	}  
+	for(int i=0;i<q-1;i++)  
+	{  
+		for(int w=i+1;w<q;w++)  
+		{   
+			if(p3[w]->total()>=p3[i]->total())  
+			{  
+				temp=*p3[w];  
+				*p3[w]=*p3[i];  
+				*p3[i]=temp;  
+			}  
+		}  
+	}  
+	for(int i=0;i<q;i++)  
+	{  
+		p3[i]->show();  
+	}  
+	for(int i=0;i<j-1;i++)  
+	{  
+		for(int w=i+1;w<j;w++)  
+		{  
+			if(p4[w]->total()>=p4[i]->total())  
+			{  
+				temp=*p4[w];  
+				*p4[w]=*p4[i];  
+				*p4[i]=temp;  
+			}  
+		}  
+	}  
+	for(int i=0;i<j;i++)  
+	{  
+		p4[i]->show();   
+	}  
+	return 0;  
+}  
+//标准答案  
+>#include <cstdio>  
+#include <algorithm>  
+#include <vector>  
+#include <string>  
+using namespace std;    
+typedef struct Student  
+{  
+	string  ID;  
+	int  De;  
+	int Cai;  
+}Student;  
+inline bool compare(Student a,Student b)  
+{  
+	if ((a.Cai+a.De)!=(b.Cai+b.De))  
+    return a.Cai+a.De>b.Cai+b.De;  
+	else if (a.De!=b.De)   
+	return a.De>b.De;  
+	else  
+	return a.ID<b.ID;  
+}  
+inline void print(Student s)  
+{  
+	printf("%s %d %d\n",s.ID.c_str(),s.De,s.Cai);  
+}   
+int main()  
+{  
+     int N,L,H;  
+	 char id[10];  
+	 Student  S;  
+	 string  ID;  
+	 vector<Student>    vec1;  
+	 vector<Student>    vec2;  
+	 vector<Student>    vec3;  
+	 vector<Student>    vec4;  
+	 scanf("%d %d %d",&N,&L,&H);  
+	 while(N--)  
+	 {   
+		 scanf("%s%d%d",id,&S.De,&S.Cai);  
+		 S.ID.assign(id);  
+		if (S.De>=L&&S.Cai>=L)  
+		{  
+			if (S.De>=H&&S.Cai>=H)  
+				vec1.push_back(S);  
+			else  
+			if (S.De>=H&&S.Cai<H)  
+			    vec2.push_back(S);  
+			else  
+		   if (S.De<H&&S.Cai<H&&S.De>=S.Cai)  
+		        vec3.push_back(S);  
+			else  
+				vec4.push_back(S);  	
+		}  
+	 }  
+	 sort(vec1.begin(),vec1.end(),compare);  
+	 sort(vec2.begin(),vec2.end(),compare);  
+     sort(vec3.begin(),vec3.end(),compare);  
+     sort(vec4.begin(),vec4.end(),compare);  
+	 printf("%d\n",vec1.size()+vec2.size()+vec3.size()+vec4.size());  
+	 for_each(vec1.begin(),vec1.end(),print);  
+	 for_each(vec2.begin(),vec2.end(),print);  
+	 for_each(vec3.begin(),vec3.end(),print);  
+	 for_each(vec4.begin(),vec4.end(),print);  
+	//  system("PAUSE");  
+	return 0;  
+}  
+//第二次代码  
+//两个地方需要注意 有两个测试点会运行超时，用printf进行输出 第二个 结构体的string不能直接输出，需要转字符串 c_str()   
+>#include<iostream>  
+#include<vector>  
+#include<algorithm>  
+#include<cstring>  
+using namespace std;  
+struct node  
+{  
+	string id;  
+	int s_de;  
+	int s_cai;  
+	int all;  	
+};   
+bool cmp(node a, node b)  
+{  
+	return (a.all!=b.all)?a.all>b.all:((a.s_de!=b.s_de)?a.s_de>b.s_de: a.id<b.id);  
+}  
+vector<node> v1,v2,v3,v4;//v1为才德全尽 v2德分到线 v3德不低于才 v4仅都及格   
+int main()  
+{  
+	int num,low,high;  
+	cin>>num>>low>>high;  	
+	for(int i = 0; i<num; i++){  
+		node temp;  
+		cin>>temp.id>>temp.s_de>>temp.s_cai;  
+		temp.all = temp.s_de + temp.s_cai;  
+		if(temp.s_de>=high && temp.s_cai>=high){  
+			v1.push_back(temp);  
+		}  
+		else if(temp.s_de>=high && temp.s_cai>=low){  
+			v2.push_back(temp);  
+		}  
+		else if(temp.s_de>=low && temp.s_cai>= low && temp.s_de>=temp.s_cai){  
+			v3.push_back(temp);  
+		}  
+		else if(temp.s_de>=low && temp.s_cai>= low){  
+			v4.push_back(temp);  
+		}  
+	}   
+	sort(v1.begin(),v1.end(),cmp);  
+	sort(v2.begin(),v2.end(),cmp);  
+	sort(v3.begin(),v3.end(),cmp);  
+	sort(v4.begin(),v4.end(),cmp);  
+	int sum = v1.size()+v2.size()+v3.size()+v4.size();  
+	cout<<sum<<endl;  
+	for(int i = 0; i<v1.size(); i++){  
+		printf("%s %d %d\n",v1[i].id.c_str(), v1[i].s_de, v1[i].s_cai);  
+//		cout<<v1[i].id<<" "<<v1[i].s_de<<" "<<v1[i].s_cai<<endl;  
+	}  
+	for(int i = 0; i<v2.size(); i++){   
+		printf("%s %d %d\n",v2[i].id.c_str(), v2[i].s_de, v2[i].s_cai);  
+//		cout<<v2[i].id<<" "<<v2[i].s_de<<" "<<v2[i].s_cai<<endl;   
+	}  
+	for(int i = 0; i<v3.size(); i++){  
+		printf("%s %d %d\n",v3[i].id.c_str(), v3[i].s_de, v3[i].s_cai);  
+//		cout<<v3[i].id<<" "<<v3[i].s_de<<" "<<v3[i].s_cai<<endl;  
+	}  
+	for(int i = 0; i<v4.size(); i++){  
+		printf("%s %d %d\n",v4[i].id.c_str(), v4[i].s_de, v4[i].s_cai);  
+//		cout<<v4[i].id<<" "<<v4[i].s_de<<" "<<v4[i].s_cai<<endl;  
+	}  
+	return 0;  
+}    
+*/   
+  
+/*  
+1016    
+部分A+B 给定两个整数，将对应数字出现次数按规律成新的数字，求和  
+
+***思路：用char数组或者字符串去存入两个char型整数，然后比较字符出现次数，字符转为数字  
+      用公式计算出对应结果，用到pow(a,b)函数 a的b次方***  
+>#include<iostream>   
+#include<cmath>    
+using namespace std;  
+int main()  
+{  
+    string A,B;  
+    char Da,Db;  
+    int a=0,b=0,sum=0;  
+    cin>>A>>Da>>B>>Db;  
+    for(int i=0; i<A.size(); i++)   
+    {  
+        if(A[i]==Da)  
+            a++;  
+    }  
+    for(int i=0; i<B.size(); i++)  
+    {  
+        if(B[i]==Db)  
+            b++;  
+    }  
+    for(int i=0; i<a; i++)  
+        sum+=(Da-'0')*pow(10,i);   //10的i次方   
+    for(int i=0; i<b; i++)  
+        sum+=(Db-'0')*pow(10,i);  
+    cout<<sum<<endl;  
+}        
+*/   
+
+/*  
+1017  有一个答案错误   
+A除以B  不超过1000位的A读入，算商和余数  
+
+***思路：放入字符型数组，再放入整型数组***   
+
+>#include<iostream>   
+#include<cstring>  
+using namespace std;  
+int main()  
+{	  
+	char c[1001];  
+	int a[1001];  
+	cin>>c;	  
+	int m;  
+	cin>>m;  
+	for(int i=0;i<strlen(c);i++)    
+	{  
+		a[i]=c[i]-'0';  
+	}  
+	int yu=0,shang;  
+	for(int i=0;i<strlen(c);i++)  
+	{  
+		shang=(yu*10+a[i])/m;	  	
+		yu=(yu*10+a[i])%m;      
+		if(shang==0&&i==0){    
+		}  
+		else cout<<shang;  
+	}  
+	cout<<" "<<yu;  
+	return 0;  
+}  
+//标准答案  
+>#include<iostream>  
+#include<string.h>  
+#include<math.h>  
+#include<stdlib.h>  
+int main(){  
+    char a[2000];  
+    scanf("%s",a);  
+    int b;  
+    scanf("%d",&b);  
+    int n = strlen(a);  
+    int temp=0;  
+    int flag = 0;  
+    for(int i=0;i<n;i++){  
+        temp = (a[i]-'0')+temp*10;  
+        if(temp>=b){  
+            printf("%d",temp/b);  
+            flag = 1;  
+        }  
+        else if(flag){  
+            printf("0");  
+        }  
+        temp = temp%b;  
+    }  
+    if(flag==0)  
+        printf("0");  
+    printf(" %d",temp);  
+}   
+*/  
+
+/*    运算符重载只能跟类一起玩   
+1018    部分正确   
+锤子剪刀布 输出甲乙胜平负的次数和胜最多的手势  
+
+***思路：读取次数后循环遍历，每次计数并对应胜利手势结果数组位置+1***   
+ 
+>#include<iostream>  
+using namespace std;  
+bool judgeda(char c1,char c2)  
+{  
+	if(((c1=='C')&&(c2=='J'))||((c1=='J')&&(c2=='B'))||((c1=='B')&&(c2=='C')))  
+	return true;  
+	else return false;  
+}   
+bool judgedeng(char c1,char c2)  
+{  
+	if(((c1=='C')&&(c2=='C'))||((c1=='J')&&(c2=='J'))||((c1=='B')&&(c2=='B')))  
+	return true;  
+	else return false;  
+}  
+bool judgexiao(char c1,char c2)  
+{  
+	if(((c1=='J')&&(c2=='C'))||((c1=='B')&&(c2=='J'))||((c1=='C')&&(c2=='B')))  
+	return true;  
+	else return false;  
+}  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	char c1,c2;   //用于读取字符（手势）    
+	int jia[3]={0};   //用于放入胜平负次数    多定义一个空位   
+	int yi[3]={0};  
+	int jiashoushi[3]={0};//用于记录胜利时手势结果 C J B  
+	int yishoushi[3]={0};   
+	for(int i=0;i<n;i++)  
+	{  
+		cin>>c1>>c2;  
+		if(judgeda(c1,c2))  
+		{  
+			jia[0]++;  
+			yi[2]++;  
+			if(c1=='C')  
+			{  
+				jiashoushi[0]++;  
+			}  
+			else if(c1=='J')  
+			{  
+				jiashoushi[1]++;  
+			}  
+			else if(c1=='B')  
+			{  
+				jiashoushi[2]++;  
+			}  
+		}  
+		else if(judgexiao(c1,c2))   
+		{  
+			jia[2]++;  
+			yi[0]++;  
+			if(c2=='C')  
+			{  
+				yishoushi[0]++;  
+			}  
+			else if(c2=='J')  
+			{  
+				yishoushi[1]++;  
+			}  
+			else if(c2=='B')  
+			{  
+				yishoushi[2]++;  
+			}  
+		}  
+		else if(judgedeng(c1,c2))   
+		{  
+			jia[1]++;  
+			yi[1]++;  
+		}  
+	}   
+	cout<<jia[0]<<" "<<jia[1]<<" "<<jia[2]<<endl;  
+	cout<<yi[0]<<" "<<yi[1]<<" "<<yi[2]<<endl;  
+	//遍历甲获胜手势中最多的  C J B  
+	int max1=0;  
+	for(int i=0;i<2;i++)  
+	{  
+		if(jiashoushi[i]<=jiashoushi[i+1])  
+		{  
+			max1=i+1;  
+		}  	 
+	}   
+	if(max1==0)  
+	{  
+		cout<<"C"<<" ";  
+	}  
+	else if(max1==1)  
+	{  
+		cout<<"J"<<" ";  
+	}  
+	else if(max1==2)  
+	{  
+		cout<<"B"<<" ";  
+	}  
+	int max2=0;  
+	for(int i=0;i<2;i++)  
+	{  
+		if(yishoushi[i]<=yishoushi[i+1])  
+		{  
+			max2=i+1;  
+		}  	
+	}  
+	if(max2==0)   
+	{  
+		cout<<"C";  
+	}  
+	else if(max2==1)  
+	{  
+		cout<<"J";  
+	}  
+	else if(max2==2)  
+	{  
+		cout<<"B";  
+	}  
+	return 0;  
+}  
+//标准答案   
+>#include <iostream>    
+#include <stdio.h>   
+using namespace std;  
+int main()  
+{  
+    int n;  
+    scanf("%d", &n);  
+    int jiaWin = 0, jiaLose = 0, draw = 0;  
+    int jiaJWin = 0, jiaCWin = 0, jiaBWin = 0;  
+    int yiJWin = 0, yiCWin = 0, yiBWin = 0;  
+    char jia, yi;  
+    for(int i = 0; i < n; i++){  
+        scanf(" %c %c", &jia, &yi);  
+        if(jia == 'C'){  
+            if(yi == 'C'){  
+                draw++;  
+            }  
+            else if(yi == 'J'){  
+                jiaWin++;  
+                jiaCWin++;  
+            }  
+            else if(yi == 'B'){  
+                jiaLose++;  
+                yiBWin++;  
+            }  
+        }  
+        else if(jia == 'J'){  
+            if(yi == 'C'){  
+                jiaLose++;  
+                yiCWin++;  
+            }  
+            else if(yi == 'J'){  
+                draw++;  
+            }  
+            else if(yi == 'B'){  
+                jiaWin++;  
+                jiaJWin++;  
+            }  
+        }  
+        else if(jia == 'B'){  
+            if(yi == 'C'){  
+                jiaWin++;  
+                jiaBWin++;  
+            }  
+            else if(yi == 'J'){  
+                jiaLose++;  
+                yiJWin++;  
+            }  
+            else if(yi == 'B'){  
+                draw++;  
+            }  
+        }  
+    }  
+    printf("%d %d %d\n", jiaWin, draw, jiaLose);  
+    printf("%d %d %d\n", jiaLose, draw, jiaWin);  
+    printf("%c ", jiaBWin >= jiaCWin ? (jiaBWin >= jiaJWin ? 'B' : 'J') : (jiaCWin >= jiaJWin ? 'C' : 'J'));  
+    printf("%c\n", yiBWin >= yiCWin ? (yiBWin >= yiJWin ? 'B' : 'J') : (yiCWin >= yiJWin ? 'C' : 'J'));  
+    return 0;    
+}   
+//第二次代码  
+>#include<iostream>  
+#include<vector>   
+#include<algorithm>  
+#include<cstring>  
+using namespace std;  
+void out(int a[])  
+{  
+	int max1 = -1;  
+	int num1 = 0;  
+	for(int i = 0; i<3 ;i++){   //直接用3   
+		if(a[i]>max1){  
+			max1=a[i];  
+			num1 = i;  
+		}   
+	}  
+	if(num1 == 0) cout<<"B";  
+	else if(num1 == 1) cout<<"C";  
+	else if(num1 == 2) cout<<"J";	  
+}   
+int main()  
+{  
+	int N;  
+	cin>>N;    
+	int count1 = 0, count2 = 0, count3 = 0;  
+	int j[3] = {0}, y[3] = {0};  
+	char jia, yi;  
+	for(int i = 0; i<N; i++){  
+		cin>>jia>>yi;  
+		if((jia == 'C' && yi == 'J') || (jia == 'J' && yi == 'B') || (jia == 'B' && yi == 'C')){  
+			count1++;  
+			if(jia == 'B') j[0]++;  
+			else if(jia == 'C') j[1]++;  
+			else if(jia == 'J') j[2]++;	  
+		}  
+		else if((jia == 'C' && yi == 'C') || (jia == 'J' && yi == 'J') || (jia == 'B' && yi == 'B')){  
+			count2++;  
+		}  
+		else if((jia == 'C' && yi == 'B') || (jia == 'J' && yi == 'C') || (jia == 'B' && yi == 'J')){  
+			count3++;  
+			if(yi == 'B') y[0]++;  
+			else if(yi == 'C') y[1]++;  
+			else if(yi == 'J') y[2]++;  
+		}  
+	}   
+	printf("%d %d %d\n", count1, count2, count3);  
+	printf("%d %d %d\n", count3, count2, count1);  
+	out(j);  
+	cout<<" ";  
+	out(y);  
+	return 0;  
+}   
+*/  
+
+/*  
+1019  
+数字黑洞 将四位数字按序做差得到新数，一直循环直到6174   
+  
+***思路：字符串操作猛如虎***    
+
+//参考答案 玩转字符串  头文件 #include <algorithm>   
+>#include<iostream>   
+#include<cstring>  
+#include<algorithm>  
+using namespace std;  
+int main()  
+{  
+	string s,s1,s2;  
+	cin>>s;  
+	s.insert(0,4-s.length(),'0');  //不足四位填充完整   
+	while(true)  //条件达到就break出去，不然执行死循环   
+	{  
+		string temp=s;  
+		sort(s.rbegin(),s.rend());  //将s降序排列 有s   
+		s1=s;   
+		sort(temp.begin(),temp.end());  
+		s2=temp;                    //将temp升序排列  
+		if(s1==s2)  
+		{  
+			cout<<s1<<" - "<<s2<<" = 0000"<<endl;  
+			break;   //第一处跳出循环   
+		}   
+		else  
+		{  
+			int ts1 = stoi(s1);  //字符串转成数字  
+			int ts2=stoi(s2);  
+			int dec=ts1-ts2;  
+			cout<<s1<<" - "<<s2<<" = ";  
+			printf("%04d",dec);  //对于输出结果的控制，用printf操作  
+			s[0] = (char)(dec/1000 + '0');  
+            dec%=1000;  
+            s[1] = (char)(dec/100 + '0');  
+            dec%=100;  
+            s[2] = (char)(dec/10 + '0');  
+            dec%=10;  
+            s[3] = (char)(dec + '0');  
+		//	s=to_string(ts1-ts2);   
+		//	s.insert(0, 4-s.length(), '0');  
+		 }   
+		 if(s=="6174")break;  //第二处跳出循环  
+		 else cout<<endl;   
+	}  	
+	return 0;  
+}  
+//第二次仍然不完美  
+//递归函数思想做数字黑洞  
+>#include<iostream>  
+#include<algorithm>  
+#include<cstring>  
+bool cmp(char a, char b)  
+{  
+	return a>b;  
+}  
+using namespace std;   
+int main()  
+{  
+    char a[4];  
+	for(int i = 0; i<4; i++){  
+		cin>>a[i];  
+	}  
+	while(true){  
+		if(a[0]==a[1] && a[0]==a[2] && a[0]==a[3]){  
+		printf("%c%c%c%c - %c%c%c%c = 0000",a[0],a[0],a[0],a[0],a[0],a[0],a[0],a[0]);  
+		break;  
+	    }  
+	    else{  
+	char b[4];  
+	char c[4];  
+	for(int i = 0; i<4; i++){  
+		b[i] = a[i];  
+	}  
+	sort(a,a+strlen(a),cmp);    
+	sort(b,b+strlen(a));  
+	int temp;  
+	temp = ((a[3]-'0') + (a[2]-'0')*10 + (a[1]-'0')*100 + (a[0]-'0')*1000) - ((b[3]-'0') + (b[2]-'0')*10 + (b[1]-'0')*100 + (b[0]-'0')*1000);  
+	for(int i = 0; i<4; i++){  
+		printf("%c",a[i]);  
+	}  
+	printf(" - ");  
+	for(int i = 0; i<4; i++){  
+		printf("%c",b[i]);  
+	}  
+	printf(" = %04d\n",temp);  
+	if(temp == 6174) break;  
+	else{  
+		a[0] =(char) (temp/1000 + '0');  
+	    a[1] =(char) (temp/100%10 + '0');  
+	    a[2] =(char) (temp/10%10 +'0');  
+     	a[3] =(char) (temp%10 + '0');  
+	}  
+	}  
+	}  
+	return 0;  
+}   
+*/  
+ 
+/*  
+1020  
+月饼 给出不同月饼的库存量，总售价，市场总需求，算最大收益  
+
+***思路:用a[n][2]分别放入数据，并计算  用三个数组也可以***   
+
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	float a1[n];  
+	float a2[n];  
+	float b[n];  
+	int zongliang;  
+	cin>>zongliang;  
+	for(int i=0;i<n;i++)  //读入库存量   
+	{  
+		cin>>a1[i];  
+	}  
+	for(int j=0;j<n;j++)  //读入总售价   
+	{  
+		cin>>a2[j];  
+	}  
+	for(int q=0;q<n;q++)  //读入收益单价   
+	{  
+		b[q]=a2[q]/a1[q];  
+	}  
+	//按收益单价进行排序  
+	for(int i=0;i<n-1;i++)  
+	{  
+		for(int j=i+1;j<n;j++)  
+		{  
+			if(b[i]<b[j])  
+			{  
+				float temp1,temp2,temp3;  
+				temp1=b[i];  
+				b[i]=b[j];  
+				b[j]=temp1;  
+				temp2=a1[i];  
+				a1[i]=a1[j];  
+				a1[j]=temp2;  
+				temp3=a2[i];  
+				a2[i]=a2[j];  
+				a2[j]=temp3;  
+			}  
+		}  
+	}   
+	float lirun=0.0;  
+	for(int i=0;i<n;i++)  
+	{  
+		if(zongliang>a1[i])  
+		{  
+			lirun+=a2[i];  
+			zongliang=zongliang-a1[i];  
+			continue;  
+		}  
+		else   //if((zongliang>0)&&(zongliang<a[i][0]))  
+		{  
+			lirun=lirun+zongliang*b[i];  
+			break;  
+		}  
+	}  
+	printf("%.2f",lirun);  
+	return 0;  
+}  
+//第二次代码  
+//月饼题 用结构体vector做  考虑市场需求太大，无法全部满足 测试点3   
+>#include<iostream>  
+#include<algorithm>  
+#include<cstring>  
+#include<vector>  
+using namespace std;   
+struct node  
+{  
+	double cucun;  
+	double zongjia;  
+	double danjia;  	
+};   
+bool cmp(node a, node b)  
+{  
+	return a.danjia>b.danjia;  
+}  
+int main()  
+{  
+	int N;  
+	double count;  
+	cin>>N>>count;  
+	double mmax = 0.0;  
+	double mmmax = 0.0;  
+	vector<node> v(N);  
+	for(int i = 0; i<N; i++){  
+		cin>>v[i].cucun;  
+		mmax +=  v[i].cucun;   
+	}  
+	for(int i = 0; i<N; i++){  
+		cin>>v[i].zongjia;  
+		mmmax += v[i].zongjia;  
+	}  
+	for(int i = 0; i<N; i++){  
+		v[i].danjia = v[i].zongjia/v[i].cucun;  
+	}  
+    sort(v.begin(),v.end(),cmp);  
+    int k = 0;   
+    double sum = 0.0;  
+    if(count>=mmax){   
+    	printf("%.2lf",mmmax);  
+	}  
+	else{   
+    	if(count>v[k].cucun){  
+    		sum += v[k].zongjia;  
+    		count -= v[k].cucun;  
+    		k++;  
+		}  
+		else if(count<=v[k].cucun){  
+			sum += count*v[k].zongjia/v[k].cucun;  
+		//	count = 0;  
+		    break;   
+		}  
+	}  
+	printf("%.2lf",sum);  
+	}  
+	return 0;  
+}      
+*/  
 
 /*
 1021

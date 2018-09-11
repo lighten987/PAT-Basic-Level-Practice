@@ -4112,445 +4112,438 @@ int main(){
 }  
  */  
  
-/*
-1063
-渣渣题 
-统计最大数输出 
-#include<iostream>
-#include<math.h> 
-using namespace std;
-float mo(float a,float b)
-{
-	return sqrt(a*a+b*b);
-}
-int main()
-{
-	int n;
-	cin>>n;
-	float shuzu[n];
-	for(int i=0;i<n;i++)
-	{
-		int a,b;
-		cin>>a>>b;
-		shuzu[i]=mo(a,b);
-	}
-	for(int i=0;i<n-1;i++)
-	{
-		for(int j=i+1;j<n;j++)
-		if(shuzu[i]<shuzu[j])
-		{
-			float temp;
-			temp=shuzu[i];
-			shuzu[i]=shuzu[j];
-			shuzu[j]=temp;
-		}
-	}
-	printf("%.2f",shuzu[0]);
-	return 0;
-}
-*/
+/*  
+1063  
+渣渣题   
+统计最大数输出   
+>#include<iostream>  
+#include<math.h>      
+using namespace std;  
+float mo(float a,float b)  
+{  
+	return sqrt(a*a+b*b);  
+}  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	float shuzu[n];  
+	for(int i=0;i<n;i++)  
+	{  
+		int a,b;  
+		cin>>a>>b;  
+		shuzu[i]=mo(a,b);  
+	}  
+	for(int i=0;i<n-1;i++)  
+	{  
+		for(int j=i+1;j<n;j++)  
+		if(shuzu[i]<shuzu[j])  
+		{  
+			float temp;  
+			temp=shuzu[i];  
+			shuzu[i]=shuzu[j];  
+			shuzu[j]=temp;  
+		}  
+	}  
+	printf("%.2f",shuzu[0]);  
+	return 0;  
+}  
+*/  
 
-/*
-1064
-朋友数 各数位和相同即为朋友数，给出一系列数，按增序输出所有朋友数 
+/*  
+1064  
+朋友数 各数位和相同即为朋友数，给出一系列数，按增序输出所有朋友数   
 
-思路：朋友数最大为36，用一个数组来装每个数对应的朋友数 
-#include<iostream>
-using namespace std;
-//函数返回各数位和
-int he(int n)
-{
-	int he=0;
-	while(n>0)
-	{
-		he+=n%10;
-		n/=10;		
-	}
-	return he;
- } 
-int main()
-{
-	int n;
-	cin>>n;
-	int shu;
-	int pengyoushuzu[40]={0};
-	for(int i=0;i<n;i++)
-	{
-		cin>>shu;
-		pengyoushuzu[he(shu)]++;
-	}
-	int count=0;
-	for(int i=0;i<40;i++)
-	{
-		if(pengyoushuzu[i])
-		{
-			count++;
-		}
-	}
-	cout<<count<<endl;
-	int i=0;
-	for(;count>1;i++)
-	{
-		if(pengyoushuzu[i])
-		{
-			cout<<i<<" ";
-			count--;
-		}
-	}
-	int k=1;
-	for(;k>0;i++)
-	{
-		if(pengyoushuzu[i])
-		{
-			cout<<i;
-			k--;
-		}
-	}
-	return 0;
-}
-*/
+***思路：朋友数最大为36，用一个数组来装每个数对应的朋友数***   
+>#include<iostream>  
+using namespace std;  
+//函数返回各数位和  
+int he(int n)  
+{  
+	int he=0;  
+	while(n>0)  
+	{  
+		he+=n%10;  
+		n/=10;	  	
+	}  
+	return he;  
+ }   
+int main()  
+{  
+	int n;   
+	cin>>n;  
+	int shu;  
+	int pengyoushuzu[40]={0};  
+	for(int i=0;i<n;i++)  
+	{  
+		cin>>shu;  
+		pengyoushuzu[he(shu)]++;  
+	}  
+	int count=0;  
+	for(int i=0;i<40;i++)  
+	{  
+		if(pengyoushuzu[i])  
+		{  
+			count++;  
+		}  
+	}  
+	cout<<count<<endl;  
+	int i=0;  
+	for(;count>1;i++)  
+	{  
+		if(pengyoushuzu[i])  
+		{  
+			cout<<i<<" ";  
+			count--;  
+		}  
+	}  
+	int k=1;  
+	for(;k>0;i++)  
+	{  
+		if(pengyoushuzu[i])  
+		{  
+			cout<<i;  
+			k--;  
+		}  
+	}  
+	return 0;  
+}  
+*/  
 
-/*
-1065
-单身狗
+/*  
+1065  
+单身狗  
 
-思路：先数组置为-1，存入cp信息互为彼此 用guest[]数组放入来宾，在list[]上cp处为1，
-      再去list[]上遍历，若为1，则配偶来了 不为1的放入set，set自动升序，输出即可  
+***思路：先数组置为-1，存入cp信息互为彼此 用guest[]数组放入来宾，在list[]上cp处为1，
+      再去list[]上遍历，若为1，则配偶来了 不为1的放入set，set自动升序，输出即可***    
 
-#include<iostream>
-#include<set>
-using namespace std;
-#define MAX 100001
-int main() 
-{
-	int id[MAX]={-1},guest[10001]={0},list[MAX]={0};
-	int cpdui;
-	cin>>cpdui;
-	int male,female;
-	for(int i=0;i<cpdui;i++)
-	{
-		cin>>male>>female;
-		//在id[]中互相存入彼此，证明存在 
-		id[male]=female;
-		id[female]=male;
-	}
-	int count;
-	cin>>count;
-	//存入来宾信息 
-	for(int j=0;j<count;j++)
-	{
-		cin>>guest[j];
-		if(id[guest[j]]!=-1)  //此人有配偶 
-        //配偶信息对应在list[]中置为1 		
-        list[id[guest[j]]]=1;
-	}
-	set<int>s; 
-	//遍历list[]，为1证明都到了 
-	for(int j=0;j<count;j++)
-	{
-	if(!list[guest[j]])
-		s.insert(guest[j]);
-	}
-	cout<<s.size()<<endl; 
-	for(set<int>::iterator it =s.begin();it!=s.end();it++)
-	{
-		if(it!=s.begin())
-		cout<<" ";
-		printf("%05d",*it);
-	 } 
-	return 0;
-}
-*/
+>#include<iostream>  
+#include<set>  
+using namespace std;  
+#define MAX 100001  
+int main()   
+{  
+	int id[MAX]={-1},guest[10001]={0},list[MAX]={0};  
+	int cpdui;  
+	cin>>cpdui;  
+	int male,female;  
+	for(int i=0;i<cpdui;i++)  
+	{  
+		cin>>male>>female;    
+		//在id[]中互相存入彼此，证明存在   
+		id[male]=female;  
+		id[female]=male;  
+	}  
+	int count;  
+	cin>>count;  
+	//存入来宾信息   
+	for(int j=0;j<count;j++)  
+	{  
+		cin>>guest[j];  
+		if(id[guest[j]]!=-1)  //此人有配偶   
+        //配偶信息对应在list[]中置为1 	  	
+        list[id[guest[j]]]=1;  
+	}  
+	set<int>s;   
+	//遍历list[]，为1证明都到了  
+	for(int j=0;j<count;j++)  
+	{  
+	if(!list[guest[j]])  
+		s.insert(guest[j]);  
+	}  
+	cout<<s.size()<<endl;   
+	for(set<int>::iterator it =s.begin();it!=s.end();it++)  
+	{  
+		if(it!=s.begin())  
+		cout<<" ";  
+		printf("%05d",*it);  
+	 }   
+	return 0;  
+}  
+*/  
 
-/* 
-1066
-图像过滤
-渣渣题 
-#include<iostream>  //scanf读取 
-using namespace std;
-int main()
-{
-	int m,n,low,high,tidai;
-	cin>>m>>n>>low>>high>>tidai;
-	for(int i=0;i<m;i++)
-	{
-		int temp;
-		scanf("%d",&temp);
-		if((temp>=low)&&(temp<=high))temp=tidai;
-		printf("%03d",temp);
-		for(int j=1;j<n;j++)
-		{
-			scanf("%d",&temp);
-			if((temp>=low)&&(temp<=high))
-			{
-			temp=tidai;
-			}
-			printf(" %03d",temp);
-		}
-		cout<<endl;
-	}
-	return 0;
-}
-*/ 
+/*   
+1066  
+图像过滤  
+渣渣题   
+>#include<iostream>  //scanf读取   
+using namespace std;  
+int main()  
+{  
+	int m,n,low,high,tidai;  
+	cin>>m>>n>>low>>high>>tidai;  
+	for(int i=0;i<m;i++)  
+	{  
+		int temp;  
+		scanf("%d",&temp);  
+		if((temp>=low)&&(temp<=high))temp=tidai;  
+		printf("%03d",temp);  
+		for(int j=1;j<n;j++)  
+		{  
+			scanf("%d",&temp);  
+			if((temp>=low)&&(temp<=high))  
+			{  
+			temp=tidai;   
+			}  
+			printf(" %03d",temp);  
+		}  
+		cout<<endl;  
+	}  
+	return 0;  
+}  
+*/   
 
-/*
-1067 试密码
+/*  
+1067   
+试密码  
 
-注意：再一次getchar()去消尾（清空回车符），用getline(cin,s)去读一整行 
+***注意：再一次getchar()去消尾（清空回车符），用getline(cin,s)去读一整行***   
 
-#include<iostream>
-#include<cstring>
-using namespace std;
-int main()
-{
-	string mima;
-	int n;
-	cin>>mima>>n;
-	getchar();
-	int count=0;
-	for(int i=0;i<n;i++)
-	{
-		string s;
-        getline(cin,s);
-        if(s=="#")break;
-		if(s==mima)
-		{
-			cout<<"Welcome in"<<endl;
-			break;
-		}
-		else 
-		{
-			cout<<"Wrong password: "<<s<<endl;
-			count++;
-			if(count==n){
-				cout<<"Account locked"<<endl;
-				break;
-			}
-		}
-	}
-	return 0;
-}
-*/
+>#include<iostream>  
+#include<cstring>  
+using namespace std;  
+int main()   
+{  
+	string mima;  
+	int n;  
+	cin>>mima>>n;  
+	getchar();  
+	int count=0;  
+	for(int i=0;i<n;i++)  
+	{  
+		string s;  
+        getline(cin,s);  
+        if(s=="#")break;  
+		if(s==mima)  
+		{  
+			cout<<"Welcome in"<<endl;  
+			break;  
+		}  
+		else   
+		{  
+			cout<<"Wrong password: "<<s<<endl;  
+			count++;  
+			if(count==n){  
+				cout<<"Account locked"<<endl;  
+				break;  
+			}  
+		}  
+	}  
+	return 0;  
+}  
+*/  
 
-/*
-1068  并不知道哪里错了 
-万绿丛中一点红 
+/*  
+1068  并不知道哪里错了   
+万绿丛中一点红   
  
-//map映射判重最好用
+***//map映射判重最好用***    
 
-#include<iostream>
-#include<cmath>
-#include<map>
-using namespace std;
-
-map<int,int>zhi;
-int m,n,yuzhi;
-int a[1001][1001];	
-bool panduan(int x,int y)
-{
-	int zuobiao[8][2]={1,0,-1,0,0,1,0,-1,1,1,1,-1,-1,1,-1,-1};
-	for(int i=0;i<8;i++)
-	{
-		int xx,yy;
-		xx=x+zuobiao[i][0];
-		yy=y+zuobiao[i][1];
-		if(xx>=0 && xx<n && yy<m && yy>=0 && abs(a[xx][yy]-a[x][y])<=yuzhi) return false; 
-	}
-	return false;
-}
-int main()
-{	
-cin>>m>>n>>yuzhi;
-
-	for(int i=0;i<n;i++)
-	{
-		for(int j=0;j<m;j++)
-		{
-			cin>>a[i][j];
-			zhi[a[i][j]]++;
-		}
-	}
-	int count=0;
-	int c1,c2,c3;
-	for(int i=0;i<n;i++)
-	{
-		for(int j=0;j<m;j++)
-		{
-			if(zhi[a[i][j]]==1&&panduan(i,j))
-			{
-				count++;
-				c1=i;
-				c2=j;
-				c3=a[i][j];
-			}
-		}
-	}
-	if(count==0)cout<<"Not Exist"<<endl;
-	else if(count>1)cout<<"Not Unique"<<endl;
-	else if(count==1)
-	{
-		cout<<"("<<c2<<", "<<c1<<"): "<<c3<<endl;
-	}
+>#include<iostream>  
+#include<cmath>  
+#include<map>  
+using namespace std;  
+map<int,int>zhi;  
+int m,n,yuzhi;  
+int a[1001][1001];  	
+bool panduan(int x,int y)  
+{  
+	int zuobiao[8][2]={1,0,-1,0,0,1,0,-1,1,1,1,-1,-1,1,-1,-1};  
+	for(int i=0;i<8;i++)  
+	{  
+		int xx,yy;  
+		xx=x+zuobiao[i][0];  
+		yy=y+zuobiao[i][1];  
+		if(xx>=0 && xx<n && yy<m && yy>=0 && abs(a[xx][yy]-a[x][y])<=yuzhi) return false;   
+	}  
+	return false;  
+}  
+int main()  
+{	  
+cin>>m>>n>>yuzhi;   
+	for(int i=0;i<n;i++)  
+	{  
+		for(int j=0;j<m;j++)  
+		{  
+			cin>>a[i][j];  
+			zhi[a[i][j]]++;  
+		}  
+	}  
+	int count=0;  
+	int c1,c2,c3;  
+	for(int i=0;i<n;i++)  
+	{  
+		for(int j=0;j<m;j++)  
+		{  
+			if(zhi[a[i][j]]==1&&panduan(i,j))  
+			{  
+				count++;  
+				c1=i;  
+				c2=j;  
+				c3=a[i][j];  
+			}  
+		}  
+	}  
+	if(count==0)cout<<"Not Exist"<<endl;  
+	else if(count>1)cout<<"Not Unique"<<endl;  
+	else if(count==1)  
+	{  
+		cout<<"("<<c2<<", "<<c1<<"): "<<c3<<endl;  
+	}  
+	return 0;  
+}  
 	
-	
-	return 0;
-}
-//标准答案
-#include<cstdio>
-#include<iostream>
-#include<cstring>
-#include<map>
-#include<cmath>
-using namespace std;
- 
-map<int, int> vis;
-int s[1001][1001];
-int n, m ,tol;
-int dir[8][2] = {1,0, -1,0, 0,1, 0,-1, 1,1, 1,-1, -1,1, -1,-1};
-//判断是否大于阈值 
-bool check(int x, int y)
-{
-	for(int i=0 ;i<8 ;i++){
-		int xx = x + dir[i][0];
-		int yy = y + dir[i][1];
-		if(xx>=0 && xx<n && yy<m && yy>=0 && abs(s[xx][yy]-s[x][y])<=tol ) return false; 
-	}
-	return true;
-}
- 
-int main(){
-	cin>>m>>n>>tol;
-	
-	for(int i=0 ;i<n ;i++){
-		for(int j=0 ;j<m ;j++){
-			cin>>s[i][j];
-			vis[s[i][j]] ++;  	
-		}
-	}
-	//cnt记录只出现一次的数字的个数
-	//x y记录坐标 
-	int cnt = 0;
-	int x, y;
-	for(int i=0 ;i<n ;i++){
-		for(int j=0 ;j<m ;j++){
-			if(vis[s[i][j]]==1 && check(i,j)){
-				cnt++;
-				x = i;
-				y = j;
-			}	
-		}
-	}
-	
-	if(cnt==1){
-		printf("(%d, %d): %d\n",y+1, x+1, s[x][y]);
-	}
-	else if(cnt>1){
-		puts("Not Unique");
-	}
-	else{
-		puts("Not Exist");
-	}
-	
-	return 0;
-}*/
+//标准答案  
+>#include<cstdio>  
+#include<iostream>  
+#include<cstring>  
+#include<map>  
+#include<cmath>  
+using namespace std;  
+map<int, int> vis;  
+int s[1001][1001];  
+int n, m ,tol;  
+int dir[8][2] = {1,0, -1,0, 0,1, 0,-1, 1,1, 1,-1, -1,1, -1,-1};  
+//判断是否大于阈值   
+bool check(int x, int y)  
+{  
+	for(int i=0 ;i<8 ;i++){  
+		int xx = x + dir[i][0];  
+		int yy = y + dir[i][1];  
+		if(xx>=0 && xx<n && yy<m && yy>=0 && abs(s[xx][yy]-s[x][y])<=tol ) return false;   
+	}  
+	return true;  
+}  
+int main(){  
+	cin>>m>>n>>tol;  
+	for(int i=0 ;i<n ;i++){  
+		for(int j=0 ;j<m ;j++){  
+			cin>>s[i][j];  
+			vis[s[i][j]] ++;    	
+		}  
+	}  
+	//cnt记录只出现一次的数字的个数  
+	//x y记录坐标   
+	int cnt = 0;  
+	int x, y;  
+	for(int i=0 ;i<n ;i++){  
+		for(int j=0 ;j<m ;j++){  
+			if(vis[s[i][j]]==1 && check(i,j)){  
+				cnt++;  
+				x = i;  
+				y = j;  
+			}	  
+		}  
+	}   
+	if(cnt==1){  
+		printf("(%d, %d): %d\n",y+1, x+1, s[x][y]);  
+	}  
+	else if(cnt>1){  
+		puts("Not Unique");  
+	}  
+	else{  
+		puts("Not Exist");  
+	}  
+	return 0;  
+}*/  
 
-/*
-1069   运行超时 
-微博转发抽奖  给出转发数，抽奖间隔和第一位序号 满足条件且第一次就输出，满足条件数为零输出特定语句 
+/*  
+1069   运行超时   
+微博转发抽奖  给出转发数，抽奖间隔和第一位序号 满足条件且第一次就输出，满足条件数为零输出特定语句   
 
-#include<iostream>
-#include<cstring> 
-using namespace std;
-int main()
-{
-	int zhuan,jiange,shouwei;
-	cin>>zhuan>>jiange>>shouwei;
-	if(shouwei>zhuan)
-	cout<<"Keep going..."<<endl;
-	else
-	{
-		char s[1010][30];  //转发的所有人昵称 
-		char ss[1010][30]={0};  //存放已中奖人的昵称，用于判断是否重复 
-		int k=0;
-		for(int i=1;i<=zhuan;i++)
-		{
-			cin>>s[i];
-		}
-		for(int j=shouwei;j<=zhuan;)
-		{
-			for(int i=0;i<k;i++)
-			{
-					if(strcmp(s[j],ss[k])==0)
-		    	{
-		    		j=j+1;
-		    		break;
-				}
-			}
-		            cout<<s[j]<<endl;
-		    		ss[k]==s[j];
-		    		k++;
-		    		j=j+jiange-1;	
-		}
-	}
-	return 0; 
-} 
+>#include<iostream>  
+#include<cstring>   
+using namespace std;  
+int main()  
+{  
+	int zhuan,jiange,shouwei;  
+	cin>>zhuan>>jiange>>shouwei;  
+	if(shouwei>zhuan)  
+	cout<<"Keep going..."<<endl;  
+	else  
+	{  
+		char s[1010][30];  //转发的所有人昵称   
+		char ss[1010][30]={0};  //存放已中奖人的昵称，用于判断是否重复   
+		int k=0;  
+		for(int i=1;i<=zhuan;i++)  
+		{  
+			cin>>s[i];  
+		}  
+		for(int j=shouwei;j<=zhuan;)  
+		{  
+			for(int i=0;i<k;i++)  
+			{  
+					if(strcmp(s[j],ss[k])==0)  
+		    	{  
+		    		j=j+1;  
+		    		break;  
+				}  
+			}  
+		            cout<<s[j]<<endl;  
+		    		ss[k]==s[j];  
+		    		k++;  
+		    		j=j+jiange-1;	  
+		}  
+	}  
+	return 0;   
+}   
 
-//标准答案 大佬神操作，用映射 
-#include<iostream>
-#include<map>
-using namespace std;
-int main()
-{
-	int zhuan,jiange,shouwei;
-	cin>>zhuan>>jiange>>shouwei;
-	map<string,int>choujiang;
-	int flag=0;
-	string str;
-	for(int i=1;i<=zhuan;i++)
-	{
-		cin>>str;
-		if(choujiang[str]==1)shouwei++;
-		if(i==shouwei&&choujiang[str]==0)
-		{
-			choujiang[str]=1;
-			cout<<str<<endl;
-			flag=1;
-			shouwei+=jiange;
-		}
-	}
-	if(flag==0)cout<<"Keep going..."<<endl;
-	return 0;
-}
-*/ 
+//标准答案 大佬神操作，用映射   
+>#include<iostream>  
+#include<map>  
+using namespace std;  
+int main()  
+{  
+	int zhuan,jiange,shouwei;  
+	cin>>zhuan>>jiange>>shouwei;  
+	map<string,int>choujiang;  
+	int flag=0;  
+	string str;  
+	for(int i=1;i<=zhuan;i++)  
+	{  
+		cin>>str;  
+		if(choujiang[str]==1)shouwei++;  
+		if(i==shouwei&&choujiang[str]==0)  
+		{  
+			choujiang[str]=1;  
+			cout<<str<<endl;  
+			flag=1;  
+			shouwei+=jiange;  
+		}  
+	}  
+	if(flag==0)cout<<"Keep going..."<<endl;  
+	return 0;  
+}  
+*/   
 
-/*
-1070
-结绳
+/*  
+1070  
+结绳  
 
-思路：数组读入，并使用排序函数使得数组有序，升序，再依次操作 
-#include <iostream>
-#include <string>
-#include <algorithm>  //sort()函数 
-using namespace std;
-int main()
-{
-    int n,a[10004];
-    cin>>n;
-    for(int i=0;i<n;i++) 
-	cin>>a[i];
-    sort(a,a+n);  //自动排序函数 
-    double ans=a[0];
-    for(int i=1;i<n;i++)
-    {
-        ans+=a[i];
-        ans/=2;
-    }
-    cout<<(int)ans;
-    return 0;
-}
-*/
+***思路：数组读入，并使用排序函数使得数组有序，升序，再依次操作***  
 
-/*
+>#include <iostream>  
+#include <string>  
+#include <algorithm>  //sort()函数   
+using namespace std;  
+int main()  
+{  
+    int n,a[10004];  
+    cin>>n;  
+    for(int i=0;i<n;i++)   
+	cin>>a[i];  
+    sort(a,a+n);  //自动排序函数   
+    double ans=a[0];  
+    for(int i=1;i<n;i++)   
+    {  
+        ans+=a[i];   
+    }  
+    cout<<(int)ans;  
+    return 0;  
+}  
+*/  
+
+/*  
 1071 
 小赌怡情 
 

@@ -3298,829 +3298,819 @@ int main()
 }  
 */  
 
-/*
-1046
-划拳  两人喊数与出的数之间的关系
+/*  
+1046  
+划拳  两人喊数与出的数之间的关系  
 
-思路：分n次直接出结果累加输出，不用二维数组做 
+***思路：分n次直接出结果累加输出，不用二维数组做***   
  
-#include<iostream>
-using namespace std;
-int main()
-{
-	int n;
-	cin>>n;
-	int jia=0,yi=0,c=0;
-	int a[4];
-	for(int i=0;i<n;i++)
-	{
-		for(int k=0;k<=3;k++)
-			cin>>a[k];
-		if(a[0]+a[2]==a[1] &&a[0]+a[2]==a[3])
-		{
-			continue;
-		}
-		if(a[0]+a[2]==a[1])
-		jia++;
-		if(a[0]+a[2]==a[3])
-		yi++;
-	} 
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	int jia=0,yi=0,c=0;  
+	int a[4];  
+	for(int i=0;i<n;i++)  
+	{  
+		for(int k=0;k<=3;k++)  
+			cin>>a[k];  
+		if(a[0]+a[2]==a[1] &&a[0]+a[2]==a[3])  
+		{  
+			continue;  
+		}  
+		if(a[0]+a[2]==a[1])  
+		jia++;  
+		if(a[0]+a[2]==a[3])  
+		yi++;  
+	}   
+	cout<<yi<<" "<<jia<<endl;  
+	return 0;  
+}  
+*/  
 
-	cout<<yi<<" "<<jia<<endl;
-	return 0;
-}
-*/
+/*  
+1047 渣渣题   
 
-/*
-1047 渣渣题 
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	int team[1001]={0};   
+	int dui,ren,score;  
+	for(int i=0;i<n;i++)  
+	{  
+		scanf("%d-%d %d",&dui,&ren,&score);  
+		team[dui]+=score;	  	
+	}  
+	int max=0;  
+	for(int i=1;i<1001;i++)   
+	{  
+		if(team[i]>team[max])  
+		max=i;  
+	}  
+	cout<<max<<" "<<team[max];  
+	return 0;  
+}  
+*/  
 
-#include<iostream>
-using namespace std;
-int main()
-{
-	int n;
-	cin>>n;
-	int team[1001]={0}; 
-	int dui,ren,score;
-	for(int i=0;i<n;i++)
-	{
-		scanf("%d-%d %d",&dui,&ren,&score);
-		team[dui]+=score;		
-	}
-	int max=0;
-	for(int i=1;i<1001;i++)
-	{
-		if(team[i]>team[max])
-		max=i;
-	}
-	cout<<max<<" "<<team[max];
-	return 0;
-}
-*/
+/*  
+1048  
+数字加密  
 
-/*
-1048
-数字加密
+***思路：玩正序逆序***  
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	string s1,s2;  
+	cin>>s1;  
+	cin>>s2;  
+	int max=(s1.size()>s2.size()?s1.size():s2.size());  
+	int a[100]={0};  
+	int b[100]={0};  
+	char c[100]={0};   
+	int k=0;  
+	//将字符串折算成数字对应放入数组 并反序  即个位在前   
+	for(int i=s1.size()-1;i>=0;i--)  
+	{  
+		a[k]=s1[i]-'0';  
+		k++;  
+	}  
+	int u=0;  
+	for(int j=s2.size()-1;j>=0;j--)  
+	{  
+		b[u]=s2[j]-'0';  
+		u++;  
+	}    
+	for(int i=0;i<max;i++)  
+	{  
+		if(i%2==0)   //实际为奇数位   对应奇数位规则   
+		{  
+			int temp;  
+			temp=(a[i]+b[i])%13;  
+			if(temp>=0&&temp<=9)  
+			{  
+				c[i]=temp+'0';  
+			}  
+			else if(temp==10)c[i]='J';  
+			else if(temp==11)c[i]='Q';  
+			else if(temp==12)c[i]='K';  
+		}  
+		else if(i%2==1)  //实际为偶数位  
+		{  
+			int tem=b[i]-a[i];  
+			if(tem>=0)  
+			{  
+				c[i]=tem+'0';  
+			}  
+			else   
+			{  
+				tem=tem+10;  
+				c[i]=tem+'0';  
+			}  
+		}   
+	}   
+	for(int i=max-1;i>=0;i--)  
+	{  
+		cout<<c[i];  
+	}  
+	return 0;  
+}  
+*/   
 
-思路：玩正序逆序 
-#include<iostream>
-using namespace std;
-int main()
-{
-	string s1,s2;
-	cin>>s1;
-	cin>>s2;
-	int max=(s1.size()>s2.size()?s1.size():s2.size());
-	int a[100]={0};
-	int b[100]={0};
-	char c[100]={0}; 
-	int k=0;
-	//将字符串折算成数字对应放入数组 并反序  即个位在前 
-	for(int i=s1.size()-1;i>=0;i--)
-	{
-		a[k]=s1[i]-'0';
-		k++;
-	}
-	int u=0;
-	for(int j=s2.size()-1;j>=0;j--)
-	{
-		b[u]=s2[j]-'0';
-		u++;
-	} 
-	for(int i=0;i<max;i++)
-	{
-		if(i%2==0)   //实际为奇数位   对应奇数位规则 
-		{
-			int temp;
-			temp=(a[i]+b[i])%13;
-			if(temp>=0&&temp<=9)
-			{
-				c[i]=temp+'0';
-			}
-			else if(temp==10)c[i]='J';
-			else if(temp==11)c[i]='Q';
-			else if(temp==12)c[i]='K';
-		}
-		else if(i%2==1)  //实际为偶数位
-		{
-			int tem=b[i]-a[i];
-			if(tem>=0)
-			{
-				c[i]=tem+'0';
-			}
-			else 
-			{
-				tem=tem+10;
-				c[i]=tem+'0';
-			}
-		} 
-	} 
-	for(int i=max-1;i>=0;i--)
-	{
-		cout<<c[i];
-	}
-	return 0;
-}
-*/ 
+/*  
+1049   
+数列的片段和   片段必须保证连续   
 
-/*
-1049 
-数列的片段和   片段必须保证连续 
-
-思路：找关系，画图，发现 sum+=(long long int)(n-i)*(i+1)*a[i];
+***思路：找关系，画图，发现 sum+=(long long int)(n-i)*(i+1)*a[i];***  
  
-#include<iostream>
-using namespace std;
-int main()
-{
-	int n;
-	cin>>n;
-	double a[n]; 
-	float sum=0.00;
-	for(int i=0;i<n;i++)
-	{		
-		cin>>a[i];
-		sum+=(long long int)(n-i)*(i+1)*a[i];		
-	} 
-	printf("%.2f",sum);
-	return 0;
-}
-*/
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	double a[n];    
+	float sum=0.00;  
+	for(int i=0;i<n;i++)  
+	{		  
+		cin>>a[i];  
+		sum+=(long long int)(n-i)*(i+1)*a[i];	  	
+	}   
+	printf("%.2f",sum);  
+	return 0;  
+}  
+*/  
 
-/*
-1051
-复数乘法
-渣渣题 
-#include<iostream>
-#include<math.h>
-using namespace std;
-int main()
-{
-	double a,b,c,d;
-	cin>>a>>b>>c>>d;
-	double A1,B1,A2,B2;
-	A1=a*cos(b);B1=a*sin(b);
-	A2=c*cos(d);B2=c*sin(d);
-	double C,D;
-	//C+Di
-	C=A1*A2-B1*B2;
-	D=A1*B2+A2*B1;
-	if(-0.005<C&&C<0)cout<<"0.00";
-	else printf("%.2f",C);
-	if(D>=0)printf("+%.2fi",D);
-	else if(-0.005<D&&D<0)cout<<"+0.00i";
-	else printf("%.2fi",D);
-	return 0;
-}
-*/
+/*  
+1051  
+复数乘法  
+渣渣题   
+>#include<iostream>  
+#include<math.h>  
+using namespace std;  
+int main()  
+{  
+	double a,b,c,d;  
+	cin>>a>>b>>c>>d;   
+	double A1,B1,A2,B2; 
+	A1=a*cos(b);B1=a*sin(b);     
+	A2=c*cos(d);B2=c*sin(d);  
+	double C,D;  
+	//C+Di  
+	C=A1*A2-B1*B2;  
+	D=A1*B2+A2*B1;  
+	if(-0.005<C&&C<0)cout<<"0.00";  
+	else printf("%.2f",C);  
+	if(D>=0)printf("+%.2fi",D);  
+	else if(-0.005<D&&D<0)cout<<"+0.00i";  
+	else printf("%.2fi",D);  
+	return 0;  
+}  
+*/  
 
-/*
-1052
-卖个萌 
+/*  
+1052  
+卖个萌   
 
-#include<iostream>
-using namespace std;
-int get(char p[][4])  //内部修改二维字符数组，并返回总数量值 
-{
-	char c;
-	int i=0,j=0;
-	while((c=getchar())!='\n') 
+>#include<iostream>  
+using namespace std;  
+int get(char p[][4])  //内部修改二维字符数组，并返回总数量值   
+{  
+	char c;  
+	int i=0,j=0;  
+	while((c=getchar())!='\n')   
 	{
-		if(c=='[')
-		{
-			while((c=getchar())!=']')
-			{
-				if(c=='\n')return (i-1);
-				p[i][j]=c;
-				j++;
-			}
-			p[i][j]='\0';
-			i++;
-			j=0;
+		if(c=='[')  
+		{    
+			while((c=getchar())!=']')  
+			{  
+				if(c=='\n')return (i-1);  
+				p[i][j]=c;  
+				j++;  
+			}  
+			p[i][j]='\0';  
+			i++;  
+			j=0;  
+		}  
+	}   
+	return (i-1);  
+}  
+int main()  
+{  
+	char hand[10][4],eye[10][4],mouth[10][4];  
+	int hct,ect,mct;  
+	hct=get(hand);  
+	ect=get(eye);  
+	mct=get(mouth);  
+	int count;  
+	cin>>count;  
+	for(int i=0;i<count;i++)  
+	{  
+		int a1,a2,a3,a4,a5;  
+		cin>>a1>>a2>>a3>>a4>>a5;  
+		//越界判断  
+		if(a1<0||a2<0||a3<0||a4<0||a5<0)   
+		{  
+			cout<<"Are you kidding me? @\/@"<<endl;  
 		}
-	}
-	return (i-1);
-}
-int main()
-{
-	char hand[10][4],eye[10][4],mouth[10][4];
-	int hct,ect,mct;
-	hct=get(hand);
-	ect=get(eye);
-	mct=get(mouth);
-	int count;
-	cin>>count;
-	for(int i=0;i<count;i++)
-	{
-		int a1,a2,a3,a4,a5;
-		cin>>a1>>a2>>a3>>a4>>a5;
-		//越界判断
-		if(a1<0||a2<0||a3<0||a4<0||a5<0) 
-		{
-			cout<<"Are you kidding me? @\/@"<<endl;
-		}
-		else if(--a1>hct||--a5>hct||--a2>ect||--a4>ect||--a3>mct)
-		{
-			cout<<"Are you kidding me? @\/@"<<endl;
-		}
-		else
-		{
-			printf("%s(%s%s%s)%s\n",hand[a1],eye[a2],mouth[a3],eye[a4],hand[a5]);
-			//cout<<hand[a1]<<"("<<eye[a2]<<mouth[a3]<<eye[a4]<<")"<<hand[a5]<<endl;
-		}
-	}	
-	return 0;
-} 
-//标准答案
-#include <math.h>
-#include <stdio.h>
-char hand[10][5],eye[10][5],mouse[10][5];
-int  get_symbol(char p[][5]) //读取符号
-{
-	char c,i=0,j=0;
-	while( (c=getchar()) !='\n')
-	{
+		else if(--a1>hct||--a5>hct||--a2>ect||--a4>ect||--a3>mct)  
+		{  
+			cout<<"Are you kidding me? @\/@"<<endl;  
+		}  
+		else  
+		{   
+			printf("%s(%s%s%s)%s\n",hand[a1],eye[a2],mouth[a3],eye[a4],hand[a5]);  
+			//cout<<hand[a1]<<"("<<eye[a2]<<mouth[a3]<<eye[a4]<<")"<<hand[a5]<<endl;  
+		}  
+	}	    
+	return 0;  
+}   
+	
+//标准答案  
+>#include <math.h>  
+#include <stdio.h>  
+char hand[10][5],eye[10][5],mouse[10][5];  
+int  get_symbol(char p[][5]) //读取符号   
+{    
+	char c,i=0,j=0;  
+	while( (c=getchar()) !='\n')  
+	{  
 		if( c == '[')
-		{
-			while( (c=getchar()) != ']' )
-			{
-				if(c == '\n')    
-					return (i-1);
-				p[i][j] = c;
-				j++;
+		{  
+			while( (c=getchar()) != ']' )  
+			{  
+				if(c == '\n')      
+					return (i-1);  
+				p[i][j] = c;  
+				j++;  
+			}  
+			p[i][j] = '\0';   
+			i++;  
+			j=0;  
+		}  
+	}  
+	return (i-1);  
+}  
+main()  
+{  
+	int hand_count,eye_count,mouse_count;  
+	int n,i,a1,a2,a3,a4,a5;  
+	 hand_count = get_symbol(hand);  
+	eye_count = get_symbol(eye);  
+	mouse_count = get_symbol(mouse);  
+	scanf("%d",&n);  
+	for(i=0;i<n;i++)  
+	{  
+		scanf("%d%d%d%d%d",&a1,&a2,&a3,&a4,&a5);  
+		if(--a1 > hand_count || --a5 > hand_count || --a2 > eye_count || --a4 > eye_count || --a3 > mouse_count) //注意下标越界的情况  
+		{  
+			puts("Are you kidding me? @\\/@");  
+		}  
+		else if  
+			(a1 < 0 || a2 < 0 || a3 < 0 || a4 < 0 || a5< 0)  //注意下标小于0的情况  
+		{  
+			puts("Are you kidding me? @\\/@");  
+		}  
+		else  
+		{  
+			printf("%s(%s%s%s)%s\n",hand[a1],eye[a2],mouse[a3],eye[a4],hand[a5]);  
+		}  
+	}  
+	return 0;  
+}  
+*/   
+
+/*  
+1053  
+住房空置率  
+渣渣题   
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	float e;   
+	cin>>e;  
+	int guancha;  
+	cin>>guancha;  
+	int maybe=0,surely=0;  
+	for(int i=0;i<n;i++)  
+	{  
+		int day;  
+		cin>>day;  
+		int count=0;  
+		for(int j=0;j<day;j++)  
+		{  
+			float temp;   
+			cin>>temp;  
+			if(temp<e)  
+			count++;  
+		}  
+		if(count>day/2)  
+		{  
+			if(day>guancha)  
+			surely++;  
+			else maybe++;  
+		}  
+	}   
+	printf("%.1lf%%",(double)maybe/n*100);  
+	printf(" %.1lf%%",(double)surely/n*100);  
+	return 0;  
+}  
+*/  
+
+/*  
+1054  
+求平均值    怀疑人生   
+***sscanf() – 从一个字符串中读进与指定格式相符的数据   sscanf(a,"%lf",&temp)  a->temp   
+sprintf() – 字符串格式化命令，主要功能是把格式化的数据写入某个字符串中。 sprintf(b,"%.2lf",temp)  temp->b***   
+
+>#include<iostream>  
+#include<cstdio>//sscanf()与sprintf()头文件     
+#include<cstring>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	char a[50],b[50];  
+	double temp,sum=0.0;  
+	int count=0;  
+	for(int i=0;i<n;i++){  
+		scanf("%s",a);  
+		sscanf(a,"%lf",&temp);  
+		sprintf(b,"%.2lf",temp);  
+		int flag=0;  
+		for(int j=0;j<strlen(a);j++){  
+			if(a[j]!=b[j]) flag=1;  
+		}  
+		if(flag || temp<-1000 || temp>1000){  
+			printf("ERROR: %s is not a legal number\n",a);  
+			continue;  
+		}  
+		else{  
+			sum+=temp;  
+			count++;  
+		}  
+	}  
+	if(count==1){  
+		printf("The average of 1 number is %.2lf",sum);  
+	}  
+	else if(count>1){  
+		printf("The average of %d number is %.2lf",count,sum/count);  
+	}  
+	else{  
+		 printf("The average of 0 numbers is Undefined");  
+	}  
+	return 0;  
+}  
+	  
+//标准答案  
+>#include <iostream>  
+#include <cstdio>  
+#include <string.h>  
+using namespace std;  
+int main() {  
+    int n, cnt = 0;  
+    char a[50], b[50];  
+    double temp, sum = 0.0;  
+    cin >> n;  
+    for(int i = 0; i < n; i++) {  
+        scanf("%s", a);  
+        sscanf(a, "%lf", &temp);  
+        sprintf(b, "%.2lf",temp);  
+        int flag = 0;  
+        for(int j = 0; j < strlen(a); j++) {  
+            if(a[j] != b[j]) flag = 1;  
+        }  
+        if(flag || temp < -1000 || temp > 1000) {  
+            printf("ERROR: %s is not a legal number\n", a);  
+            continue;  
+        } else {  
+            sum += temp;  
+            cnt++;  
+        }  
+    }  
+    if(cnt == 1) {  
+        printf("The average of 1 number is %.2lf", sum);  
+    } else if(cnt > 1) {    
+        printf("The average of %d numbers is %.2lf", cnt, sum / cnt);  
+    } else {  
+        printf("The average of 0 numbers is Undefined");  
+    }  
+    return 0;  
+}   
+*/  
+
+/*  
+1056 渣渣题   
+
+>#include<iostream>  
+#include<math.h>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	int sum=0;  
+	for(int i=0;i<n;i++)  
+	{    
+		int k;  
+		cin>>k;  
+		for(int i=0;i<2;i++)  
+		{  
+			sum+=k*pow(10,i);  
+		}  	
+	}  
+	cout<<(n-1)*sum;   
+	return 0;  
+}   
+*/  
+
+/*  
+1057        
+数零一  给出一个字符串，每一位字母对应0-26，将序号相加，得到整数N，再转换为二进制数，数其中零和一的个数   
+
+***思路：字符串读入，每一位判断并输出序号相加，和转换为二进制数，放入数组来数  
+c语言函数gets()可读取一行，包括空格，但是c++中报错  
+c++中getline()的用法 getline（cin,s) 用于字符串与字符数组都可以   
+cin.getline(s,50)用于字符数组s[50]*** 
+>#include<iostream>  
+#include<cstring>  
+#include<string>  
+using namespace std;  
+int main()  
+{  
+	string s;  
+	getline(cin,s);  
+	int sum=0;  
+	for(int i=0;i<s.size();i++)  
+	{   
+		if(s[i]>='A'&&s[i]<='Z')  
+		{  
+		    sum+=s[i]-'A'+1;	   
+		}  
+		if(s[i]>='a'&&s[i]<='z')  
+		{  
+		    sum+=s[i]-'a'+1;  	
+		}  
+	}   
+    int shu[100];  
+    int k=0;  
+    while(sum)  
+    {  
+    	shu[k]=sum%2;  
+    	k++;  
+    	sum/=2;  
+	}  
+	int count0=0,count1=0;  
+	for(int i=0;i<k;i++)   
+	{  
+		if(shu[i]==0)count0++;  
+		if(shu[i]==1)count1++;  
+	}  
+	cout<<count0<<" "<<count1;  
+	return 0;  
+}  
+*/  
+
+/*  
+1058  
+选择题  
+
+***思路：用结构体存入每道题信息，包括string+=char  
+      用scanf去读取每道题答题情况。string对比判定是否得分***  
+
+>#include<iostream>  
+using namespace std;  
+struct daan  
+{  
+	int score;  
+	int count_zong;  
+	int count_dui;  
+	string ans;  
+};  
+int main()  
+{  
+	int renshu,timushu;  
+	cin>>renshu>>timushu;    
+	//存储题目信息   
+	daan d[105];   
+	for(int i=0;i<timushu;i++)  
+	{  
+		cin>>d[i].score>>d[i].count_zong>>d[i].count_dui;  
+		char c;  
+		for(int j=0;j<d[i].count_dui;j++)  
+		{  
+			cin>>c;  
+			d[i].ans+=c;  
+		}  	
+	}  
+	int wrong[timushu]={0};  
+	for(int i=0;i<renshu;i++){  
+		int sco=0;  
+//		getchar();//?????????????  
+        scanf("\n");  
+		for(int j=0;j<timushu;j++)  
+		{  
+			if(j!=0)scanf(" ");  
+			string str;  
+			int k;  
+			char s;  
+			scanf("(%d",&k);  
+			for(int q=0;q<k;q++){  
+				scanf(" %c",&s);  
+				str+=s;  
+			}  
+			scanf(")");  
+			if(str==d[j].ans)sco+=d[j].score;  
+			else wrong[j]++;  
+		}  
+		printf("%d\n",sco);  
+	}  
+	int max=-1;  
+	for(int i=0;i<timushu;i++)  
+	{  
+		if(max<wrong[i])max=wrong[i];  
+	}  
+	if(max==0)cout<<"Too simple";   
+	else{  
+		cout<<max;  
+		for(int i=0;i<timushu;i++){   
+			if(max==wrong[i])cout<<" "<<i+1;  
+		}   
+	}  
+	return 0;  
+}   
+*/  
+
+/*  
+1059   
+C语言竞赛  
+
+***思路：用数组装序号，数组下标即为名次，查询数先看是否在数组，再返回下标判断奖品***
+
+>#include<iostream>  
+#include<cmath>  
+using namespace std;  
+int Is(int n)   //判断素数程序   
+{  
+	int flag=1;  
+	for(int i=2;i<=sqrt(n);i++)  
+	{  
+		if(n%i==0)flag=0;  
+	}  
+	return flag;  
+}  
+int main()  
+{  
+	int n;  
+	cin>>n;   
+	int a[n+1];  
+	a[0]=-1;  
+	int b[10001]={0};  
+	for(int i=1;i<=n;i++)  
+	{  
+		cin>>a[i];  
+	}  
+	int k;  
+	cin>>k;  
+	while(k--)  
+	{  
+		int shu;  
+		int paiming=0;  
+		cin>>shu;  
+		for(int i=1;i<=n;i++)  
+	    {  
+		if(shu==a[i]){  
+			b[shu]++;  
+			paiming=i;	  	
+		}  
+		}  
+		if(b[shu]>1)  
+			{  
+				printf("%04d",shu);  
+				cout<<": Checked"<<endl;  
+			}  
+		else{  			
+	    if(paiming==0)  
+	    {  
+	    	printf("%04d",shu);  
+	    	cout<<": Are you kidding?"<<endl;  
+		}   
+		else if(paiming==1)   
+		{  
+			printf("%04d",shu);  
+			cout<<": Mystery Award"<<endl;  
+		}  
+		else if(Is(paiming))  
+		{  
+			printf("%04d",shu);  
+			cout<<": Minion"<<endl;  
+		}  
+		else   
+		{  
+			printf("%04d",shu);  
+			cout<<": Chocolate"<<endl;  
+		}  
+	}  
+	}  
+	return 0;  
+}   
+*/  
+
+/*  
+1060   有错误 感觉题目没读懂   
+爱丁顿数   
+>#include<iostream>  
+#include<algorithm>  
+using namespace std;  
+int main()  
+{  
+	long n;  
+	cin>>n;  
+	int a[1000001];  
+	for(long i=0;i<n;i++)  
+	{  
+		cin>>a[i];  
+	}  
+	sort(a,a+n);  //升序   
+	int count=0;  
+	int shu;  
+	for(long i=n-1;i>=0;i++)  
+	{  
+		shu=a[i];  
+		for(long j=0;j<n;j++)  
+		{  
+			if(a[j]>shu)count++;  
+		}  
+		if(count>=shu)   
+		{  
+			cout<<count;  
+			break;  
+		}  
+		else count=0;  
+	}  
+	return 0;  
+}  
+
+//标准答案  
+>#include<iostream>  
+#include<algorithm>  
+using namespace std;  
+int main(){  
+  	int n;    
+ 	cin>>n;  
+ 	int a[n];  
+ 	for(int i=0 ;i<n ;i++){  
+  		cin>>a[i];  
+ 	}  
+  	sort(a,a+n);  
+  	int ans = 0;  
+  	int i;  
+  	if(a[0]>n){  
+    	cout<<n<<endl;  
+  	}   
+	else{  
+		for(i=n-1 ;i>=0 ;i--){  
+  			if(a[i]<=n-i){  
+  				ans = n-i-1;  
+  			break;  
+	  	}  
+  	}  
+  	cout<<ans<<endl;  
+}  
+  	return 0;  
+}  
+*/   
+
+/*  
+1061 渣渣题  
  
-			}
-			p[i][j] = '\0'; 
-			i++;
-			j=0;
-		}
-	}
-	return (i-1);
-}
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int shu;    
+	int n;	  
+	cin>>shu>>n;  
+	int a[n];  //分值  
+	int b[n];  //答案  
+	int c[n];   
+	for(int i=0;i<n;i++)  
+	{  
+		cin>>a[i];  
+	}   
+	for(int i=0;i<n;i++)  
+	{  
+		cin>>b[i];  
+	}   
+	for(int i=0;i<shu;i++)  
+	{  
+		int sum=0;  
+		for(int i=0;i<n;i++)  
+	{  
+		cin>>c[i];  
+		if(c[i]==b[i])  
+		{  
+			sum+=a[i];  
+		}  
+	}  
+	cout<<sum<<endl;  
+	}  
+	return 0;  
+}  
+*/  
+
+/*  
+1062  
+最简分数  给定分母，给定范围，求出这个范围里满足条件的分数  
  
-main()
-{
-	int hand_count,eye_count,mouse_count;
-	int n,i,a1,a2,a3,a4,a5;
- 
-	 hand_count = get_symbol(hand);
-	eye_count = get_symbol(eye);
-	mouse_count = get_symbol(mouse);
-	scanf("%d",&n);
-	for(i=0;i<n;i++)
-	{
-		scanf("%d%d%d%d%d",&a1,&a2,&a3,&a4,&a5);
-		if(--a1 > hand_count || --a5 > hand_count || --a2 > eye_count || --a4 > eye_count || --a3 > mouse_count) //注意下标越界的情况
-		{
-			puts("Are you kidding me? @\\/@");
-		}
-		else if
-			(a1 < 0 || a2 < 0 || a3 < 0 || a4 < 0 || a5< 0)  //注意下标小于0的情况
-		{
-			puts("Are you kidding me? @\\/@");
-		}
-		else
-		{
-			printf("%s(%s%s%s)%s\n",hand[a1],eye[a2],mouse[a3],eye[a4],hand[a5]);
-		}
-	}
- 
-	return 0;
-}
-*/ 
-
-/*
-1053
-住房空置率
-渣渣题 
-#include<iostream>
-using namespace std;
-int main()
-{
-	int n;
-	cin>>n;
-	float e;
-	cin>>e;
-	int guancha;
-	cin>>guancha;
-	int maybe=0,surely=0;
-	for(int i=0;i<n;i++)
-	{
-		int day;
-		cin>>day;
-		int count=0;
-		for(int j=0;j<day;j++)
-		{
-			float temp;
-			cin>>temp;
-			if(temp<e)
-			count++;
-		}
-		if(count>day/2)
-		{
-			if(day>guancha)
-			surely++;
-			else maybe++;
-		}
-	} 
-	printf("%.1lf%%",(double)maybe/n*100);
-	printf(" %.1lf%%",(double)surely/n*100);
-	return 0;
-}
-*/
-
-/*
-1054
-求平均值    怀疑人生 
-sscanf() – 从一个字符串中读进与指定格式相符的数据   sscanf(a,"%lf",&temp)  a->temp 
-sprintf() – 字符串格式化命令，主要功能是把格式化的数据写入某个字符串中。 sprintf(b,"%.2lf",temp)  temp->b
-
-#include<iostream>
-#include<cstdio>//sscanf()与sprintf()头文件 
-#include<cstring>
-using namespace std;
-int main()
-{
-	int n;
-	cin>>n;
-	char a[50],b[50];
-	double temp,sum=0.0;
-	int count=0;
-	for(int i=0;i<n;i++){
-		scanf("%s",a);
-		sscanf(a,"%lf",&temp);
-		sprintf(b,"%.2lf",temp);
-		int flag=0;
-		for(int j=0;j<strlen(a);j++){
-			if(a[j]!=b[j]) flag=1;
-		}
-		if(flag || temp<-1000 || temp>1000){
-			printf("ERROR: %s is not a legal number\n",a);
-			continue;
-		}
-		else{
-			sum+=temp;
-			count++;
-		}
-	}
-	if(count==1){
-		printf("The average of 1 number is %.2lf",sum);
-	}
-	else if(count>1){
-		printf("The average of %d number is %.2lf",count,sum/count);
-	}
-	else{
-		 printf("The average of 0 numbers is Undefined");
-	}
-	return 0;
-}
-//标准答案
-#include <iostream>
-#include <cstdio>
-#include <string.h>
-using namespace std;
-int main() {
-    int n, cnt = 0;
-    char a[50], b[50];
-    double temp, sum = 0.0;
-    cin >> n;
-    for(int i = 0; i < n; i++) {
-        scanf("%s", a);
-        sscanf(a, "%lf", &temp);
-        sprintf(b, "%.2lf",temp);
-        int flag = 0;
-        for(int j = 0; j < strlen(a); j++) {
-            if(a[j] != b[j]) flag = 1;
-        }
-        if(flag || temp < -1000 || temp > 1000) {
-            printf("ERROR: %s is not a legal number\n", a);
-            continue;
-        } else {
-            sum += temp;
-            cnt++;
-        }
-    }
-    if(cnt == 1) {
-        printf("The average of 1 number is %.2lf", sum);
-    } else if(cnt > 1) {
-        printf("The average of %d numbers is %.2lf", cnt, sum / cnt);
-    } else {
-        printf("The average of 0 numbers is Undefined");
-    }
-    return 0;
-} 
-*/
-
-/*
-1056 渣渣题 
-
-#include<iostream>
-#include<math.h>
-using namespace std;
-int main()
-{
-	int n;
-	cin>>n;
-	int sum=0;
-	for(int i=0;i<n;i++)
-	{
-		int k;
-		cin>>k;
-		for(int i=0;i<2;i++)
-		{
-			sum+=k*pow(10,i);
-		}	
-	}
-	cout<<(n-1)*sum; 
-	return 0;
-}
-*/
-
-/*
-1057    
-数零一  给出一个字符串，每一位字母对应0-26，将序号相加，得到整数N，再转换为二进制数，数其中零和一的个数
-
-思路：字符串读入，每一位判断并输出序号相加，和转换为二进制数，放入数组来数
-c语言函数gets()可读取一行，包括空格，但是c++中报错
-c++中getline()的用法 getline（cin,s) 用于字符串与字符数组都可以 
-cin.getline(s,50)用于字符数组s[50] 
-#include<iostream>
-#include<cstring>
-#include<string>
-using namespace std;
-int main()
-{
-	string s;
-	getline(cin,s);
-	int sum=0;
-	for(int i=0;i<s.size();i++)
-	{
-		if(s[i]>='A'&&s[i]<='Z')
-		{
-		    sum+=s[i]-'A'+1;	
-		}
-		if(s[i]>='a'&&s[i]<='z')
-		{
-		    sum+=s[i]-'a'+1;	
-		}
-	} 
-    int shu[100];
-    int k=0;
-    while(sum)
-    {
-    	shu[k]=sum%2;
-    	k++;
-    	sum/=2;
-	}
-	int count0=0,count1=0;
-	for(int i=0;i<k;i++) 
-	{
-		if(shu[i]==0)count0++;
-		if(shu[i]==1)count1++;
-	}
-	cout<<count0<<" "<<count1;
-	return 0;
-}
-*/
-
-/*
-1058
-选择题
-
-思路：用结构体存入每道题信息，包括string+=char
-      用scanf去读取每道题答题情况。string对比判定是否得分
-
-#include<iostream>
-using namespace std;
-struct daan
-{
-	int score;
-	int count_zong;
-	int count_dui;
-	string ans;
-};
-int main()
-{
-	int renshu,timushu;
-	cin>>renshu>>timushu;
-	//存储题目信息 
-	daan d[105];
-	for(int i=0;i<timushu;i++)
-	{
-		cin>>d[i].score>>d[i].count_zong>>d[i].count_dui;
-		char c;
-		for(int j=0;j<d[i].count_dui;j++)
-		{
-			cin>>c;
-			d[i].ans+=c;
-		}
-		
-	}
-	int wrong[timushu]={0};
-	for(int i=0;i<renshu;i++){
-		int sco=0;
-//		getchar();//?????????????
-        scanf("\n");
-		for(int j=0;j<timushu;j++)
-		{
-			if(j!=0)scanf(" ");
-			string str;
-			int k;
-			char s;
-			scanf("(%d",&k);
-			for(int q=0;q<k;q++){
-				scanf(" %c",&s);
-				str+=s;
-			}
-			scanf(")");
-			if(str==d[j].ans)sco+=d[j].score;
-			else wrong[j]++;
-		}
-		printf("%d\n",sco);
-	}
-	int max=-1;
-	for(int i=0;i<timushu;i++)
-	{
-		if(max<wrong[i])max=wrong[i];
-	}
-	if(max==0)cout<<"Too simple";
-	else{
-		cout<<max;
-		for(int i=0;i<timushu;i++){
-			if(max==wrong[i])cout<<" "<<i+1;
-		}
-	}
-	return 0;
-} 
-*/
-
-/*
-1059 C语言竞赛
-
-思路：用数组装序号，数组下标即为名次，查询数先看是否在数组，再返回下标判断奖品
-
-#include<iostream>
-#include<cmath>
-using namespace std;
-int Is(int n)   //判断素数程序 
-{
-	int flag=1;
-	for(int i=2;i<=sqrt(n);i++)
-	{
-		if(n%i==0)flag=0;
-	}
-	return flag;
-}
-int main()
-{
-	int n;
-	cin>>n;
-	int a[n+1];
-	a[0]=-1;
-	int b[10001]={0};
-	for(int i=1;i<=n;i++)
-	{
-		cin>>a[i];
-	}
-	int k;
-	cin>>k;
-	while(k--)
-	{
-		int shu;
-		int paiming=0;
-		cin>>shu;
-		for(int i=1;i<=n;i++)
-	    {
-		if(shu==a[i]){
-			b[shu]++;
-			paiming=i;		
-		}
-		}
-		if(b[shu]>1)
-			{
-				printf("%04d",shu);
-				cout<<": Checked"<<endl;
-			}
-		else{
-				
-	    if(paiming==0)
-	    {
-	    	printf("%04d",shu);
-	    	cout<<": Are you kidding?"<<endl;
-		}
-		else if(paiming==1)
-		{
-			printf("%04d",shu);
-			cout<<": Mystery Award"<<endl;
-		}
-		else if(Is(paiming))
-		{
-			printf("%04d",shu);
-			cout<<": Minion"<<endl;
-		}
-		else 
-		{
-			printf("%04d",shu);
-			cout<<": Chocolate"<<endl;
-		}
-	}
-	}
-	return 0;
-} 
-*/
-
-/*
-1060   有错误 感觉题目没读懂 
-爱丁顿数 
-#include<iostream>
-#include<algorithm>
-using namespace std;
-int main()
-{
-	long n;
-	cin>>n;
-	int a[1000001];
-	for(long i=0;i<n;i++)
-	{
-		cin>>a[i];
-	}
-	sort(a,a+n);  //升序 
-	int count=0;
-	int shu;
-	for(long i=n-1;i>=0;i++)
-	{
-		shu=a[i];
-		for(long j=0;j<n;j++)
-		{
-			if(a[j]>shu)count++;
-		}
-		if(count>=shu)
-		{
-			cout<<count;
-			break;
-		}
-		else count=0;
-	}
-	return 0;
-}
-
-//标准答案
-#include<iostream>
-#include<algorithm>
-using namespace std;
- 
-int main(){
-  	int n;
- 	cin>>n;
- 	int a[n];
- 	for(int i=0 ;i<n ;i++){
-  		cin>>a[i];
- 	}
-  	sort(a,a+n);
-  	int ans = 0;
-  	int i;
-  	if(a[0]>n){
-    	cout<<n<<endl;
-  	}
-	else{
-		for(i=n-1 ;i>=0 ;i--){
-  			if(a[i]<=n-i){
-  				ans = n-i-1;
-  			break;
-	  	}
-  	}
-  	cout<<ans<<endl;
-}
-  	return 0;
-}
-*/ 
-
-/*
-1061 渣渣题
- 
-#include<iostream>
-using namespace std;
-int main()
-{
-	int shu;
-	int n;	
-	cin>>shu>>n;
-	int a[n];  //分值
-	int b[n];  //答案
-	int c[n]; 
-	for(int i=0;i<n;i++)
-	{
-		cin>>a[i];
-	} 
-	for(int i=0;i<n;i++)
-	{
-		cin>>b[i];
-	} 
-	for(int i=0;i<shu;i++)
-	{
-		int sum=0;
-		for(int i=0;i<n;i++)
-	{
-		cin>>c[i];
-		if(c[i]==b[i])
-		{
-			sum+=a[i];
-		}
-	}
-	cout<<sum<<endl;
-	}
-	return 0;
-}
-*/
-
-/*
-1062
-最简分数  给定分母，给定范围，求出这个范围里满足条件的分数
- 
-#include<iostream>
-using namespace std;
-int main()
-{
-	int a1,a2,b1,b2,fenmu;
-	scanf("%d/%d %d/%d %d",&a1,&a2,&b1,&b2,&fenmu);
-	int a[fenmu]={0};
-	int k=0;
-	//暂时未判断1/分母 
-	float low=(float)a1/(float)a2;
-	float high=(float)b1/(float)b2;
-	if(low>high)
-	{
-		float c;
-		c=low;
-		low=high;
-		high=c;
-	}
-	float temp=(float)1/(float)fenmu;	
-	if(temp>low&&temp<high)
-			{
-				a[0]=1;
-				k++;
-			}
-	for(int i=2;i<fenmu;i++)
-	{
-		if(fenmu%i!=0)
-		{
-			float temp=(float)i/(float)fenmu;
-			if(temp>low&&temp<high)
-			{
-				a[k]=i;
-				k++;
-			}
-		}
-	}
-	printf("%d/%d",a[0],fenmu);
-	for(int j=1;j<k;j++)
-	{
-		printf(" %d/%d",a[j],fenmu);
-	}
-	return 0;
-}
-//标准答案
-#include<cstdio>
-using namespace std;
-double a,b,c,d,e; 
-double a1,a2,a3;
- 
-int Gcd(int  a,int b){
-	return a%b==0 ? b : Gcd(b,a%b);
-}
- 
-int main(){
-	scanf("%lf/%lf",&a,&b); a1 = a/b;
-	scanf("%lf/%lf",&c,&d); a2 = c/d;
-	if(a1>a2){
-		double temp = a1;
-		a1 = a2;
-		a2 = temp;
-	}
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int a1,a2,b1,b2,fenmu;  
+	scanf("%d/%d %d/%d %d",&a1,&a2,&b1,&b2,&fenmu);   
+	int a[fenmu]={0};    
+	int k=0;  
+	//暂时未判断1/分母   
+	float low=(float)a1/(float)a2;  
+	float high=(float)b1/(float)b2;   
+	if(low>high)  
+	{  
+		float c;  
+		c=low;   
+		low=high;  
+		high=c;   
+	}  
+	float temp=(float)1/(float)fenmu;      	
+	if(temp>low&&temp<high)  
+			{  
+				a[0]=1;  
+				k++;  
+			}  
+	for(int i=2;i<fenmu;i++)  
+	{  
+		if(fenmu%i!=0)  
+		{  
+			float temp=(float)i/(float)fenmu;  
+			if(temp>low&&temp<high)  
+			{  
+				a[k]=i;  
+				k++;  
+			}  
+		}  
+	}  
+	printf("%d/%d",a[0],fenmu);  
+	for(int j=1;j<k;j++)  
+	{  
+		printf(" %d/%d",a[j],fenmu);  
+	}  
+	return 0;  
+}  
 	
-	scanf("%lf",&e);
- 
-	int flag = 1;
-	for(double i=1 ;i<e ;i++){
-		a3 = i/e;
-		if(a1<a3&&a3<a2){
-			if(Gcd(i,e)==1){
-				if(flag){
-				flag = 0;
-					printf("%.0f/%.0f",i,e);
-				}else{
-					printf(" %.0f/%.0f",i,e);
-				}
-			}
-			
-		}
-	}
-	printf("\n"); 
-	
-	return 0;
-}
- */
+//标准答案  
+>#include<cstdio>  
+using namespace std;  
+double a,b,c,d,e;   
+double a1,a2,a3;  
+int Gcd(int  a,int b){  
+	return a%b==0 ? b : Gcd(b,a%b);  
+}  
+int main(){  
+	scanf("%lf/%lf",&a,&b); a1 = a/b;  
+	scanf("%lf/%lf",&c,&d); a2 = c/d;  
+	if(a1>a2){  
+		double temp = a1;  
+		a1 = a2;  
+		a2 = temp;  
+	}  
+	scanf("%lf",&e);  
+	int flag = 1;  
+	for(double i=1 ;i<e ;i++){  
+		a3 = i/e;   
+		if(a1<a3&&a3<a2){  
+			if(Gcd(i,e)==1){  
+				if(flag){  
+				flag = 0;  
+					printf("%.0f/%.0f",i,e);  
+				}else{  
+					printf(" %.0f/%.0f",i,e);  
+				}  
+			}  			
+		}   
+	}  
+	printf("\n");   	
+	return 0;  
+}  
+ */  
  
 /*
 1063

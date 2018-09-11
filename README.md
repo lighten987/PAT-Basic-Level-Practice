@@ -4536,7 +4536,8 @@ int main()
     double ans=a[0];  
     for(int i=1;i<n;i++)   
     {  
-        ans+=a[i];   
+        ans+=a[i]; 
+	ans/=2;  
     }  
     cout<<(int)ans;  
     return 0;  
@@ -4544,734 +4545,719 @@ int main()
 */  
 
 /*  
-1071 
-小赌怡情 
+1071    
+小赌怡情   
 
-#include<iostream>
-using namespace std;
-int main()
-{
-	int qian,lunshu;
-	int isprime=0;
-	cin>>qian>>lunshu;
-	for(int i=0;i<lunshu;i++)
-	{
-		int a,b;
-		int cai;
-		int duzi;
-		cin>>a>>cai>>duzi>>b;
-		if(duzi>qian)
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int qian,lunshu;  
+	int isprime=0;  
+	cin>>qian>>lunshu;  
+	for(int i=0;i<lunshu;i++)  
+	{  
+		int a,b;  
+		int cai;  
+		int duzi;  
+		cin>>a>>cai>>duzi>>b;  
+		if(duzi>qian)  
+		{  
+			cout<<"Not enough tokens.  Total = "<<qian<<"."<<endl;  
+		}  
+		else   
 		{
-			cout<<"Not enough tokens.  Total = "<<qian<<"."<<endl;
-		}
-		else 
-		{
-		if(((cai==0)&&(a>b))||((cai==1)&&(a<b)))
-		{
-			qian+=duzi;
-			cout<<"Win "<<duzi<<"!  Total = "<<qian<<"."<<endl;
-		}
-		
-		else if(((cai==0)&&(a<b))||((cai==1)&&(a>b)))
-		{
-			qian-=duzi;
-			cout<<"Lose "<<duzi<<".  Total = "<<qian<<"."<<endl;
-			if(qian==0)
-			{
-				isprime=1;
-				break;
-			}
-		}
-		}	
-	} if(isprime==1)
-	{
-		cout<<"Game Over.";
-	}	
-	return 0;
-} 
+		if(((cai==0)&&(a>b))||((cai==1)&&(a<b)))  
+		{  
+			qian+=duzi;  
+			cout<<"Win "<<duzi<<"!  Total = "<<qian<<"."<<endl;  
+		}  		
+		else if(((cai==0)&&(a<b))||((cai==1)&&(a>b)))  
+		{  
+			qian-=duzi;  
+			cout<<"Lose "<<duzi<<".  Total = "<<qian<<"."<<endl;  
+			if(qian==0)  
+			{  
+				isprime=1;  
+				break;  
+			}  
+		}  
+		}  	
+	} if(isprime==1)  
+	{  
+		cout<<"Game Over.";  
+	}	  
+	return 0;  
+}    
+*/  
+
+/*  
+1072   printf(" %04d",shoujiao[q]);   //注意输出格式!!!  	
+开学寄语 将对应字符串输出，输出人数与字符串数量   
+
+>#include<iostream>   
+using namespace std;  
+int main()  
+{  
+ 	int menber,zhonglei;  
+ 	int renshu=0,wupinshu=0;  
+ 	cin>>menber>>zhonglei;  
+ 	int a[zhonglei]={0};  
+ 	for(int i=0;i<zhonglei;i++)  
+ 	{   
+ 		cin>>a[i];  
+	}  
+	for(int j=0;j<menber;j++)  
+	{  
+		string s;  
+		int num;  
+		cin>>s;  
+		cin>>num;  
+		int shoujiao[num]={0};  
+		int k=0;  
+		for(int r=0;r<num;r++)  
+		{  
+			int temp;  
+			cin>>temp;  
+			for(int i=0;i<zhonglei;i++)  
+			{  
+				if(temp==a[i])  
+				{  
+					wupinshu++;  
+					shoujiao[k]=temp;  
+					k++;  
+				}  
+			}  
+		}  
+		if(k)  
+		{  
+		int w=k;  	
+			renshu++;  
+			cout<<s<<":";  
+			for(int q=0;q<w;q++)  
+			{  
+				printf(" %04d",shoujiao[q]);   //注意输出格式!!!  	
+			}  
+			cout<<endl;  
+			k=0;  	
+		}shoujiao[num]={0};  
+	}   
+	cout<<renshu<<" "<<wupinshu;   
+ 	return 0;  
+}  
+*/   
+
+/*  
+>#include<iostream>  
+using namespace std;  
+struct daan  
+{  
+	int score;  
+	int count_all;  
+	int count_right;  
+	string ans;  
+};  
+int main()  
+{  
+	int renshu;  
+	int timushu;  
+	daan d[102];  
+	for(int i=0;i<timushu;i++)  
+	return 0;  
+	{  
+		cin>>d[i].score>>d[i].count_all>>d[i].count_right;  
+		char c;  
+		for(int j=0;j<d[i].count_right;j++)  
+		{  
+			cin>>c;  
+			d[i].ans+=c;  
+		}  
+	}  
+	int wrong[102]={0};  
+	for(int i=0;i<renshu;i++)  
+	{  
+		scanf("\n");  
+		for(int j=0;j<timushu;j++)  
+		{  
+			int sco=0;  
+			if(j!=0)scanf(" ");  
+			int k;  
+			scanf("(%d",&k);  
+			string s;  
+			for(int q=0;q<k;q++)  
+			{  
+				char cc;  
+				scanf(" %c"&cc);  
+				s+=cc;  
+			}  
+			scanf(")");  
+			if(s==d[j].ans)sco+=d[j].score;  
+			else wrong[j]++;  
+		}  
+	}  
+}   
+
+//标准答案    
+>#include<iostream>  
+using namespace std;  
+struct Ques {  
+    int qscore;     // 满分  
+    int qsnum;      // 选项个数  
+    int qrnum;      // 正确选项个数  
+    int qawr[128];  // 所有正确选项   abcd对应的asc11码   
+};  
+typedef struct Ques s_ques;   
+#define LEN 120  
+int main (void) {  
+    int snum;           // 学生人数    
+    int qnum;           // 题目个数  
+    s_ques ques[LEN];   // 每道题的信息  
+    int wrong[LEN][128] = {0}; // 错误信息矩阵  
+    int wmax = 0;              // 最大错误次数  
+    char ch;  
+    int i;  
+    int j;  
+    int k;  
+    scanf("%d %d", &snum, &qnum);  
+    for (i = 1; i <= qnum; i++) {  
+        ques[i].qawr['a'] = 0;  
+        ques[i].qawr['b'] = 0;  
+        ques[i].qawr['c'] = 0;  
+        ques[i].qawr['d'] = 0;  
+        ques[i].qawr['e'] = 0;  
+        scanf("%d %d %d", &ques[i].qscore, &ques[i].qsnum, &ques[i].qrnum);  
+        for (j = 1; j <= ques[i].qrnum; j++) {  
+            scanf(" %c", &ch);  
+            ques[i].qawr[(int)(ch)] = 1;  
+        }  
+    }  
+    getchar(); // 回车挡掉  
+    int len;   // 初始是第1道题  
+    int mys;   // 这个学生选了几个选项  
+    char slt;  // 选中选项  
+    for (i = 1; i <= snum; i++) {  
+        double score = 0.0;  // 每个学生的初始分数  
+        len = 1;  
+        // 一个 while 循环是一位学生答题的全部情况  
+        while ((ch = getchar()) != '\n') {  
+            if (ch == '(') {  
+                int cawr[128] = {0}; // 用来记录该题答题情况, 有1, 无0  
+                scanf("%d", &mys);  
+                for (j = 1; j <= mys; j++) {  
+                    scanf(" %c", &slt);  
+                    cawr[(int)(slt)] = 1;  
+                }  
+                // 学生这个选项答了, 而正确答案没有, 相应错误+1  
+                for (k = 'a'; k <= 'e'; k++) {  
+                    if (cawr[k] != ques[len].qawr[k]) wrong[len][k]++;  
+                    if (wrong[len][k] > wmax) wmax = wrong[len][k];  
+                }  
+                if (  
+                    // 所有选项全部匹配, 为完全正确  
+                    cawr['a'] == ques[len].qawr['a'] &&  
+                    cawr['b'] == ques[len].qawr['b'] &&  
+                    cawr['c'] == ques[len].qawr['c'] &&  
+                    cawr['d'] == ques[len].qawr['d'] &&  
+                    cawr['e'] == ques[len].qawr['e']  
+                ) {  
+                    score += (double)(ques[len].qscore);  
+                } else if (  
+                    // 这一项学生答了, 而正确答案没有这一项, 该题答错  
+                    (cawr['a'] == 1 && ques[len].qawr['a'] == 0) ||  
+                    (cawr['b'] == 1 && ques[len].qawr['b'] == 0) ||  
+                    (cawr['c'] == 1 && ques[len].qawr['c'] == 0) ||  
+                    (cawr['d'] == 1 && ques[len].qawr['d'] == 0) ||  
+                    (cawr['e'] == 1 && ques[len].qawr['e'] == 0)   
+                ) {  
+                    // 该题答错  
+                    // do nothing  
+                } else {  
+                    // 部分正确  
+                    score += (double)(ques[len].qscore) / 2.0;  
+                }  
+                len++; // 进入到下一题  
+            }  
+        }  
+        printf("%.1f\n", score); // 打印这位同学的得分  
+    }  
+    if (wmax == 0) {  
+        printf("Too simple\n");  
+    } else {  
+        for (i = 1; i <= qnum; i++) {  
+            for (j = 'a'; j <= 'e'; j++) {  
+                if (wrong[i][j] == wmax) {  
+                    printf("%d %d-%c\n", wrong[i][j], i, j);  
+                }  
+            }  
+        }  
+    }   
+    return 0;  
+}  
 */
 
-/*
-1072   printf(" %04d",shoujiao[q]);   //注意输出格式!!!	
-开学寄语 将对应字符串输出，输出人数与字符串数量 
+/*  
+1074  
+宇宙无敌加法器 每一位规定不同的进制 输出两个数相加后的结果  
 
-#include<iostream> 
-using namespace std;
-int main()
-{
- 	int menber,zhonglei;
- 	int renshu=0,wupinshu=0;
- 	cin>>menber>>zhonglei;
- 	int a[zhonglei]={0};
- 	for(int i=0;i<zhonglei;i++)
- 	{
- 		cin>>a[i];
-	}
-	for(int j=0;j<menber;j++)
-	{
-		string s;
-		int num;
-		cin>>s;
-		cin>>num;
-		int shoujiao[num]={0};
-		int k=0;
-		for(int r=0;r<num;r++)
-		{
-			int temp;
-			cin>>temp;
-			for(int i=0;i<zhonglei;i++)
-			{
-				if(temp==a[i])
-				{
-					wupinshu++;
-					shoujiao[k]=temp;
-					k++;
-				}
-			}
-		}
-		if(k)
-		{
-		int w=k;	
-			renshu++;
-			cout<<s<<":";
-			for(int q=0;q<w;q++)
-			{
-				printf(" %04d",shoujiao[q]);   //注意输出格式!!!	
-			}
-			cout<<endl;
-			k=0;
-			
-		}shoujiao[num]={0};
-	}
-	cout<<renshu<<" "<<wupinshu; 
- 	return 0;
-}
-*/ 
-
-/*
-#include<iostream>
-using namespace std;
-struct daan
-{
-	int score;
-	int count_all;
-	int count_right;
-	string ans;
-};
-int main()
-{
-	int renshu;
-	int timushu;
-	daan d[102];
-	
-	for(int i=0;i<timushu;i++)
-	return 0;
-	{
-		cin>>d[i].score>>d[i].count_all>>d[i].count_right;
-		char c;
-		for(int j=0;j<d[i].count_right;j++)
-		{
-			cin>>c;
-			d[i].ans+=c;
-		}
-	}
-	int wrong[102]={0};
-	for(int i=0;i<renshu;i++)
-	{
-		scanf("\n");
-		for(int j=0;j<timushu;j++)
-		{
-			int sco=0;
-			if(j!=0)scanf(" ");
-			int k;
-			scanf("(%d",&k);
-			string s;
-			for(int q=0;q<k;q++)
-			{
-				char cc;
-				scanf(" %c"&cc);
-				s+=cc;
-			}
-			scanf(")");
-			if(s==d[j].ans)sco+=d[j].score;
-			else wrong[j]++;
-		}
-	}
-} 
-
-//标准答案 
-#include<iostream>
-using namespace std;
-struct Ques {
-    int qscore;     // 满分
-    int qsnum;      // 选项个数
-    int qrnum;      // 正确选项个数
-    int qawr[128];  // 所有正确选项   abcd对应的asc11码 
-};
-typedef struct Ques s_ques;
-
-#define LEN 120
-int main (void) {
-    int snum;           // 学生人数
-    int qnum;           // 题目个数
-    s_ques ques[LEN];   // 每道题的信息
-    int wrong[LEN][128] = {0}; // 错误信息矩阵
-    int wmax = 0;              // 最大错误次数
-    char ch;
-    int i;
-    int j;
-    int k;
-
-    scanf("%d %d", &snum, &qnum);
-    for (i = 1; i <= qnum; i++) {
-        ques[i].qawr['a'] = 0;
-        ques[i].qawr['b'] = 0;
-        ques[i].qawr['c'] = 0;
-        ques[i].qawr['d'] = 0;
-        ques[i].qawr['e'] = 0;
-        scanf("%d %d %d", &ques[i].qscore, &ques[i].qsnum, &ques[i].qrnum);
-        for (j = 1; j <= ques[i].qrnum; j++) {
-            scanf(" %c", &ch);
-            ques[i].qawr[(int)(ch)] = 1;
-        }
-    }
-    getchar(); // 回车挡掉
-
-    int len;   // 初始是第1道题
-    int mys;   // 这个学生选了几个选项
-    char slt;  // 选中选项
-    for (i = 1; i <= snum; i++) {
-        double score = 0.0;  // 每个学生的初始分数
-        len = 1;
-        // 一个 while 循环是一位学生答题的全部情况
-        while ((ch = getchar()) != '\n') {
-            if (ch == '(') {
-                int cawr[128] = {0}; // 用来记录该题答题情况, 有1, 无0
-                scanf("%d", &mys);
-                for (j = 1; j <= mys; j++) {
-                    scanf(" %c", &slt);
-                    cawr[(int)(slt)] = 1;
-                }
-
-                // 学生这个选项答了, 而正确答案没有, 相应错误+1
-                for (k = 'a'; k <= 'e'; k++) {
-                    if (cawr[k] != ques[len].qawr[k]) wrong[len][k]++;
-                    if (wrong[len][k] > wmax) wmax = wrong[len][k];
-                }
-
-                if (
-                    // 所有选项全部匹配, 为完全正确
-                    cawr['a'] == ques[len].qawr['a'] &&
-                    cawr['b'] == ques[len].qawr['b'] &&
-                    cawr['c'] == ques[len].qawr['c'] &&
-                    cawr['d'] == ques[len].qawr['d'] &&
-                    cawr['e'] == ques[len].qawr['e']
-                ) {
-                    score += (double)(ques[len].qscore);
-                } else if (
-                    // 这一项学生答了, 而正确答案没有这一项, 该题答错
-                    (cawr['a'] == 1 && ques[len].qawr['a'] == 0) ||
-                    (cawr['b'] == 1 && ques[len].qawr['b'] == 0) ||
-                    (cawr['c'] == 1 && ques[len].qawr['c'] == 0) ||
-                    (cawr['d'] == 1 && ques[len].qawr['d'] == 0) ||
-                    (cawr['e'] == 1 && ques[len].qawr['e'] == 0) 
-                ) {
-                    // 该题答错
-                    // do nothing
-                } else {
-                    // 部分正确
-                    score += (double)(ques[len].qscore) / 2.0;
-                }
-                len++; // 进入到下一题
-            }
-        }
-        printf("%.1f\n", score); // 打印这位同学的得分
-    }
-
-    if (wmax == 0) {
-        printf("Too simple\n");
-    } else {
-        for (i = 1; i <= qnum; i++) {
-            for (j = 'a'; j <= 'e'; j++) {
-                if (wrong[i][j] == wmax) {
-                    printf("%d %d-%c\n", wrong[i][j], i, j);
-                }
-            }
-        }
-    }
-
-    return 0;
-}
-*/
-
-/*
-1074
-宇宙无敌加法器 每一位规定不同的进制 输出两个数相加后的结果
-
-思路：用三个字符数组读入三个数，转化为数字数组 逆序相加，求余求商，商进位，最后再逆序输出 
+***思路：用三个字符数组读入三个数，转化为数字数组 逆序相加，求余求商，商进位，最后再逆序输出***   
  
-#include <iostream>
-using namespace std;
-int main()
-{
-    string radix, num1, num2;
-    cin >> radix >> num1 >> num2;
-    //将num1和num2的长度转为相同
-    if (num1.length() > num2.length()) {
-        string temp = "";
-        for (int i = 0; i < num1.length() - num2.length(); i++) {
-            temp += "0";
-        }
-        num2 = temp + num2;   //字符串可以直接加 
-    }
-    if (num2.length() > num1.length()) {
-        string temp = "";
-        for (int i = 0; i < num2.length() - num1.length(); i++) {
-            temp += "0";
-        }
-        num1 = temp + num1;
-    }
-    int temp = radix.length() - 1;
-    int carry = 0;   //进位位 
-    string result = "";
-    //对各个位进行运算
-    for (int i = num1.length() - 1; i >= 0; i--) {
-        int sum = (num1[i] - '0') + (num2[i] - '0') + carry;
-        int r = radix[temp] - '0';
-        temp--;
-        if (r == 0) {   //十进制 
-            r = 10;
-        }
-        carry = sum / r;
-        result = (char)(sum % r + '0') + result ;
-    }
-    //有进位且还有进制
-    while (carry != 0 && temp >= 0) {
-        int sum = carry;
-        int r = radix[temp] - '0';
-        temp--;
-        if (r == 0) {
-            r = 10;
-        }
-        carry = sum / r;
-        result = (char)(sum % r + '0') + result ;
-    }
-    //有进位但没进制，则只需一次
-    if (carry != 0) {
-        result = (char)(carry + '0') + result ;
-    }
-    int tag = 0;
-    for (int i = 0; i < result.length(); i++) {
-        if (tag == 1) {
-            cout << result[i];
-            continue;
-        }
-        if (result[i] != '0') {
-            if (tag == 0) {
-                tag = 1;
-            }
-            cout << result[i];
-        }
-    }
-    if (tag == 0) {
-        cout << 0;
-    }
-}
-*/
+>#include <iostream>  
+using namespace std;  
+int main()  
+{  
+    string radix, num1, num2;  
+    cin >> radix >> num1 >> num2;  
+    //将num1和num2的长度转为相同  
+    if (num1.length() > num2.length()) {  
+        string temp = "";  
+        for (int i = 0; i < num1.length() - num2.length(); i++) {  
+            temp += "0";  
+        }  
+        num2 = temp + num2;   //字符串可以直接加   
+    }  
+    if (num2.length() > num1.length()) {  
+        string temp = "";  
+        for (int i = 0; i < num2.length() - num1.length(); i++) {  
+            temp += "0";  
+        }  
+        num1 = temp + num1;  
+    }  
+    int temp = radix.length() - 1;  
+    int carry = 0;   //进位位   
+    string result = "";  
+    //对各个位进行运算  
+    for (int i = num1.length() - 1; i >= 0; i--) {  
+        int sum = (num1[i] - '0') + (num2[i] - '0') + carry;  
+        int r = radix[temp] - '0';  
+        temp--;  
+        if (r == 0) {   //十进制   
+            r = 10;  
+        }  
+        carry = sum / r;  
+        result = (char)(sum % r + '0') + result ;  
+    }  
+    //有进位且还有进制  
+    while (carry != 0 && temp >= 0) {  
+        int sum = carry;  
+        int r = radix[temp] - '0';  
+        temp--;  
+        if (r == 0) {  
+            r = 10;  
+        }  
+        carry = sum / r;  
+        result = (char)(sum % r + '0') + result ;  
+    }  
+    //有进位但没进制，则只需一次  
+    if (carry != 0) {  
+        result = (char)(carry + '0') + result ;  
+    }   
+    int tag = 0;  
+    for (int i = 0; i < result.length(); i++) {  
+        if (tag == 1) {  
+            cout << result[i];  
+            continue;  
+        }  
+        if (result[i] != '0') {  
+            if (tag == 0) {  
+                tag = 1;  
+            }  
+            cout << result[i];  
+        }  
+    }  
+    if (tag == 0) {   
+        cout << 0;   
+    }  
+}    
+*/  
 
-/*
-1075
-链表元素分类
+/*   
+1075   
+链表元素分类  
 
-思路：根据条件放入不同向量再归并输出
-#include<iostream>
-#include<vector>
-using namespace std;
-struct node
-{
-	int add;
-	int data;
-	int next;
-};
-int main()
-{
-	vector<node>in(100001);
-	vector<node>sorted;
-	vector<node>fu;
-	vector<node>qujian;
-	vector<node>chaoguo;
-	vector<node>out; 
-	int first,N,high;
-	node temp;
-	cin>>first>>N>>high;
-	//第一步 完成读入 
-	for(int i=0;i<N;i++)
-	{
-		cin>>temp.add>>temp.data>>temp.next;
-		in[temp.add]=temp;   //完成稀疏存储 
-	}
-	//第二步 完成顺序存储 
-	if(first==-1)cout<<"-1"<<endl;
-	else
-	{
-		int nextadd=first;
-		while(nextadd!=-1)
-		{
-			sorted.push_back(in[nextadd]);
-			nextadd=in[nextadd].next;
-		}
-	}
-	//第三步 遍历并根据条件压入对应向量
-	int size=sorted.size();
-	for(int i=0;i<size;i++)
-	{
-		if(sorted[i].data<0)
-		fu.push_back(sorted[i]);
-		else if(sorted[i].data<=high)
-		qujian.push_back(sorted[i]);
-		else if(sorted[i].data>high)
-		chaoguo.push_back(sorted[i]);
-	} 
-	//第四步 三个向量依次放入输出向量
-	int size1=fu.size();
-	int size2=qujian.size();
-	int size3=chaoguo.size();
-	for(int j=0;j<size1;j++)
-	{
-		out.push_back(fu[j]);
-	} 
-	for(int j=0;j<size2;j++)
-	{
-		out.push_back(qujian[j]);
-	}
-	for(int j=0;j<size3;j++)
-	{
-		out.push_back(chaoguo[j]);
-	}
-	//第四步 输出 注意地址的转换 分两次输出，最后一次单独输出
-	int size4=out.size();
-	for(int j=0;j<size4-1;j++)
-	{
-		out[j].next=out[j+1].add;
-		printf("%05d %d %05d\n",out[j].add,out[j].data,out[j].next);
-	}
-	printf("%05d %d -1",out[size4-1].add,out[size4-1].data); 
-	return 0;
-}
-*/
+***思路：根据条件放入不同向量再归并输出***  
+>#include<iostream>  
+#include<vector>  
+using namespace std;  
+struct node   
+{  
+	int add;  
+	int data;  
+	int next;  
+};  
+int main()  
+{  
+	vector<node>in(100001);  
+	vector<node>sorted;  
+	vector<node>fu;  
+	vector<node>qujian;  
+	vector<node>chaoguo;  
+	vector<node>out;   
+	int first,N,high;  
+	node temp;  
+	cin>>first>>N>>high;  
+	//第一步 完成读入   
+	for(int i=0;i<N;i++)  
+	{  
+		cin>>temp.add>>temp.data>>temp.next;  
+		in[temp.add]=temp;   //完成稀疏存储   
+	}  
+	//第二步 完成顺序存储   
+	if(first==-1)cout<<"-1"<<endl;  
+	else  
+	{  
+		int nextadd=first;  
+		while(nextadd!=-1)  
+		{  
+			sorted.push_back(in[nextadd]);  
+			nextadd=in[nextadd].next;  
+		}  
+	}  
+	//第三步 遍历并根据条件压入对应向量  
+	int size=sorted.size();  
+	for(int i=0;i<size;i++)  
+	{  
+		if(sorted[i].data<0)  
+		fu.push_back(sorted[i]);  
+		else if(sorted[i].data<=high)  
+		qujian.push_back(sorted[i]);  
+		else if(sorted[i].data>high)  
+		chaoguo.push_back(sorted[i]);  
+	}   
+	//第四步 三个向量依次放入输出向量  
+	int size1=fu.size();  
+	int size2=qujian.size();  
+	int size3=chaoguo.size();  
+	for(int j=0;j<size1;j++)  
+	{  
+		out.push_back(fu[j]);  
+	}   
+	for(int j=0;j<size2;j++)  
+	{  
+		out.push_back(qujian[j]);  
+	}  
+	for(int j=0;j<size3;j++)  
+	{  
+		out.push_back(chaoguo[j]);  
+	}  
+	//第四步 输出 注意地址的转换 分两次输出，最后一次单独输出  
+	int size4=out.size();  
+	for(int j=0;j<size4-1;j++)  
+	{  
+		out[j].next=out[j+1].add;  
+		printf("%05d %d %05d\n",out[j].add,out[j].data,out[j].next);  
+	}  
+	printf("%05d %d -1",out[size4-1].add,out[size4-1].data);   
+	return 0;  
+}  
+*/  
 
-/*
-1076
-WIFI密码
-枚举  渣渣题 
-#include<iostream>
-using namespace std;
-int main()
-{
-	int n;
-	cin>>n;
-	for(int i=0;i<n;i++)
-	{
-		string s1,s2,s3,s4;
-		cin>>s1>>s2>>s3>>s4;
-		if(s1=="A-T"||s2=="A-T"||s3=="A-T"||s4=="A-T")
-		cout<<"1";
-		else if(s1=="B-T"||s2=="B-T"||s3=="B-T"||s4=="B-T")
-		cout<<"2";
-		else if(s1=="C-T"||s2=="C-T"||s3=="C-T"||s4=="C-T")
-		cout<<"3";
-		else if(s1=="D-T"||s2=="D-T"||s3=="D-T"||s4=="D-T")
-		cout<<"4";
-	}
-	return 0;
-}
-*/ 
+/*  
+1076  
+WIFI密码  
+枚举  渣渣题   
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	for(int i=0;i<n;i++)  
+	{  
+		string s1,s2,s3,s4;  
+		cin>>s1>>s2>>s3>>s4;  
+		if(s1=="A-T"||s2=="A-T"||s3=="A-T"||s4=="A-T")  
+		cout<<"1";  
+		else if(s1=="B-T"||s2=="B-T"||s3=="B-T"||s4=="B-T")  
+		cout<<"2";  
+		else if(s1=="C-T"||s2=="C-T"||s3=="C-T"||s4=="C-T")  
+		cout<<"3";  
+		else if(s1=="D-T"||s2=="D-T"||s3=="D-T"||s4=="D-T")  
+		cout<<"4";  
+	}  
+	return 0;  
+}  
+*/   
 
-/*
-1077
-互评成绩计算 
-渣渣题
-#include<iostream>
-#include<algorithm>
-#include<cmath>
-using namespace std;
-int main()
-{
-	int zushu;
-	int maxscore;
-	cin>>zushu>>maxscore;
-	int a[zushu];
-	
-	for(int j=0;j<zushu;j++)
-	{
-	float sum1=0,sum2=0;
-	int k=0,max=0,min=100;
-	for(int i=0;i<zushu;i++)
-	{
-		cin>>a[i];
-		if(i==0)
-		sum1+=a[i];
-		else
-		{
-			if(a[i]>=0&&a[i]<=maxscore)
-			{
-				if(a[i]>max)
-				max=a[i];
-				if(a[i]<min)
-				min=a[i];
-				sum2+=a[i];
-				k++;
-			}
-		}
-	} 
-	float u=(sum2-min-max)/(k-2);
-	float count;
-	count=(sum1+u)/2;
-	cout<<round(count)<<endl;
-	}
-	return 0;
-}
-*/
+/*  
+1077  
+互评成绩计算   
+渣渣题  
+>#include<iostream>  
+#include<algorithm>  
+#include<cmath>  
+using namespace std;  
+int main()  
+{  
+	int zushu;  
+	int maxscore;  
+	cin>>zushu>>maxscore;  
+	int a[zushu];  
+	for(int j=0;j<zushu;j++)  
+	{  
+	float sum1=0,sum2=0;  
+	int k=0,max=0,min=100;  
+	for(int i=0;i<zushu;i++)  
+	{  
+		cin>>a[i];  
+		if(i==0)  
+		sum1+=a[i];  
+		else  
+		{   
+			if(a[i]>=0&&a[i]<=maxscore)  
+			{  
+				if(a[i]>max)  
+				max=a[i];  
+				if(a[i]<min)  
+				min=a[i];  
+				sum2+=a[i];  
+				k++;  
+			}  
+		}  
+	}   
+	float u=(sum2-min-max)/(k-2);  
+	float count;  
+	count=(sum1+u)/2;  
+	cout<<round(count)<<endl;  
+	}  
+	return 0;  
+}  
+*/  
 
-/*
-1078   有一个运行超时 
-字符串压缩与解压  
-#include<iostream>
-using namespace std;
-int main()
-{
-	char c;
-	cin>>c;
-	getchar();
-	string s;
-	getline(cin,s);
-	if(c=='D'){
-		char d[1001]={0};
-		int count=0;
-		for(int i=0;i<s.size();)//可能存在两个为数的，调试看有没有三个为数的 
-		{
-			//前一个为数，后一个为字符，需要展开 
-			if((s[i]>='1'&&s[i]<='9')&&(!(s[i+1]>='0'&&s[i+1]<='9')))
-			{
-				int geshu=s[i]-'0';
-				for(int j=0;j<geshu;j++)
-				{
-					d[count++]=s[i+1];
-				} 
-				i+=2;
-			}
-			//前两个为数，后一个为字符，需要展开
-			else if((s[i]>='1'&&s[i]<='9')&&(s[i+1]>='0'&&s[i+1]<='9')&&(!(s[i+2]>='1'&&s[i+2]<='9')))
-			{
-				int geshu=(s[i]-'0')*10+s[i+1]-'0';
-				for(int j=0;j<geshu;j++)
-				{
-					d[count++]=s[i+2];
-				} 
-				i+=3;
-			}
-			//字符或空格 原样输出 
-			else if((s[i]>='a'&&s[i]<='z')||(s[i]>='A'&&s[i]<='Z')||(s[i]==' ')) {
-				d[count++]=s[i];
-				i++;
-			}
-			
-		}
-		for(int i=0;i<count;i++)cout<<d[i];
-	}
-	else if(c=='C'){
-		int count=1;
-		for(int i=0;i<s.size();)
-		{
-			if(s[i]==s[i+1])
-			{
-				count++;
-				i++;
-					
-			} 
-			else
-			{
-				if(count==1)
-				{
-					cout<<s[i];
-					i++;
-				}
-				else 
-				{
-					cout<<count<<s[i];
-					i++;
-					count=1;
-				}
-			}
-		} 
-	
-	}	
-	return 0;
-} 
-//标准答案
-#include<iostream>
-#include<string>
-using namespace std;
-int main()
-{
-    char type;
-    scanf("%c",&type);
-    string s;
-    getchar();
-    getline(cin,s);
-    if(type=='C'){
+/*  
+1078   有一个运行超时    
+字符串压缩与解压    
+>#include<iostream>   
+using namespace std;  
+int main()  
+{  
+	char c;  
+	cin>>c;  
+	getchar();  
+	string s;  
+	getline(cin,s);  
+	if(c=='D'){  
+		char d[1001]={0};  
+		int count=0;  
+		for(int i=0;i<s.size();)//可能存在两个为数的，调试看有没有三个为数的   
+		{  
+			//前一个为数，后一个为字符，需要展开   
+			if((s[i]>='1'&&s[i]<='9')&&(!(s[i+1]>='0'&&s[i+1]<='9')))  
+			{  
+				int geshu=s[i]-'0';  
+				for(int j=0;j<geshu;j++)  
+				{  
+					d[count++]=s[i+1];  
+				}   
+				i+=2;  
+			}  
+			//前两个为数，后一个为字符，需要展开  
+			else if((s[i]>='1'&&s[i]<='9')&&(s[i+1]>='0'&&s[i+1]<='9')&&(!(s[i+2]>='1'&&s[i+2]<='9')))  
+			{  
+				int geshu=(s[i]-'0')*10+s[i+1]-'0';  
+				for(int j=0;j<geshu;j++)  
+				{  
+					d[count++]=s[i+2];  
+				}   
+				i+=3;  
+			}  
+			//字符或空格 原样输出   
+			else if((s[i]>='a'&&s[i]<='z')||(s[i]>='A'&&s[i]<='Z')||(s[i]==' ')) {  
+				d[count++]=s[i];  
+				i++;  
+			}  		
+		}  
+		for(int i=0;i<count;i++)cout<<d[i];  
+	}  
+	else if(c=='C'){  
+		int count=1;  
+		for(int i=0;i<s.size();)  
+		{  
+			if(s[i]==s[i+1])  
+			{  
+				count++;  
+				i++;  		
+			}   
+			else  
+			{  
+				if(count==1)  
+				{  
+					cout<<s[i];  
+					i++;  
+				}  
+				else   
+				{  
+					cout<<count<<s[i];  
+					i++;  
+					count=1;  
+				}  
+			}  
+		}   	
+	}  	
+	return 0;  
+}   
+	 						  
+//标准答案  
+>#include<iostream>  
+#include<string>  
+using namespace std;  
+int main()  
+{  
+    char type;  
+    scanf("%c",&type);  
+    string s;  
+    getchar();  
+    getline(cin,s);  
+    if(type=='C'){  
+    for(int i=0;i<s.size();i++){  
+            int cnt=0;  
+       while(s[i]==s[i+1])  
+        i++,cnt++;  
+       if(cnt!=0)  
+            cout<<cnt+1;  
+        cout<<s[i];  
+    }  
+    }else{  
+    for(int i=0;i<s.size();i++){  
+             int cnt=0;  
+    while(s[i]<='9'&&s[i]>='0')  
+        cnt=cnt*10+s[i++]-'0';  
+    for(int j=0;j<cnt;j++)  
+    cout<<s[i];   
+    if(cnt==0)  
+        cout<<s[i];  
+    }  
+    }  
+    return 0;  
+}  
+*/  
 
-    for(int i=0;i<s.size();i++){
-            int cnt=0;
-       while(s[i]==s[i+1])
-        i++,cnt++;
-       if(cnt!=0)
-            cout<<cnt+1;
-        cout<<s[i];
-    }
-    }else{
+/*  
+1080  
+MOOC期终成绩  
 
-    for(int i=0;i<s.size();i++){
-             int cnt=0;
-    while(s[i]<='9'&&s[i]>='0')
-        cnt=cnt*10+s[i++]-'0';
-    for(int j=0;j<cnt;j++)
-    cout<<s[i];
-    if(cnt==0)
-        cout<<s[i];
-    }
-    }
-    return 0;
-}
-*/
-
-/*
-1080
-MOOC期终成绩
-
-思路：用vector<node>存储初始学生信息和最终输出 用map记录有网上成绩的名字，下标依次加一，
-push进向量时用下标操作
-#include<iostream>
-#include<vector>
-#include<map>
-#include<algorithm>
-using namespace std;
-//结构体节点存储学生信息 
-struct node
-{
-	string name;
-	int online;
-	int mid;
-	int final;
-	int score;
-	
-};
-//函数实现根据结构体某参数进行排序，与sort一起使用 
-bool cmp(node a,node b)
-{
-	return a.score!=b.score?a.score>b.score : a.name<b.name; 
-};
-int main()
-{
-	int m,n,k;
-	cin>>m>>n>>k;
-	int xiabiao=1;//方便遍历 
-	//存储所有信息，存储输出信息
-	vector<node>v,out;
-	//放入有网上成绩的人的信息
-	map<string,int>mp;
-	//将网上成绩读入 
-	for(int i=0;i<m;i++){
-		string s;
-		int a;
-		cin>>s>>a;
-		if(a>=200){
-			mp[s]=xiabiao++;
-			v.push_back(node{s,a,-1,-1,0});
-		}
-	} 
-	//读入期中成绩 
-	for(int j=0;j<n;j++){
-		string ss;
-		int b;
-		cin>>ss>>b;
-		if(mp[ss]!=0){
-			v[mp[ss]-1].mid=b;
-		}
-	} 
-	//读入期末成绩
-	for(int i=0;i<k;i++){
-		string sss;
-		int c;
-		cin>>sss>>c;
-		if(mp[sss]!=0){
-			v[mp[sss]-1].final=v[mp[sss]-1].score=c;
-			//神操作   担心原本的四舍五入被去尾，所以加0.5 
-			if(v[mp[sss]-1].mid>v[mp[sss]-1].final){
-				v[mp[sss]-1].score=int(v[mp[sss]-1].mid*0.4+v[mp[sss]-1].final*0.6+0.5);
-			}
-		}
-	} 
-	//放入out中准备输出
-	for(int j=0;j<v.size();j++)
-	{
-		if(v[j].final>=60) 
-		out.push_back(v[j]);
-	} 
-	sort(out.begin(),out.end(),cmp);
-	for(int j=0;j<out.size();j++)
-	{
-		//是out[j].name.c_str()，不是out[j].name 
-		printf("%s %d %d %d %d\n",out[j].name.c_str(),out[j].online,out[j].mid,out[j].final,out[j].score);
-	}
-	return 0;
-}
-//标准答案
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <map>
-using namespace std;
-struct node {
-    string name;
-    int gp, gm, gf, g;
-};
-bool cmp(node a, node b) {
-    return a.g != b.g ? a.g > b.g : a.name < b.name;
-}
-map<string, int> idx;
-int main() {
-    int p, m, n, score, cnt = 1;
-    cin >> p >> m >> n;
-    vector<node> v, ans;
-    string s;
-    for (int i = 0; i < p; i++) {
-        cin >> s >> score;
-        if (score >= 200) {
-            v.push_back(node{s, score, -1, -1, 0});   //push_back后就下标操作了
-            idx[s] = cnt++;
-        }
-    }
-    for (int i = 0; i < m; i++) {
-        cin >> s >> score;
-        if (idx[s] != 0) v[idx[s] - 1].gm = score;
-    }
-    for (int i = 0; i < n; i++) {
-        cin >> s >> score;
-        if (idx[s] != 0) {
-            int temp = idx[s] - 1;
-            v[temp].gf = v[temp].g = score;
-            if (v[temp].gm > v[temp].gf) v[temp].g = int(v[temp].gm * 0.4 + v[temp].gf * 0.6 + 0.5);
-        }
-    }
-    for (int i = 0; i < v.size(); i++)
-        if (v[i].g >= 60) ans.push_back(v[i]);
-    sort(ans.begin(), ans.end(), cmp);
-    for (int i = 0; i < ans.size(); i++)
-        printf("%s %d %d %d %d\n", ans[i].name.c_str(), ans[i].gp, ans[i].gm, ans[i].gf, ans[i].g);
-    return 0;
-}
-*/
+***思路：用vector<node>存储初始学生信息和最终输出 用map记录有网上成绩的名字，下标依次加一，
+push进向量时用下标操作***  
+>#include<iostream>  
+#include<vector>  
+#include<map>  
+#include<algorithm>  
+using namespace std;  
+//结构体节点存储学生信息   
+struct node  
+{  
+	string name;  
+	int online;  
+	int mid;  
+	int final;  
+	int score;  	
+};  
+//函数实现根据结构体某参数进行排序，与sort一起使用   
+bool cmp(node a,node b)  
+{  
+	return a.score!=b.score?a.score>b.score : a.name<b.name;   
+};  
+int main()  
+{  
+	int m,n,k;  
+	cin>>m>>n>>k;   
+	int xiabiao=1;//方便遍历   
+	//存储所有信息，存储输出信息  
+	vector<node>v,out;   
+	//放入有网上成绩的人的信息  
+	map<string,int>mp;  
+	//将网上成绩读入   
+	for(int i=0;i<m;i++){  
+		string s;  
+		int a;  
+		cin>>s>>a;  
+		if(a>=200){  
+			mp[s]=xiabiao++;  
+			v.push_back(node{s,a,-1,-1,0});  
+		}  
+	}   
+	//读入期中成绩   
+	for(int j=0;j<n;j++){  
+		string ss;  
+		int b;  
+		cin>>ss>>b;  
+		if(mp[ss]!=0){  
+			v[mp[ss]-1].mid=b;  
+		}  
+	}   
+	//读入期末成绩  
+	for(int i=0;i<k;i++){  
+		string sss;  
+		int c;   
+		cin>>sss>>c;  
+		if(mp[sss]!=0){  
+			v[mp[sss]-1].final=v[mp[sss]-1].score=c;  
+			//神操作   担心原本的四舍五入被去尾，所以加0.5   
+			if(v[mp[sss]-1].mid>v[mp[sss]-1].final){  
+				v[mp[sss]-1].score=int(v[mp[sss]-1].mid*0.4+v[mp[sss]-1].final*0.6+0.5);  
+			}  
+		}  
+	}   
+	//放入out中准备输出  
+	for(int j=0;j<v.size();j++)  
+	{  
+		if(v[j].final>=60)   
+		out.push_back(v[j]);  
+	}   
+	sort(out.begin(),out.end(),cmp);  
+	for(int j=0;j<out.size();j++)  
+	{  
+		//是out[j].name.c_str()，不是out[j].name   
+		printf("%s %d %d %d %d\n",out[j].name.c_str(),out[j].online,out[j].mid,out[j].final,out[j].score);  
+	}  
+	return 0;  
+}  
+				      
+//标准答案  
+>#include <iostream>  
+#include <algorithm>  
+#include <vector>  
+#include <map>  
+using namespace std;  
+struct node {  
+    string name;  
+    int gp, gm, gf, g;  
+};  
+bool cmp(node a, node b) {  
+    return a.g != b.g ? a.g > b.g : a.name < b.name;  
+}  
+map<string, int> idx;  
+int main() {   
+    int p, m, n, score, cnt = 1;  
+    cin >> p >> m >> n;  
+    vector<node> v, ans;  
+    string s;  
+    for (int i = 0; i < p; i++) {  
+        cin >> s >> score;  
+        if (score >= 200) {  
+            v.push_back(node{s, score, -1, -1, 0});   //push_back后就下标操作了  
+            idx[s] = cnt++;  
+        }  
+    }  
+    for (int i = 0; i < m; i++) {  
+        cin >> s >> score;  
+        if (idx[s] != 0) v[idx[s] - 1].gm = score;  
+    }  
+    for (int i = 0; i < n; i++) {  
+        cin >> s >> score;  
+        if (idx[s] != 0) {  
+            int temp = idx[s] - 1;  
+            v[temp].gf = v[temp].g = score;  
+            if (v[temp].gm > v[temp].gf) v[temp].g = int(v[temp].gm * 0.4 + v[temp].gf * 0.6 + 0.5);  
+        }  
+    }  
+    for (int i = 0; i < v.size(); i++)  
+        if (v[i].g >= 60) ans.push_back(v[i]);  
+    sort(ans.begin(), ans.end(), cmp);  
+    for (int i = 0; i < ans.size(); i++)  
+        printf("%s %d %d %d %d\n", ans[i].name.c_str(), ans[i].gp, ans[i].gm, ans[i].gf, ans[i].g);  
+    return 0;  
+}  
+*/  
 
 /*
 1081

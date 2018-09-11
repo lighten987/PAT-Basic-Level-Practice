@@ -2475,842 +2475,828 @@ int main()
 
 /*
 1034  
-有理数四则运算  太复杂了，各种讨论 
+有理数四则运算  太复杂了，各种讨论    
 
-#include<iostream>
-#include<cmath>
-#define fun fc
-using namespace std;
-//辗转相除求最大公约数，真的牛皮！！！ 
-long long a, b, c, d;
-long long huajian(long long a,long long b)
-{
-    return b==0?a:huajian(b,a%b);
-}
-
-void fc(long long m,long long n)
-{
-	int flag1=0,flag2=0,flag=0;
-	//分母为零 
-	if(n==0)
-	{
-		cout<<"Inf";
-		return;  //子程序结束，回到子函数 
-	}
-	//分子为零 
-	if(m==0)
-	{
-		cout<<"0";
-		return;
-	}
-	//讨论负数  
-	if (m < 0) flag1 = 1;
-    if (n < 0) flag2 = 1;
-    m = abs(m), n = abs(n);
-    if (flag1 == 1 && flag2 == 1) flag = 0;
-    else if (flag1 == 1 || flag2 == 1) flag = 1;
-    //若分子分母值相同 
-    if (m == n) {
-        if (flag == 1) printf("(-1)");
-        else printf("1");
-        return;
-    } 
-	long long x=m%n,y=m/n;  //x表示正整数倍或者零 y表示是否为假分数，整数倍数为y 
-    if(x==0)
-	{
-		if(flag==0)cout<<y;
-		else cout<<"-"<<y;
-		return;
-	} 
-	else
-	{
-		long long t1=m-y*n,t2 =n, t=huajian(t1,t2);
-		t1=t1/t,t2=t2/t;
-	if (flag == 1) {
-            printf("(-");
-            if (y != 0) printf("%lld %lld/%lld)", y, t1, t2);
-            else printf("%d/%d)", t1, t2);
-        } else {
-            if (y != 0) printf("%lld %lld/%lld", y, t1, t2);
-            else printf("%lld/%lld", t1, t2);
-        }	
-	}
-} 
-void print() {
-    fun(a, b); printf(" + "); fun(c, d); printf(" = "); fun(a * d + b * c, b * d); printf("\n");
-    fun(a, b); printf(" - "); fun(c, d); printf(" = "); fun(a * d - b * c, b * d); printf("\n");
-    fun(a, b); printf(" * "); fun(c, d); printf(" = "); fun(a * c, b * d); printf("\n");
-    fun(a, b); printf(" / "); fun(c, d); printf(" = "); fun(a * d, b * c); printf("\n");
-}
-int main() {
-    scanf("%lld/%lld %lld/%lld", &a, &b, &c, &d);
-    print();
-    return 0;
-} 
-
-//标准答案
-#include <iostream>
-#include <cmath>
-using namespace std;
-long long a, b, c, d;
-long long gcd(long long t1, long long t2) {
-    return t2 == 0 ? t1 : gcd(t2, t1 % t2);
-}
-void func(long long m, long long n) {
-    int flag1 = 0, flag2 = 0, flag = 0;
-    if (n == 0) {
-        printf("Inf");
-        return ;
-    }
-    if (m == 0) {
-        printf("0");
-        return ;
-    }
-    if (m < 0) flag1 = 1;
-    if (n < 0) flag2 = 1;
-    m = abs(m), n = abs(n);
-    if (flag1 == 1 && flag2 == 1) flag = 0;
-    else if (flag1 == 1 || flag2 == 1) flag = 1;
-    if (m == n) {
-        if (flag == 1) printf("(-1)");
-        else printf("1");
-        return;
-    }       
-    long long x = m % n, y = m / n;
-    if (x == 0) {
-        if (flag == 0) printf("%d", y);
-        else printf("(-%d)", y);
-        return ;
-    } else {
-        long long t1 = m - y * n, t2 = n, t = gcd(t1, t2);
-        t1 = t1 / t, t2 = t2 / t;
-        if (flag == 1) {
-            printf("(-");
-            if (y != 0) printf("%lld %lld/%lld)", y, t1, t2);
-            else printf("%d/%d)", t1, t2);
-        } else {
-            if (y != 0) printf("%lld %lld/%lld", y, t1, t2);
-            else printf("%lld/%lld", t1, t2);
-        }
-    }
-}
-void print() {
-    func(a, b); printf(" + "); func(c, d); printf(" = "); func(a * d + b * c, b * d); printf("\n");
-    func(a, b); printf(" - "); func(c, d); printf(" = "); func(a * d - b * c, b * d); printf("\n");
-    func(a, b); printf(" * "); func(c, d); printf(" = "); func(a * c, b * d); printf("\n");
-    func(a, b); printf(" / "); func(c, d); printf(" = "); func(a * d, b * c); printf("\n");
-}
-int main() {
-    scanf("%lld/%lld %lld/%lld", &a, &b, &c, &d);
-    print();
-    return 0;
-} 
-*/
-
-/*
-1035
-插入与归并
-
-思路：抓住插入排序前面有序，后面未动，去判断 归并排序要重头来，直到到了那一步，再+1
-
-#include<iostream>
-#include<algorithm>
-using namespace std;
-int main()
-{
-	int n;
-	int a[101];
-	int b[101];
-	cin>>n;
-	for(int i=0;i<n;i++) 
-	    cin>>a[i];
-	for(int i=0;i<n;i++)
-	    cin>>b[i];
-	int j,k;
-	for(j=0;a[j]<=a[j+1]&&j<n-1;j++);//此时的j为乱序的第一位
-	for(k=++j;a[k]==b[k]&&j<n;k++); 
-	if(k==n)
-	{
-		cout<<"Insertion Sort"<<endl;
-		sort(a,a+j+1);  //注意下标   都放入a数组最后一起输出 
-	}
-	else 
-	{
-		cout<<"Merge Sort"<<endl;
-		int k=1;
-		int flag=1;//标志位判断是否到了给出的那一步，再下一步即可
-		while(flag)
-		{
-			flag=0;
-			for(int i=0;i<n;i++)
-			{
-				if(a[i]!=b[i])  //排序还未到 
-				flag=1;
-				//归并排序 
-				k*=2;
-				for(int i=0;i<n/k;i++)   //i为组数，会越来越少，每次组内排序 
-				sort(a+i*k,a+(i+1)*k);
-				for(int j=k*(n/k);j<n;j++)//排序最后几个
-				sort(a+k*(n/k),a+n); 
-			}
-		} 
-	}
-	cout<<a[0];
-	for(int i=1;i<n;i++)
-	{
-		cout<<" "<<a[i];
-	}
-	return 0;
-}
-//参考答案
-#include<iostream>
-#include<algorithm>
-using namespace std;
-int main()
-{
-        int N;
-        int A1[101], A2[101];  // 原始序列A1  中间序列A2
-        int i, j;
-        cin>>N;
-        for( i=0; i<N; i++ )    cin>>A1[i];
-        for( i=0; i<N; i++ )    cin>>A2[i];
- 
-        for( i=0; A2[i]<=A2[i+1] && i<N-1; i++ ) ; // i作为有序序列最后一个元素下标退出循环
-        for( j=++i; A1[j]==A2[j] && j<N; j++  ) ;    // A1 A2从 第一个无序的元素开始 逐一比对
-        if( j==N ){// 前半部分有序而后半部分未改动可以确定是插入排序
-            cout<<"Insertion Sort"<<endl;
-            sort( A1, A1+i+1 );
-        }
-        else{
-            cout<<"Merge Sort"<<endl;
-            int k = 1;
-            int flag=1;         //用来标记是否归并到 “中间序列”
-            while( flag )
-            {
-                    flag = 0;
-                    for( i=0; i<N; i++ )
-                        if( A1[i]!=A2[i] )
-                            flag = 1;
-                    k*=2;
-                    for( i=0; i<N/k; i++ )
-                        sort( A1+i*k, A1+(i+1)*k );
-                    for( i=k*(N/k); i<N; i++ ) // 对 非偶数序列的“尾巴”进行排序
-                        sort( A1+k*(N/k), A1+N );
-            }
-        }
-        cout<<A1[0];
-        for( i=1; i<N; i++ )
-            cout<<" "<<A1[i];
-        cout<<endl;
-        return 0;
-} 
-*/
-
-/*
-1036
-输出正方形图案
-
-思路：先判断奇偶求出行数，然后分首位排和中间排按规则输出
-#include<iostream>
-using namespace std;
-
-int main()
-{
-	int n;
-	char c;
-	cin>>n>>c;
-	//打印第一排 
-	for(int i=0;i<n;i++)
-	cout<<c;
-	cout<<endl;
-	//打印第2至（n-1）排 
-	int j;
-	if(n%2==0)j=n/2-1;
-	else j=n/2;
-	while(j>1)
-	{
-	cout<<c;
-	for(int i=0;i<n-2;i++)
-	{
-		cout<<" ";
-	}
-	cout<<c<<endl;
-	j--;	
-	}
-	for(int i=0;i<n;i++)
-	cout<<c;
-	return 0;
+>#include<iostream>  
+#include<cmath>  
+#define fun fc  
+using namespace std;  
+//辗转相除求最大公约数，真的牛皮！！！   
+long long a, b, c, d;  
+long long huajian(long long a,long long b)  
+{  
+    return b==0?a:huajian(b,a%b);  
 }  
-*/
+void fc(long long m,long long n)  
+{  
+	int flag1=0,flag2=0,flag=0;  
+	//分母为零   
+	if(n==0)  
+	{  
+		cout<<"Inf";  
+		return;  //子程序结束，回到子函数   
+	}  
+	//分子为零   
+	if(m==0)  
+	{  
+		cout<<"0";  
+		return;  
+	}  
+	//讨论负数    
+	if (m < 0) flag1 = 1;  
+    if (n < 0) flag2 = 1;  
+    m = abs(m), n = abs(n);  
+    if (flag1 == 1 && flag2 == 1) flag = 0;  
+    else if (flag1 == 1 || flag2 == 1) flag = 1;  
+    //若分子分母值相同   
+    if (m == n) {  
+        if (flag == 1) printf("(-1)");  
+        else printf("1");  
+        return;  
+    }   
+	long long x=m%n,y=m/n;  //x表示正整数倍或者零 y表示是否为假分数，整数倍数为y   
+    if(x==0)  
+	{  
+		if(flag==0)cout<<y;  
+		else cout<<"-"<<y;  
+		return;  
+	}   
+	else  
+	{  
+		long long t1=m-y*n,t2 =n, t=huajian(t1,t2);  
+		t1=t1/t,t2=t2/t;  
+	if (flag == 1) {  
+            printf("(-");  
+            if (y != 0) printf("%lld %lld/%lld)", y, t1, t2);  
+            else printf("%d/%d)", t1, t2);  
+        } else {  
+            if (y != 0) printf("%lld %lld/%lld", y, t1, t2);  
+            else printf("%lld/%lld", t1, t2);  
+        }  	
+	}  
+}   
+void print() {  
+    fun(a, b); printf(" + "); fun(c, d); printf(" = "); fun(a * d + b * c, b * d); printf("\n");  
+    fun(a, b); printf(" - "); fun(c, d); printf(" = "); fun(a * d - b * c, b * d); printf("\n");  
+    fun(a, b); printf(" * "); fun(c, d); printf(" = "); fun(a * c, b * d); printf("\n");  
+    fun(a, b); printf(" / "); fun(c, d); printf(" = "); fun(a * d, b * c); printf("\n");  
+}   
+int main() {  
+    scanf("%lld/%lld %lld/%lld", &a, &b, &c, &d);  
+    print();  
+    return 0;  
+}   
 
-/*
-1037
-找零钱   定义不同的进制 输出找的钱或者差的钱 
-#include<iostream>
-using namespace std;
-int main()
-{
-	int a1,b1,c1;
-	int a2,b2,c2;
-	int a3,b3,c3;
-	scanf("%d.%d.%d %d.%d.%d",&a1,&b1,&c1,&a2,&b2,&c2);
-if((c2+b2*29+a2*29*17)>=(c1+b1*29+a1*29*17))
-{
-	
-   if(c2>=c1)
-	{
-		c3=c2-c1;
-	}
-	else {
-		c3=c2+29-c1;
-		b2--;
-	}
-	if(b2>=b1)
-	{
-		b3=b2-b1;
-	}
-	else{
-		b3=b2+17-b1;
-		a2--;
-	}
-	
-		a3=a2-a1;
-		cout<<a3<<"."<<b3<<"."<<c3<<endl;
-}
-else   //倒差钱 
-	{
-		if(c1>=c2)c3=c1-c2;
-		else{
-			c3=c1+29-c2;
-			b1--;
-		}
-		if(b1>=b2)b3=b1-b2;
-		else{
-			b3=b1+17-b2;
-			a1--;
-		}
-		a3=a1-a2;
-		cout<<"-"<<a3<<"."<<b3<<"."<<c3<<endl;
-	}
+//标准答案  
+>#include <iostream>  
+#include <cmath>  
+using namespace std;  
+long long a, b, c, d;  
+long long gcd(long long t1, long long t2) {  
+    return t2 == 0 ? t1 : gcd(t2, t1 % t2);  
+}  
+void func(long long m, long long n) {  
+    int flag1 = 0, flag2 = 0, flag = 0;  
+    if (n == 0) {  
+        printf("Inf");  
+        return ;  
+    }  
+    if (m == 0) {  
+        printf("0");  
+        return ;  
+    }  
+    if (m < 0) flag1 = 1;  
+    if (n < 0) flag2 = 1;  
+    m = abs(m), n = abs(n);  
+    if (flag1 == 1 && flag2 == 1) flag = 0;  
+    else if (flag1 == 1 || flag2 == 1) flag = 1;  
+    if (m == n) {  
+        if (flag == 1) printf("(-1)");  
+        else printf("1");  
+        return;  
+    }         
+    long long x = m % n, y = m / n;  
+    if (x == 0) {  
+        if (flag == 0) printf("%d", y);  
+        else printf("(-%d)", y);  
+        return ;  
+    } else {  
+        long long t1 = m - y * n, t2 = n, t = gcd(t1, t2);  
+        t1 = t1 / t, t2 = t2 / t;  
+        if (flag == 1) {  
+            printf("(-");  
+            if (y != 0) printf("%lld %lld/%lld)", y, t1, t2);  
+            else printf("%d/%d)", t1, t2);   
+        } else {  
+            if (y != 0) printf("%lld %lld/%lld", y, t1, t2);  
+            else printf("%lld/%lld", t1, t2);  
+        }  
+    }  
+}   
+void print() {  
+    func(a, b); printf(" + "); func(c, d); printf(" = "); func(a * d + b * c, b * d); printf("\n");  
+    func(a, b); printf(" - "); func(c, d); printf(" = "); func(a * d - b * c, b * d); printf("\n");  
+    func(a, b); printf(" * "); func(c, d); printf(" = "); func(a * c, b * d); printf("\n");  
+    func(a, b); printf(" / "); func(c, d); printf(" = "); func(a * d, b * c); printf("\n");  
+}  
+int main() {  
+    scanf("%lld/%lld %lld/%lld", &a, &b, &c, &d);  
+    print();  
+    return 0;  
+}   
+*/  
 
-	return 0;
-}
-*/
+/*  
+1035  
+插入与归并  
 
-/*
-1038  运行超时考虑用scanf和printf输入输出 
-统计同成绩学生 给出n个成绩 给出k个查询值，对应输出人数
+***思路：抓住插入排序前面有序，后面未动，去判断 归并排序要重头来，直到到了那一步，再+1***  
 
-思路：将n个学生的成绩对应放入百分数数组，输出数组值
-#include<iostream>
-using namespace std;
-int main()
-{
-	double n;
-	int chengji[101]={0};
-	scanf("%lf",&n); 
-	int score;
-	for(double i=0;i<n;i++)
-	{
-		scanf("%d",&score);
-		if((score>=0)&&(score<=100))
-		chengji[score]++;
-	} 
-	int k;
-	scanf("%d",&k);
-	int chaxun;
-	scanf("%d",&chaxun);
-	printf("%d",chengji[chaxun]);
-	for(int i=0;i<k-1;i++)
-	{
-		scanf("%d",&chaxun);
-    	printf(" %d",chengji[chaxun]);
-	}	
-	return 0;
-}
-*/
+>#include<iostream>  
+#include<algorithm>  
+using namespace std;   
+int main()  
+{  
+	int n;  
+	int a[101];  
+	int b[101];  
+	cin>>n;  
+	for(int i=0;i<n;i++)   
+	    cin>>a[i];  
+	for(int i=0;i<n;i++)  
+	    cin>>b[i];  
+	int j,k;  
+	for(j=0;a[j]<=a[j+1]&&j<n-1;j++);//此时的j为乱序的第一位  
+	for(k=++j;a[k]==b[k]&&j<n;k++);   
+	if(k==n)  
+	{  
+		cout<<"Insertion Sort"<<endl;  
+		sort(a,a+j+1);  //注意下标   都放入a数组最后一起输出   
+	}  
+	else   
+	{  
+		cout<<"Merge Sort"<<endl;  
+		int k=1;  
+		int flag=1;//标志位判断是否到了给出的那一步，再下一步即可  
+		while(flag)  
+		{  
+			flag=0;  
+			for(int i=0;i<n;i++)  
+			{  
+				if(a[i]!=b[i])  //排序还未到   
+				flag=1;  
+				//归并排序   
+				k*=2;  
+				for(int i=0;i<n/k;i++)   //i为组数，会越来越少，每次组内排序   
+				sort(a+i*k,a+(i+1)*k);  
+				for(int j=k*(n/k);j<n;j++)//排序最后几个  
+				sort(a+k*(n/k),a+n);   
+			}  
+		}   
+	}  
+	cout<<a[0];  
+	for(int i=1;i<n;i++)  
+	{  
+		cout<<" "<<a[i];  
+	}  
+	return 0;  
+}  
+				
+//参考答案  
+>#include<iostream>  
+#include<algorithm>  
+using namespace std;  
+int main()  
+{  
+        int N;  
+        int A1[101], A2[101];  // 原始序列A1  中间序列A2  
+        int i, j;  
+        cin>>N;  
+        for( i=0; i<N; i++ )    cin>>A1[i];  
+        for( i=0; i<N; i++ )    cin>>A2[i];  
+        for( i=0; A2[i]<=A2[i+1] && i<N-1; i++ ) ; // i作为有序序列最后一个元素下标退出循环  
+        for( j=++i; A1[j]==A2[j] && j<N; j++  ) ;    // A1 A2从 第一个无序的元素开始 逐一比对  
+        if( j==N ){// 前半部分有序而后半部分未改动可以确定是插入排序  
+            cout<<"Insertion Sort"<<endl;  
+            sort( A1, A1+i+1 );  
+        }  
+        else{  
+            cout<<"Merge Sort"<<endl;  
+            int k = 1;  
+            int flag=1;         //用来标记是否归并到 “中间序列”  
+            while( flag )  
+            {  
+                    flag = 0;  
+                    for( i=0; i<N; i++ )  
+                        if( A1[i]!=A2[i] )  
+                            flag = 1;  
+                    k*=2;  
+                    for( i=0; i<N/k; i++ )  
+                        sort( A1+i*k, A1+(i+1)*k );  
+                    for( i=k*(N/k); i<N; i++ ) // 对 非偶数序列的“尾巴”进行排序  
+                        sort( A1+k*(N/k), A1+N );  
+            }  
+        }  
+        cout<<A1[0];  
+        for( i=1; i<N; i++ )  
+            cout<<" "<<A1[i];  
+        cout<<endl;  
+        return 0;  
+}   
+*/  
 
-/*
-1039 
-到底买不买  给一个字符串 第二个字符串是否全部包含于第一个，若是，输出多余字符个数，若不是，输出差的数量
+/*  
+1036  
+输出正方形图案  
 
-思路：字符数组遍历 相同则用*号覆盖，最后数*号的个数对应输出 
-#include<iostream>
-#include<cstring>
-using namespace std;
-int main()
-{
-	char ss1[1001];
-	char ss2[1001];
-	cin>>ss1;
-	cin>>ss2;
-	for(int i=0;i<strlen(ss2);i++)
-	{
-		for(int j=0;j<strlen(ss1);j++)
-		{
-			if(ss2[i]==ss1[j])
-			{
-				//相同就用*号覆盖 
-				ss2[i]='*';  
-				ss1[j]='*'; 
-			}	
-		}
-	 } 
-	 int count1=0,count2=0;
-	 for(int i=0;i<strlen(ss1);i++)
-	 {
-	 	if(ss1[i]!='*')
-	 	{
-	 		count1++;
-		 }
-	  } 
-	  for(int i=0;i<strlen(ss2);i++)
-	 {
-	 	if(ss2[i]!='*')
-	 	{
-	 		count2++;
-		 }
-	  }
-	  if(count2)
-	  {
-	  	cout<<"No "<<count2;
-	   }
-	   else cout<<"Yes "<<count1; 
-	return 0;
-}
-*/
+***思路：先判断奇偶求出行数，然后分首位排和中间排按规则输出***  
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	char c;  
+	cin>>n>>c;  
+	//打印第一排   
+	for(int i=0;i<n;i++)  
+	cout<<c;    
+	cout<<endl;  
+	//打印第2至（n-1）排   
+	int j;   
+	if(n%2==0)j=n/2-1;  
+	else j=n/2;  
+	while(j>1)  
+	{  
+	cout<<c;  
+	for(int i=0;i<n-2;i++)  
+	{  
+		cout<<" ";  
+	}  
+	cout<<c<<endl;  
+	j--;	  
+	}  
+	for(int i=0;i<n;i++)  
+	cout<<c;  
+	return 0;  
+}    
+*/  
 
-/*
-1040 有几个PAT
+/*  
+1037  
+找零钱   定义不同的进制 输出找的钱或者差的钱   
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int a1,b1,c1;  
+	int a2,b2,c2;  
+	int a3,b3,c3;  
+	scanf("%d.%d.%d %d.%d.%d",&a1,&b1,&c1,&a2,&b2,&c2);  
+if((c2+b2*29+a2*29*17)>=(c1+b1*29+a1*29*17))  
+{  	
+   if(c2>=c1)  
+	{  
+		c3=c2-c1;  
+	}  
+	else {  
+		c3=c2+29-c1;  
+		b2--;  
+	}  
+	if(b2>=b1)  
+	{  
+		b3=b2-b1;  
+	}  
+	else{  
+		b3=b2+17-b1;  
+		a2--;  
+	}  
+		a3=a2-a1;  
+		cout<<a3<<"."<<b3<<"."<<c3<<endl;   
+}  
+else   //倒差钱   
+	{  
+		if(c1>=c2)c3=c1-c2;  
+		else{  
+			c3=c1+29-c2;  
+			b1--;  
+		}  
+		if(b1>=b2)b3=b1-b2;  
+		else{  
+			b3=b1+17-b2;  
+			a1--;   
+		}  
+		a3=a1-a2;  
+		cout<<"-"<<a3<<"."<<b3<<"."<<c3<<endl;  
+	}  
+	return 0;  
+}  
+*/  
 
-大神脑回体：逆序逆数并累加
+/*  
+1038  运行超时考虑用scanf和printf输入输出   
+统计同成绩学生 给出n个成绩 给出k个查询值，对应输出人数  
+
+***思路：将n个学生的成绩对应放入百分数数组，输出数组值***  
+>#include<iostream>  
+using namespace std;   
+int main()  
+{  
+	double n;  
+	int chengji[101]={0};  
+	scanf("%lf",&n);   
+	int score;  
+	for(double i=0;i<n;i++)  
+	{    
+		scanf("%d",&score);  
+		if((score>=0)&&(score<=100))   
+		chengji[score]++;  
+	}   
+	int k;  
+	scanf("%d",&k);  
+	int chaxun;  
+	scanf("%d",&chaxun);  
+	printf("%d",chengji[chaxun]);  
+	for(int i=0;i<k-1;i++)   
+	{  
+		scanf("%d",&chaxun);  
+    	printf(" %d",chengji[chaxun]);  
+	}	    
+	return 0;  
+}  
+*/  
+
+/*  
+1039   
+到底买不买  给一个字符串 第二个字符串是否全部包含于第一个，若是，输出多余字符个数，若不是，输出差的数量  
+
+***思路：字符数组遍历 相同则用*号覆盖，最后数*号的个数对应输出***   
+>#include<iostream>  
+#include<cstring>  
+using namespace std;  
+int main()  
+{  
+	char ss1[1001];  
+	char ss2[1001];  
+	cin>>ss1;  
+	cin>>ss2;  
+	for(int i=0;i<strlen(ss2);i++)  
+	{  
+		for(int j=0;j<strlen(ss1);j++)  
+		{  
+			if(ss2[i]==ss1[j])  
+			{  
+				//相同就用*号覆盖   
+				ss2[i]='*';    
+				ss1[j]='*';   
+			}	  
+		}  
+	 }   
+	 int count1=0,count2=0;  
+	 for(int i=0;i<strlen(ss1);i++)  
+	 {  
+	 	if(ss1[i]!='*')  
+	 	{  
+	 		count1++;  
+		 }  
+	  }   
+	  for(int i=0;i<strlen(ss2);i++)  
+	 {  
+	 	if(ss2[i]!='*')  
+	 	{  
+	 		count2++;   
+		 }  
+	  }  
+	  if(count2)  
+	  {  
+	  	cout<<"No "<<count2;  
+	   }  
+	   else cout<<"Yes "<<count1;   
+	return 0;  
+}  
+*/  
+
+/*  
+1040 有几个PAT  
+
+大神脑回体：逆序逆数并累加  
   
-#include<iostream>
-#include<cstring>
-using namespace std;
-int main()
-{
-	char c[100010];
-	scanf("%s",c);
-	int num=0,numt=0,numa=0;
-	int size=strlen(c);
-	//逆序操作
-	while(size--)
-	{
-		if('T'==c[size]) numt++;
-		else if('A'==c[size]) numa+=numt;
-		else  
-		{
-			num+=numa;
-			if(num>=1000000007)num%=1000000007;
-		}
-	} 
-	cout<<num;
-	return 0;
-}
-*/
+>#include<iostream>  
+#include<cstring>  
+using namespace std;  
+int main()  
+{  
+	char c[100010];  
+	scanf("%s",c);  
+	int num=0,numt=0,numa=0;  
+	int size=strlen(c);  
+	//逆序操作  
+	while(size--)  
+	{  
+		if('T'==c[size]) numt++;  
+		else if('A'==c[size]) numa+=numt;  
+		else    
+		{  
+			num+=numa;  
+			if(num>=1000000007)num%=1000000007;  
+		}  
+	}   
+	cout<<num;  
+	return 0;  
+}  
+*/  
 
-/*
-1041
-考试座位号 给考生部分信息，输出考生其他所有信息
+/*  
+1041  
+考试座位号 给考生部分信息，输出考生其他所有信息  
 
-思路：定义一个考生类，包括初始函数，读取特定值函数，输出函数，用特定值判别直接调用输出函数即可 
-#include<iostream>
-#include<cstring>
-using namespace std;
-class Student
-{
-	char Kaohao[15];
-	int Shijihao;
-	int Kaoshihao;
-public:
-	void Init(char *kaohao,int s,int k)
-	{
-		strcpy(Kaohao,kaohao);
-		Shijihao=s;
-		Kaoshihao=k;
-	}
-	int Get_Shijihao()
-	{
-		return Shijihao;
-	}
-	void Show()
-	{
-		cout<<Kaohao<<" "<<Kaoshihao<<endl;
-	}
-};
+***思路：定义一个考生类，包括初始函数，读取特定值函数，输出函数，用特定值判别直接调用输出函数即可***   
+>#include<iostream>  
+#include<cstring>  
+using namespace std;  
+class Student  
+{  
+	char Kaohao[15];  
+	int Shijihao;  
+	int Kaoshihao;  
+public:  
+	void Init(char *kaohao,int s,int k)  
+	{  
+		strcpy(Kaohao,kaohao);  
+		Shijihao=s;  
+		Kaoshihao=k;  
+	}  
+	int Get_Shijihao()  
+	{  
+		return Shijihao;  
+	}  
+	void Show()  
+	{  
+		cout<<Kaohao<<" "<<Kaoshihao<<endl;  
+	}  
+};  
+int main()  
+{  
+	char kaohao[15];  
+	int s;  
+	int k;  
+	int n;  
+	cin>>n;  
+	Student student[n];  
+	for(int i=0;i<n;i++)  
+	{  
+		cin>>kaohao>>s>>k;  
+		student[i].Init(kaohao,s,k);  
+	}  
+	int m;  
+	cin>>m;  
+	for(int i=0;i<m;i++)  
+	{  
+		int j;  
+		cin>>j;  
+		for(int i=0;i<n;i++)  
+	    {  
+		if(student[i].Get_Shijihao()==j)  
+		{  
+			student[i].Show();   
+		}  
+		}  
+	}  
+	return 0;  
+}  
+*/   
 
-int main()
-{
-	char kaohao[15];
-	int s;
-	int k;
-	int n;
-	cin>>n;
-	Student student[n];
-	for(int i=0;i<n;i++)
-	{
-		cin>>kaohao>>s>>k;
-		student[i].Init(kaohao,s,k);
-	}
-	int m;
-	cin>>m;
-	for(int i=0;i<m;i++)
-	{
-		int j;
-		cin>>j;
-		for(int i=0;i<n;i++)
-	    {
-		if(student[i].Get_Shijihao()==j)
-		{
-			student[i].Show();
-		}
-		}
-	}
-	return 0;
-}
-*/ 
+/*   
+1042  
+字符统计 统计一串字符串中出现次数做多的字符，并输出  
 
-/*
-1042
-字符统计 统计一串字符串中出现次数做多的字符，并输出
+***思路：用cin.get(字符数组名，长度)去读取字符串，遇空格不停止 然后放入两个数组去合并，再比较大小输出***  
+>#include<iostream>  
+#include<cstring>  
+using namespace std;  
+int main()  
+{  
+	//用字符数组读取字符串 记录个数   
+	char c[1001];  
+	cin.get(c,1000);  
+	//将字母按大小写分别放入对应数组   
+	int a[26]={0},A[26]={0},he[26]={0};  
+	for(int i=0;i<strlen(c);i++)  
+	{  
+		if(c[i]>='a'&&c[i]<='z')  
+		{  
+			a[c[i]-'a']++;  
+		}  
+		else if(c[i]>='A'&&c[i]<='Z')  
+		{  
+			A[c[i]-'A']++;  
+		}	  	
+	}  
+	//归为一个数组，存放的内容是出现次数   
+	for(int i=0;i<26;i++)  
+	{  
+		he[i]=a[i]+A[i];  
+	}  
+	//找到出现次数最多   
+	int max=0;  
+	int i,k;  
+	for(i=0;i<26;i++)  
+	{  
+	    if(he[i]>max)  
+		{  
+	    	max=he[i];  
+	    	k=i;  
+		}  	  	
+	}  
+	cout<<(char)(97+k)<<" "<<max;    
+	return 0;  
+}  
+*/   
 
-思路：用cin.get(字符数组名，长度)去读取字符串，遇空格不停止 然后放入两个数组去合并，再比较大小输出 
-#include<iostream>
-#include<cstring>
-using namespace std;
-int main()
-{
-	//用字符数组读取字符串 记录个数 
-	char c[1001];
-	cin.get(c,1000);
-	//将字母按大小写分别放入对应数组 
-	int a[26]={0},A[26]={0},he[26]={0};
-	for(int i=0;i<strlen(c);i++)
-	{
-		if(c[i]>='a'&&c[i]<='z')
-		{
-			a[c[i]-'a']++;
-		}
-		else if(c[i]>='A'&&c[i]<='Z')
-		{
-			A[c[i]-'A']++;
-		}		
-	}
-	//归为一个数组，存放的内容是出现次数 
-	for(int i=0;i<26;i++)
-	{
-		he[i]=a[i]+A[i];
-	}
-	//找到出现次数最多 
-	int max=0;
-	int i,k;
-	for(i=0;i<26;i++)
-	{
-	    if(he[i]>max)
-		{
-	    	max=he[i];
-	    	k=i;
-		}
-			
-	}
-	cout<<(char)(97+k)<<" "<<max;  
-	return 0;
-}
-*/ 
-
-/*
-1043
-输出PATest   按顺序输出字符串，没有的就忽略 
+/*  
+1043  
+输出PATest   按顺序输出字符串，没有的就忽略   
  
-#include<iostream>
-#include<cstring>
-using namespace std;
-int main()
-{
-	string s;
-	cin>>s;
-	int a1=0;int a2=0;int a3=0;int a4=0;int a5=0;int a6=0;
-	for(int i=0;i<s.size();i++)
-	{
-		if(s[i]=='P')
-		a1++;
-		else if(s[i]=='A')
-		a2++;
-		else if(s[i]=='T')
-		a3++;
-		else if(s[i]=='e')
-		a4++;
-		else if(s[i]=='s')
-		a5++;
-		else if(s[i]=='t')
-		a6++;		
-	} 
-	for(int i=0;i<s.size();i++)
-	{
-		if(a1)
+>#include<iostream>  
+#include<cstring>  
+using namespace std;  
+int main()  
+{  
+	string s;  
+	cin>>s;  
+	int a1=0;int a2=0;int a3=0;int a4=0;int a5=0;int a6=0;  
+	for(int i=0;i<s.size();i++)   
+	{  
+		if(s[i]=='P')  
+		a1++;  
+		else if(s[i]=='A')  
+		a2++;  
+		else if(s[i]=='T')  
+		a3++;  
+		else if(s[i]=='e')  
+		a4++;  
+		else if(s[i]=='s')  
+		a5++;  
+		else if(s[i]=='t')  
+		a6++;	  	
+	}   
+	for(int i=0;i<s.size();i++)  
+	{  
+		if(a1)  
+		{  
+		cout<<'P';  
+		a1--;  
+	    }  
+	    if(a2)  
+		{  
+		cout<<'A';  
+		a2--;  
+	    }  
+	    if(a3)  
+		{  
+		cout<<'T';  
+		a3--;  
+	    }  
+	    if(a4)  
+		{  
+		cout<<'e';  
+		a4--;  
+	    }  
+	    if(a5)  
 		{
-		cout<<'P';
-		a1--;
-	    }
-	    if(a2)
-		{
-		cout<<'A';
-		a2--;
-	    }
-	    if(a3)
-		{
-		cout<<'T';
-		a3--;
-	    }
-	    if(a4)
-		{
-		cout<<'e';
-		a4--;
-	    }
-	    if(a5)
-		{
-		cout<<'s';
+		cout<<'s';  
 		a5--;
 	    }
 	    if(a6)
 		{
 		cout<<'t';
-		a6--;
-	    }
-	}
-	return 0;
-}
-*/
+		a6--;  
+	    }  
+	}  
+	return 0;  
+}  
+*/  
 
-/*
-1044
-火星数字  13进制的正反翻译  还有点错误 
+/*  
+1044  
+火星数字  13进制的正反翻译  还有点错误   
 
-#include<iostream>
-#include<cmath>//long型的绝对值函数labs() 
-#include<algorithm>
-using namespace std;
-int main()
-{
-	string low[13]={"tret","jan","feb","mar","apr","may","jun","jly","aug","sep","oct","nov","dec"};
-	string high[12]={"tam","hel","maa","huh","tou","kes","hei","elo","syy","lok","mer","jou"}; 
-	int n;
-	cin>>n;
-	getchar();
-	for(int i=0;i<n;i++)
+>#include<iostream>  
+#include<cmath>//long型的绝对值函数labs()   
+#include<algorithm>  
+using namespace std;  
+int main()  
+{  
+	string low[13]={"tret","jan","feb","mar","apr","may","jun","jly","aug","sep","oct","nov","dec"};  
+	string high[12]={"tam","hel","maa","huh","tou","kes","hei","elo","syy","lok","mer","jou"};   
+	int n;  
+	cin>>n;  
+	getchar();  
+	for(int i=0;i<n;i++)  
+	{  
+		string a;  
+		getline(cin,a);  
+		if(a[0]>='0'&&a[0]<='9')  
+		{   
+			int shu;  
+			if(a[1]>='0'&&a[0]<='9')shu=(a[0]-'0')*10+(a[1]-'0');   
+			else shu=a[0]-'0';  
+			string out="";  
+			int yu;  
+			yu=shu/13;  
+			if(yu) out+=high[yu-1]+" ";  
+			out+=low[shu%13];  
+			cout<<out<<endl;  
+		}  
+		else  
+		{  
+			int count=0;  
+			string s1="",s2="";  
+			s1=a.substr(0,3);  
+			s2=a.substr(4,3);  
+			if(a[4]>='a'&&a[4]<='z')//大数   s1遍历high  s2遍历low   
+			{  
+				for(int i=0;i<12;i++)  
+				{  
+					if(s1==high[i])  
+					{    
+						count+=(i+1)*13;  
+					}  
+				}  
+				for(int j=0;j<13;j++)  
+				{  
+					if(s2==low[j])  
+					{  
+						count+=j;  
+					}  
+				}  
+	         }  
+	         else  
+	         {  
+	         	for(int i=0;i<12;i++)  
+				{  
+					if(s1==high[i])  
+					{  
+						count+=(i+1)*13;  
+					}  
+				}  
+				for(int j=0;j<13;j++)  
+				{  
+					if(s1==low[j])  
+					{  
+						count+=j;  
+					}  
+				}  
+			 }  
+			cout<<count<<endl;  
+		}  
+	}  
+	return 0;  
+}  
+
+//标准答案  
+>#include <iostream>  
+#include <string>  
+using namespace std;  
+void fun1(string t);   
+void fun2(string t);  
+string a[13] = {"tret","jan", "feb", "mar", "apr", "may", "jun", "jly", "aug", "sep", "oct", "nov", "dec"};  
+string b[13] = {"","tam", "hel", "maa", "huh", "tou", "kes", "hei", "elo", "syy", "lok", "mer", "jou"};  
+int tt,temp,temp1,ans = 0;  
+int main(){  
+	string t;  
+	int n;  
+	cin>>n;  
+	getchar();  
+	for(int i = 0;i<n;i++){  
+		getline(cin,t);  
+		if(t[0]>='0'&&t[0]<='9')fun1(t);//数字转火星文   
+		else fun2(t);//火星文转数字   
+		cout<<endl;  
+	}  
+	return 0;  
+}   
+void fun1(string t){  
+	int len = t.length();  
+	int num = 0;    
+	for(int i = 0;i<len;i++)//将字符串变成数字   
+	{  
+		num = num*10+(t[i]-'0');  
+	}  
+	cout<<b[num/13];  
+	if((num%13)&&(num/13))cout<<" "<<a[num%13];//如果有进位和低位   
+	else if(num%13)cout<<a[num%13];//没有进位   
+	else if(num==0)cout<<"tret";//为零的情况   
+}  
+void fun2(string t){  
+	if(t.size()==3)//只有一个火星文   
+	{  
+		for(int i = 0;i<13;i++){//遍历高位   
+			if(t==b[i]){  
+				cout<<i*13;    
+				break;  
+			}  
+		}  
+		for(int i = 0;i<13;i++){//遍历低位   
+			if(t==a[i]){  
+				cout<<i;  
+			}  
+		}  
+	}  
+	else if(t.size()==4)cout<<"0";//有四位肯定是零   
+	else						//有两个火星文   
 	{
-		string a;
-		getline(cin,a);
-		if(a[0]>='0'&&a[0]<='9')
-		{
-			int shu;
-			if(a[1]>='0'&&a[0]<='9')shu=(a[0]-'0')*10+(a[1]-'0');
-			else shu=a[0]-'0';
-			string out="";
-			int yu;
-			yu=shu/13;
-			if(yu) out+=high[yu-1]+" ";
-			out+=low[shu%13];
-			cout<<out<<endl;
-		}
-		else
-		{
-			int count=0;
-			string s1="",s2="";
-			s1=a.substr(0,3);
-			s2=a.substr(4,3);
-			if(a[4]>='a'&&a[4]<='z')//大数   s1遍历high  s2遍历low 
-			{
-				for(int i=0;i<12;i++)
-				{
-					if(s1==high[i])
-					{
-						count+=(i+1)*13;
-					}
-				}
-				for(int j=0;j<13;j++)
-				{
-					if(s2==low[j])
-					{
-						count+=j;
-					}
-				}
-		
-	         }
-	         else
-	         {
-	         	for(int i=0;i<12;i++)
-				{
-					if(s1==high[i])
-					{
-						count+=(i+1)*13;
-					}
-				}
-				for(int j=0;j<13;j++)
-				{
-					if(s1==low[j])
-					{
-						count+=j;
-					}
-				}
-	         	
-			 }
-			cout<<count<<endl;
-		}
-	}
-	return 0;
-}
+		string aa = t.substr(0,3);//高位火星文                      ！！！！！！！substr()函数   
+		string bb = t.substr(4,3);//低位火星文   
+		for(int i = 0;i<13;i++){  
+			if(aa==b[i])temp = i*13;  
+			if(bb==a[i])temp1 = i;  
+		}  
+		cout<<temp+temp1;  
+	}  
+}  
+*/   
 
-//标准答案
-#include <iostream>
-#include <string>
-using namespace std;
-void fun1(string t);
-void fun2(string t);
-string a[13] = {"tret","jan", "feb", "mar", "apr", "may", "jun", "jly", "aug", "sep", "oct", "nov", "dec"};
-string b[13] = {"","tam", "hel", "maa", "huh", "tou", "kes", "hei", "elo", "syy", "lok", "mer", "jou"};
-int tt,temp,temp1,ans = 0;
-int main(){
-	string t;
-	int n;
-	cin>>n;
-	getchar();
-	for(int i = 0;i<n;i++){
-		getline(cin,t);
-		if(t[0]>='0'&&t[0]<='9')fun1(t);//数字转火星文 
-		else fun2(t);//火星文转数字 
-		cout<<endl;
-	}
-	return 0;
+/*  
+1045  部分正确，段错误   
+快速排序  判断某个数是否可能是快速排序中的主元数  
+
+***思路：如果能想到，主元的位置与排完序后该元素所在位置相同，  
+那么再满足它是它之前所有元素中最大的一个，就可以断定它是主元***  
+
+>#include<iostream>  
+#include<algorithm>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	cin>>n;   
+	int a[n];  
+	int b[n];  
+	int shu[n];  
+	//读入元素数组中   
+	for(int i=0;i<n;i++)  
+	{  
+		cin>>a[i];  
+		b[i]=a[i];  //复制数组   
+	}  
+	sort(b,b+n); //数组b升序排列  
+	int max=0,count=0;  
+	for(int i=0;i<n;i++)  
+	{  
+		if(a[i]>max)  
+		max=a[i];  
+		if((max==a[i])&&(a[i]==b[i]))  //a[i]为前项的最大值，且在位置上   
+		{  
+			shu[count++]=a[i];  
+		}  
+	}   
+	cout<<count<<endl;  
+	for(int i=0;i<count;i++)  
+	{  
+		if(i==0)  
+		cout<<shu[i];  
+		else  
+		cout<<" "<<shu[i];  
+	}   
+	return 0;  
 } 
- 
-void fun1(string t){
-	int len = t.length();
-	int num = 0;
-	for(int i = 0;i<len;i++)//将字符串变成数字 
-	{
-		num = num*10+(t[i]-'0');
-	}
-	cout<<b[num/13];
-	if((num%13)&&(num/13))cout<<" "<<a[num%13];//如果有进位和低位 
-	else if(num%13)cout<<a[num%13];//没有进位 
-	else if(num==0)cout<<"tret";//为零的情况 
-}
- 
-void fun2(string t){
-	if(t.size()==3)//只有一个火星文 
-	{
-		for(int i = 0;i<13;i++){//遍历高位 
-			if(t==b[i]){
-				cout<<i*13;
-				break;
-			}
-		}
-		for(int i = 0;i<13;i++){//遍历低位 
-			if(t==a[i]){
-				cout<<i;
-			}
-		}
-	}
-	else if(t.size()==4)cout<<"0";//有四位肯定是零 
-	else						//有两个火星文 
-	{
-		string aa = t.substr(0,3);//高位火星文                      ！！！！！！！substr()函数 
-		string bb = t.substr(4,3);//低位火星文 
-		for(int i = 0;i<13;i++){
-			if(aa==b[i])temp = i*13;
-			if(bb==a[i])temp1 = i;
-		}
-		cout<<temp+temp1;
-	}
-}
-*/ 
 
-/*
-1045  部分正确，段错误 
-快速排序  判断某个数是否可能是快速排序中的朱元数
-
-思路：如果能想到，主元的位置与排完序后该元素所在位置相同，
-那么再满足它是它之前所有元素中最大的一个，就可以断定它是主元
-
-#include<iostream>
-#include<algorithm>
-using namespace std;
-int main()
-{
-	int n;
-	cin>>n; 
-	int a[n];
-	int b[n];
-	int shu[n];
-	//读入元素数组中 
-	for(int i=0;i<n;i++)
-	{
-		cin>>a[i];
-		b[i]=a[i];  //复制数组 
-	}
-	sort(b,b+n); //数组b升序排列
-	int max=0,count=0;
-	for(int i=0;i<n;i++)
-	{
-		if(a[i]>max)
-		max=a[i];
-		if((max==a[i])&&(a[i]==b[i]))  //a[i]为前项的最大值，且在位置上 
-		{
-			shu[count++]=a[i];
-		}
-	} 
-	cout<<count<<endl;
-	for(int i=0;i<count;i++)
-	{
-		if(i==0)
-		cout<<shu[i];
-		else
-		cout<<" "<<shu[i];
-	}
-	return 0;
-}
-
-//标准答案
-#include <iostream>
-#include <algorithm>
-#include <stdio.h>
-using namespace std;
- 
-int main()
-{
-   int N;
-   scanf("%d",&N);
-   int num[N],num_s[N];  //一个原始数据，另一个保存已经排好的数据
-   for(int i=0;i<N;i++)
-   {
-       scanf("%d",&num[i]);
-       num_s[i]=num[i];
-   }
-   sort(num_s,num_s+N);
-   int count=0,max=0;
-   int res[N];
-   
-   for(int i=0;i<N;i++)
-   {
-       if(num[i]>max)
-            max=num[i];
-        if(max==num[i] && num[i]==num_s[i])  //如果当前数是从第一个数到当前数最大的一个，且与排完顺序对应位置的数相同则该数就有可能是主元
-            res[count++]=num[i];
-   }
-    printf("%d\n",count);
-    //sort(res,res+count);
-    for(int i=0;i<count;i++)
-        if(i==0)
-             printf("%d",res[i]);
-        else
-            printf(" %d",res[i]);
-    printf("\n");
-    return 0;
-}
- 
-*/
+//标准答案  
+>#include <iostream>  
+#include <algorithm>  
+#include <stdio.h>  
+using namespace std;  
+int main()  
+{  
+   int N;  
+   scanf("%d",&N);  
+   int num[N],num_s[N];  //一个原始数据，另一个保存已经排好的数据  
+   for(int i=0;i<N;i++)  
+   {  
+       scanf("%d",&num[i]);  
+       num_s[i]=num[i];  
+   }  
+   sort(num_s,num_s+N);  
+   int count=0,max=0;   
+   int res[N];  
+   for(int i=0;i<N;i++)  
+   {  
+       if(num[i]>max)  
+            max=num[i];  
+        if(max==num[i] && num[i]==num_s[i])  //如果当前数是从第一个数到当前数最大的一个，且与排完顺序对应位置的数相同则该数就有可能是主元  
+            res[count++]=num[i];  
+   }  
+    printf("%d\n",count);  
+    //sort(res,res+count);  
+    for(int i=0;i<count;i++)  
+        if(i==0)  
+             printf("%d",res[i]);  
+        else  
+            printf(" %d",res[i]);  
+    printf("\n");  
+    return 0;  
+}  
+*/  
 
 /*
 1046

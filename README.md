@@ -1884,608 +1884,594 @@ int main()
 */  
 
 /*
-1021
-各个数字出现次数统计
+1021  
+各个数字出现次数统计  
 
-思路：字符串读入，编写函数形参为字符串和数字，返回值输出此数字在字符串中出现次数
-      主程序中判断对应值不为空的输出对应个数
-#include<iostream>
-using namespace std;
-
-int GeShu(string s,int n)
-{
-	int count=0;
-	for(int i=0;i<s.size();i++)
-	{
-		if(n==(s[i]-'0'))
-		{
-			count++;
-		}
-	}
-	return count;
-}
-
-int main()
-{
-	string s;
-	cin>>s;
-	for(int i=0;i<10;i++)
-	{
-		if(GeShu(s,i)!=0)
-		cout<<i<<":"<<GeShu(s,i)<<endl;
-	}
-	return 0;	
-} 
-*/
-
-/*
-1022
-将数转换成D进制 
-
-思路：辗转相除法  逆序输出余数
-#include <iostream>
-using namespace std;
-int main(){
-    int m,n,d;
-    cin>>m>>n>>d;
-    int sum=m+n;
-    int num=0;
-    int a[31];
-    do{
-    a[num++]=sum%d;
-    sum /= d;
-    }while(sum!=0);
-
-    for(int i=num-1;i>=0;i--)
-    {
-        cout<<a[i];
-    }
-    return 0;
-} 
-*/
-
-/*
-1023
-组个最小数 给定每个数字的个数，输出第一位不为零的最小数字组合 
-
-思路：先从数组第二位（代表数字1的个数）开始找到首位，后面遍历是否此位有数字需要输出
-      定义int[]数组输出数字，注意已输出首位需要扣除一位 
-#include<iostream>
-using namespace std;
-int main()
-{
-	int num[10]={0},A[10]={0,1,2,3,4,5,6,7,8,9};
-	int j=0,i;
-	for(i=0;i<10;i++){
-		cin>>num[i];
-	}
-//输出不为零的最小第一位 
-	for(j=1;j<10;j++){
-		if(num[j]!=0){
-			cout<<j;
-			break;
-		}
-	}
-//输出其他各位，注意已输出的要减去
-	for(int m=0;m<10;m++){
-		if(num[m]!=0)   //代表有数字需要输出
-		{
-			if(m==j){
-				num[m]--;
-				while(num[m]){
-					cout<<A[m];
-					num[m]--;
-				}
-			}else{
-			while(num[m]){
-				cout<<A[m];
-				num[m]--;
-				}
-			}
-		}
-	}
-	return 0;
-}
-*/
-
-/*
-1024
-科学计数法
-
-%[0-9]  a   了解一下
-#include<iostream>
-using namespace std;
-int main()
-{
-	char figure;
-	char a[10001]={0};
-	int zhishu;
-	//神操作  %[0-9]
-	scanf("%c%c.%[0-9]E%d",&figure,&a[0],a+1,&zhishu);
-	if(figure=='-')cout<<"-";
-	if(zhishu>=0){
-		for(int i=0;i<=zhishu||a[i]!=0;i++){
-			if(i==zhishu+1)cout<<".";
-			//cout<<a[i];
-			printf("%c",a[i]==0?'0':a[i]);
-		}
-	}
-	else{
-		cout<<"0.";
-		for(int i=1;i<(-zhishu);i++){
-			cout<<"0";	
-		
-	}	printf("%s",a);
-	}
-	return 0;
-} 
-*/
-
-/*
-1025
-反转链表
-
-思路：用三个vector<node>去存储初始化，排序，归并后，再输出，注意初始化为稀疏存储，
-找到开头后后两个向量都是push_back,此时就可以用下标开始操作了 
-
-#include<iostream> 
-#include<vector>
-using namespace std;
-struct node
-{
-	int add;
-	int data;
-	int next;
-};
-int main()
-{
-	vector<node>in(100001);
-	vector<node>sorted;
-	vector<node>out;
-	
-	int first,N,team;
-	cin>>first>>N>>team;
-	node temp;
-	//第一步 存入第一个向量 
-	for(int i=0;i<N;i++)
-	{
-		cin>>temp.add>>temp.data>>temp.next;
-		in[temp.add]=temp;
-	}
-	//第二步 排序存入第二个向量 
-	if(first==-1)cout<<"-1"<<endl;
-	else
-	{
-		int nextadd=first;//！！！！
-		while(nextadd!=-1){          //出错了，没有限制结束条件啊！！！ 
-			sorted.push_back(in[nextadd]);
-		    nextadd=in[nextadd].next; 
-		} 
-		
-	}
-	//第三步  存入第三个向量 
-	int size=sorted.size();
-	int tern=team-1;
-	while(tern<size)
-    {
-    	for(int j=tern;j>tern-team;j--)
-    	{
-    		out.push_back(sorted[j]);//第二步中用的push_back，所以这里直接使用下标 
-		}
-		tern+=team; 
-	}
-	//存在最后几个尾数还未push_back
-	for(int j=tern-team+1;j<size;j++)
-	{
-		out.push_back(sorted[j]);
-	} 
-	//第四步，除最后一个之外，其余的循环输出，最后一个单独输出
-	for(int i=0;i<size-1;i++)
-	{
-		out[i].next=out[i+1].add;
-		printf("%05d %d %05d\n",out[i].add,out[i].data,out[i].next);
-	} 
-	printf("%05d %d -1\n",out[size-1].add,out[size-1].data);
-	return 0;
-}
-*/ 
-
-/*
-1026
-程序运行时间 
-渣渣题 
-#include<iostream>
-using namespace std;
-int main()
-{
-	long c1,c2;
-	cin>>c1>>c2; 
-	long cha=c2-c1;
-	if(cha%100>=50)cha=cha/100+1;
-	else cha=cha/100;
-	printf("%02d:%02d:%02d",cha/3600,cha%3600/60,cha%60);
-	
-	return 0;
-}
-*/
-
-/*
-1027 格式错误，部分正确 
-打印沙漏图案 给定数字与符号 尽可能用掉数字去打印出沙漏图案，输出图案与未用完的个数
-
-思路：用函数返回排数
-
-#include<iostream>
-using namespace std;
-int paishu(int n)
-{
-	int count=0;
-	int i=3;
-	while(n>0)
-	{
-		count++;
-		if(count==1)n=n-1;
-		else{
-			n=n-2*i;
-			i+=2;
-		}
-	}
-	count=count-1;
-	return count;
-} 
-int yu(int n,int hang)
-{
-	int y;
-	while(hang>1)
-	{
-		n=n-hang*2;
-		hang=hang-2;
-	}
-	y=n-1;
-	return y;
-}
-int main()
-{
-	int n;
-	char c;
-	cin>>n;
-	cin>>c;
-	int hang=paishu(n);
-	int zongshu=2*hang-1;
-	int kong=0;
-	while(hang>=1)
-	{
-	    
-		for(int i=0;i<kong/2;i++)
-		cout<<" ";
-		for(int j=0;j<zongshu-kong;j++)
-		cout<<c;
-		for(int i=0;i<kong/2;i++)
-		cout<<" ";
-		cout<<endl;
-		hang=hang-1;
-		kong=kong+2;
-	}
-	
-	for(hang=3;hang<=zongshu;hang+=2)
-	{
-		int kong=zongshu-hang;
-		for(int i=0;i<kong/2;i++)
-		cout<<" ";
-		for(int j=0;j<hang;j++)
-		cout<<c;
-		for(int i=0;i<kong/2;i++)
-		cout<<" ";
-		cout<<endl;
-	}
-	cout<<yu(n,zongshu);
-	return 0;
-}
-//参考答案
-#include <iostream>
-using namespace std;
-int main() {
-    int N;
-    char c;
-    cin >> N >> c;
-    int row = 0;
-    for (int i = 0; i < N; i++) {
-        if ((2 * i * (i + 2) + 1) > N) {
-            row = i - 1;
-            break;
-        }
-    }
-    for (int i = row; i >= 1; i--) {
-        for (int k = row - i; k >= 1; k--)
-            cout << " ";
-        for (int j = i * 2 + 1; j >= 1; j--)
-            cout << c;
-        cout << endl;
-    }
-    for (int i = 0; i < row; i++)
-        cout << " ";
-    cout << c << endl;
-    for (int i = 1; i <= row; i++) {
-        for (int k = row - i; k >= 1; k--)
-            cout << " ";
-        for (int j = i * 2 + 1; j >= 1; j--)
-            cout << c;
-        cout << endl;
-    }
-    cout << (N - (2 * row * (row + 2) + 1));
-    return 0;
-}
- 
-*/ 
-
-/*
-1028
-人口普查 输入一系列人名出生日期，判断合理性并输出最年长与最年轻的人名
-
-思路：两个日期的比较方法： 
-正常读入，然后用一个long long型变量 = year*10000+month*100+day
-#include<iostream>
-#include<cstring>
-using namespace std; 
-int main()
-{
-	char name[6],Max[6],Min[6];
-	char shengri[11];
-	int year;
-	int mouth;
-	int day;
-	int count;
-	long long max=20140907;
-	long long min=18140905;
-	cin>>count;
-    int shu=0;
-	for(int i=0;i<count;i++)
-	{
-		cin>>name>>shengri;
-		year=(shengri[0]-'0')*1000+(shengri[1]-'0')*100+(shengri[2]-'0')*10+(shengri[3]-'0');
-		mouth=(shengri[5]-'0')*10+(shengri[6]-'0');
-		day=(shengri[8]-'0')*10+(shengri[9]-'0');
-		long long birth = year*10000+mouth*100+day;
-		if(birth<18140906||birth>20140906)continue;
-		else{
-			shu++;
-			if(birth<max)
-			{
-				strcpy(Max,name);
-				max=birth;
-			}
-			if(birth>min)
-			{
-				strcpy(Min,name);
-				min=birth;
-			}
-		}
-	}
-	if(shu)
-	{
-		cout<<shu<<" "<<Max<<" "<<Min;
-	}
-	else cout<<"0";
-	return 0;
-}
-*/ 
-
-/*
-1029
-旧键盘
-给两个字符串，找出缺的字符，对应键输出大写形式
-
-思路：三个字符数组，两个读取，然后遍历，设置标志位，若缺少的第一次出现，放入新数组 
-#include<iostream>
-#include<cstring>
-using namespace std;
-int main()
-{
-	char a[81],b[81],c[81]={0};
-	cin>>a;
-	cin>>b;
-	int j=0,n=0;
-	for(int i=0;i<strlen(a);i++)
-	{
-		if(a[i]==b[j])j++;   //新的遍历方式，第一次见 
-	    else
-	    {
-	    	int flag=0;
-	    	if(islower(a[i]))  //如果a[i]是小写  头文件cctype cstring 貌似都可以 
-	    	a[i]=toupper(a[i]); //转换为大写
-			for(int k=0;k<n;k++) 
-			{
-				if(a[i]==c[k])
-				flag=1;
-			}
-			if(flag==0)
-			c[n++]=a[i];
-		}
-	}
-	for(int i=0;i<n;i++)
-	{
-		cout<<c[i];
-	}
-	
-	return 0;
-} 
-*/
-
-/*
-1030   部分正确 
-完美数列 给出数列项数和参数 找到整个数列中小于等于参数*最小项的项数
-
-思路：首先我们同样保持第一个for循环遍历最小值，在第二个for循环中我们将j置为前一个元素作为最小数时候的长度，
-这样就减少了小于上一次的不必要的for循环，j依然小于 N，用一个if判断是否符合条件，
-用另一个if判断此次是否大于上次的长度，比如说我们把样例中的数据已经排好序：1 2 3 4 5 6 7 8 9 20 ，
-此时我们将array[0]作为最小数，依次向后遍历，最大数j-最小数i+1即为数列的长度，最终找到8为最大的数，
-此时数列长度count为8，在将a[1]作为最小数的时候，我们直接将j置为1+8为9，直接比较a[1]和a[9]作为最小最大值得时候是否满足，
-不满足则a[1]最为最小数的时候并不能使数列变得更长，则继续再看a[2],这样等到有大于8的时候再更新，就可以了。
-#include<iostream>
-#include<algorithm> //sort（）函数 
-using namespace std; 
-int main()
-{
-	int n;
-	
-	double a[100010];
-	double p;
-	cin>>n>>p;
-	int i=0,j=0;
-	int count=0;
-	for(int i=0;i<n;i++)
-	{
-		cin>>a[i];
-	}
-	sort(a,a+n);
-	for(i=0;i<n;i++)
-	{
-		for(j=i+count;j<n;j++)
-		{
-			if(a[j]>a[i]*p)break;
-			if(j-1+1>count)
-			count=j-i+1; 
-		}
-	}
-	cout<<j-i+1;
-	return 0;
-}
-
-//标准答案
-#include<iostream>
-#include<algorithm>
-using namespace std;
-int main(){
-    int N,count=0;
-    double p,array[100010];;
-    scanf("%d%lf",&N,&p);
-    for(int i=0;i<N;i++)
-        scanf("%lf",&array[i]);
-    sort(array,array+N);
-    for(int i=0;i<N;i++)            //遍历，将a[i]作为最小数
-        for(int j=i+count;j<N;j++){ //j置为要满足可以更新数列长度的值，减少循环次数
-            if(array[j]>array[i]*p) //如果不满足条件了，则将下一个元素最为最小值
-            break;
-            if(j-i+1>count)         //如果此次的长度大于上一次，更新数列长度
-                count=j-i+1;
-        }
-    printf("%d",count);
-    return 0;
+***思路：字符串读入，编写函数形参为字符串和数字，返回值输出此数字在字符串中出现次数   
+      主程序中判断对应值不为空的输出对应个数***  
+>#include<iostream>  
+using namespace std;  
+int GeShu(string s,int n)  
+{  
+	int count=0;  
+	for(int i=0;i<s.size();i++)  
+	{  
+		if(n==(s[i]-'0'))  
+		{  
+			count++;  
+		}  
+	}  
+	return count;  
 }  
-*/
+int main()  
+{  
+	string s;  
+	cin>>s;  
+	for(int i=0;i<10;i++)  
+	{  
+		if(GeShu(s,i)!=0)  
+		cout<<i<<":"<<GeShu(s,i)<<endl;  
+	}  
+	return 0;  	
+}   
+*/  
 
-/*
-1031
-查验身份证 前十七位给权值，算乘积和的取模11，对应效验码是否正确
+/*  
+1022  
+将数转换成D进制   
 
-思路：字符串读入，字符串转数组，再数组乘权重数组，再求和，算模，与效验码数组比较
+***思路：辗转相除法  逆序输出余数***  
+>#include <iostream>  
+using namespace std;  
+int main(){  
+    int m,n,d;  
+    cin>>m>>n>>d;  
+    int sum=m+n;  
+    int num=0;  
+    int a[31];  
+    do{  
+    a[num++]=sum%d;  
+    sum /= d;  
+    }while(sum!=0);  
+    for(int i=num-1;i>=0;i--)  
+    {  
+        cout<<a[i];  
+    }  
+    return 0;  
+}   
+*/  
+
+/*  
+1023  
+组个最小数 给定每个数字的个数，输出第一位不为零的最小数字组合   
+
+***思路：先从数组第二位（代表数字1的个数）开始找到首位，后面遍历是否此位有数字需要输出   
+      定义int[]数组输出数字，注意已输出首位需要扣除一位***
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int num[10]={0},A[10]={0,1,2,3,4,5,6,7,8,9};  
+	int j=0,i;  
+	for(i=0;i<10;i++){  
+		cin>>num[i];  
+	}  
+//输出不为零的最小第一位   
+	for(j=1;j<10;j++){  
+		if(num[j]!=0){  
+			cout<<j;  
+			break;  
+		}  
+	}  
+//输出其他各位，注意已输出的要减去  
+	for(int m=0;m<10;m++){  
+		if(num[m]!=0)   //代表有数字需要输出  
+		{  
+			if(m==j){  
+				num[m]--;  
+				while(num[m]){  
+					cout<<A[m];  
+					num[m]--;  
+				}  
+			}else{  
+			while(num[m]){  
+				cout<<A[m];  
+				num[m]--;  
+				}  
+			}  
+		}  
+	}  
+	return 0;  
+}  
+*/  
+
+/*  
+1024  
+科学计数法  
+
+***%[0-9]  a   了解一下***  
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	char figure;  
+	char a[10001]={0};  
+	int zhishu;  
+	//神操作  %[0-9]  
+	scanf("%c%c.%[0-9]E%d",&figure,&a[0],a+1,&zhishu);  
+	if(figure=='-')cout<<"-";  
+	if(zhishu>=0){  
+		for(int i=0;i<=zhishu||a[i]!=0;i++){  
+			if(i==zhishu+1)cout<<".";  
+			//cout<<a[i];  
+			printf("%c",a[i]==0?'0':a[i]);  
+		}  
+	}  
+	else{  
+		cout<<"0.";  
+		for(int i=1;i<(-zhishu);i++){  
+			cout<<"0";  	  
+	}	printf("%s",a);  
+	}  
+	return 0;  
+}   
+*/  
+
+/*  
+1025  
+反转链表  
+
+***思路：用三个vector<node>去存储初始化，排序，归并后，再输出，注意初始化为稀疏存储，  
+找到开头后后两个向量都是push_back,此时就可以用下标开始操作了***   
+
+>#include<iostream>   
+#include<vector>  
+using namespace std;  
+struct node  
+{  
+	int add;  
+	int data;  
+	int next;  
+};  
+int main()  
+{  
+	vector<node>in(100001);  
+	vector<node>sorted;  
+	vector<node>out;  
+	int first,N,team;  
+	cin>>first>>N>>team;  
+	node temp;  
+	//第一步 存入第一个向量   
+	for(int i=0;i<N;i++)  
+	{  
+		cin>>temp.add>>temp.data>>temp.next;  
+		in[temp.add]=temp;  
+	}  
+	//第二步 排序存入第二个向量   
+	if(first==-1)cout<<"-1"<<endl;  
+	else  
+	{  
+		int nextadd=first;//！！！！  
+		while(nextadd!=-1){          //出错了，没有限制结束条件啊！！！   
+			sorted.push_back(in[nextadd]);  
+		    nextadd=in[nextadd].next;   
+		}   	
+	}  
+	//第三步  存入第三个向量   
+	int size=sorted.size();  
+	int tern=team-1;  
+	while(tern<size)  
+    {  
+    	for(int j=tern;j>tern-team;j--)  
+    	{  
+    		out.push_back(sorted[j]);//第二步中用的push_back，所以这里直接使用下标   
+		}  
+		tern+=team;   
+	}  
+	//存在最后几个尾数还未push_back  
+	for(int j=tern-team+1;j<size;j++)  
+	{  
+		out.push_back(sorted[j]);  
+	}   
+	//第四步，除最后一个之外，其余的循环输出，最后一个单独输出  
+	for(int i=0;i<size-1;i++)  
+	{  
+		out[i].next=out[i+1].add;  
+		printf("%05d %d %05d\n",out[i].add,out[i].data,out[i].next);  
+	}   
+	printf("%05d %d -1\n",out[size-1].add,out[size-1].data);  
+	return 0;  
+}  
+*/   
+
+/*  
+1026  
+程序运行时间   
+渣渣题   
+>#include<iostream>  
+using namespace std;  
+int main()  
+{
+	long c1,c2;  
+	cin>>c1>>c2;   
+	long cha=c2-c1;  
+	if(cha%100>=50)cha=cha/100+1;  
+	else cha=cha/100;  
+	printf("%02d:%02d:%02d",cha/3600,cha%3600/60,cha%60);  
+	return 0;  
+}  
+*/  
+
+/*  
+1027 格式错误，部分正确   
+打印沙漏图案 给定数字与符号 尽可能用掉数字去打印出沙漏图案，输出图案与未用完的个数  
+
+***思路：用函数返回排数***  
+
+>#include<iostream>  
+using namespace std;  
+int paishu(int n)  
+{  
+	int count=0;  
+	int i=3;  
+	while(n>0)  
+	{  
+		count++;  
+		if(count==1)n=n-1;  
+		else{  
+			n=n-2*i;  
+			i+=2;  
+		}  
+	}  
+	count=count-1;  
+	return count;  
+}   
+int yu(int n,int hang)  
+{  
+	int y;  
+	while(hang>1)  
+	{  
+		n=n-hang*2;  
+		hang=hang-2;  
+	}  
+	y=n-1;  
+	return y;  
+}  
+int main()  
+{  
+	int n;  
+	char c;  
+	cin>>n;  
+	cin>>c;  
+	int hang=paishu(n);  
+	int zongshu=2*hang-1;  
+	int kong=0;  
+	while(hang>=1)  
+	{  
+		for(int i=0;i<kong/2;i++)  
+		cout<<" ";  
+		for(int j=0;j<zongshu-kong;j++)  
+		cout<<c;  
+		for(int i=0;i<kong/2;i++)  
+		cout<<" ";  
+		cout<<endl;  
+		hang=hang-1;  
+		kong=kong+2;  
+	}  	
+	for(hang=3;hang<=zongshu;hang+=2)  
+	{  
+		int kong=zongshu-hang;  
+		for(int i=0;i<kong/2;i++)  
+		cout<<" ";  
+		for(int j=0;j<hang;j++)  
+		cout<<c;  
+		for(int i=0;i<kong/2;i++)    
+		cout<<" ";  
+		cout<<endl;  
+	}  
+	cout<<yu(n,zongshu);  
+	return 0;  
+}  
+			    
+//参考答案  
+>#include <iostream>  
+using namespace std;  
+int main() {  
+    int N;  
+    char c;  
+    cin >> N >> c;  
+    int row = 0;  
+    for (int i = 0; i < N; i++) {  
+        if ((2 * i * (i + 2) + 1) > N) {  
+            row = i - 1;  
+            break;  
+        }  
+    }  
+    for (int i = row; i >= 1; i--) {  
+        for (int k = row - i; k >= 1; k--)  
+            cout << " ";  
+        for (int j = i * 2 + 1; j >= 1; j--)  
+            cout << c;  
+        cout << endl;  
+    }  
+    for (int i = 0; i < row; i++)  
+        cout << " ";  
+    cout << c << endl;  
+    for (int i = 1; i <= row; i++) {  
+        for (int k = row - i; k >= 1; k--)  
+            cout << " ";  
+        for (int j = i * 2 + 1; j >= 1; j--)  
+            cout << c;  
+        cout << endl;  
+    }  
+    cout << (N - (2 * row * (row + 2) + 1));  
+    return 0;  
+}  
+*/   
+
+/*  
+1028  
+人口普查 输入一系列人名出生日期，判断合理性并输出最年长与最年轻的人名  
+
+***思路：两个日期的比较方法：   
+正常读入，然后用一个long long型变量 = year*10000+month*100+day***  
+>#include<iostream>  
+#include<cstring>  
+using namespace std;   
+int main()  
+{  
+	char name[6],Max[6],Min[6];  
+	char shengri[11];  
+	int year;  
+	int mouth;  
+	int day;  
+	int count;  
+	long long max=20140907;  
+	long long min=18140905;  
+	cin>>count;  
+    int shu=0;  
+	for(int i=0;i<count;i++)  
+	{  
+		cin>>name>>shengri;  
+		year=(shengri[0]-'0')*1000+(shengri[1]-'0')*100+(shengri[2]-'0')*10+(shengri[3]-'0');  
+		mouth=(shengri[5]-'0')*10+(shengri[6]-'0');  
+		day=(shengri[8]-'0')*10+(shengri[9]-'0');  
+		long long birth = year*10000+mouth*100+day;  
+		if(birth<18140906||birth>20140906)continue;  
+		else{  
+			shu++;  
+			if(birth<max)  
+			{  
+				strcpy(Max,name);  
+				max=birth;  
+			}  
+			if(birth>min)  
+			{  
+				strcpy(Min,name);  
+				min=birth;  
+			}  
+		}  
+	}  
+	if(shu)  
+	{  
+		cout<<shu<<" "<<Max<<" "<<Min;  
+	}   
+	else cout<<"0";  
+	return 0;  
+}    
+*/  
+
+/*  
+1029  
+旧键盘  
+给两个字符串，找出缺的字符，对应键输出大写形式  
+
+***思路：三个字符数组，两个读取，然后遍历，设置标志位，若缺少的第一次出现，放入新数组***  
+>#include<iostream>   
+#include<cstring>  
+using namespace std;  
+int main()  
+{  
+	char a[81],b[81],c[81]={0};  
+	cin>>a;  
+	cin>>b;  
+	int j=0,n=0;  
+	for(int i=0;i<strlen(a);i++)  
+	{  
+		if(a[i]==b[j])j++;   //新的遍历方式，第一次见   
+	    else  
+	    {  
+	    	int flag=0;  
+	    	if(islower(a[i]))  //如果a[i]是小写  头文件cctype cstring 貌似都可以   
+	    	a[i]=toupper(a[i]); //转换为大写  
+			for(int k=0;k<n;k++)   
+			{  
+				if(a[i]==c[k])  
+				flag=1;  
+			}  
+			if(flag==0)  
+			c[n++]=a[i];  
+		}  
+	}   
+	for(int i=0;i<n;i++)  
+	{  
+		cout<<c[i];  
+	}  
+	return 0;  
+}   
+*/  
+
+/*  
+1030   部分正确   
+完美数列 给出数列项数和参数 找到整个数列中小于等于参数*最小项的项数  
+
+***思路：首先我们同样保持第一个for循环遍历最小值，在第二个for循环中我们将j置为前一个元素作为最小数时候的长度，  
+这样就减少了小于上一次的不必要的for循环，j依然小于 N，用一个if判断是否符合条件，  
+用另一个if判断此次是否大于上次的长度，比如说我们把样例中的数据已经排好序：1 2 3 4 5 6 7 8 9 20 ，  
+此时我们将array[0]作为最小数，依次向后遍历，最大数j-最小数i+1即为数列的长度，最终找到8为最大的数，  
+此时数列长度count为8，在将a[1]作为最小数的时候，我们直接将j置为1+8为9，直接比较a[1]和a[9]作为最小最大值得时候是否满足，  
+不满足则a[1]最为最小数的时候并不能使数列变得更长，则继续再看a[2],这样等到有大于8的时候再更新，就可以了。***  
+>#include<iostream>  
+#include<algorithm> //sort（）函数   
+using namespace std;   
+int main()  
+{  
+	int n;  
+	double a[100010];  
+	double p;  
+	cin>>n>>p;  
+	int i=0,j=0;  
+	int count=0;  
+	for(int i=0;i<n;i++)  
+	{  
+		cin>>a[i];  
+	}  
+	sort(a,a+n);  
+	for(i=0;i<n;i++)  
+	{  
+		for(j=i+count;j<n;j++)  
+		{  
+			if(a[j]>a[i]*p)break;  
+			if(j-1+1>count)  
+			count=j-i+1;   
+		}  
+	}  
+	cout<<j-i+1;  
+	return 0;  
+}  
+
+//标准答案  
+>#include<iostream>  
+#include<algorithm>  
+using namespace std;  
+int main(){  
+    int N,count=0;  
+    double p,array[100010];  
+    scanf("%d%lf",&N,&p);  
+    for(int i=0;i<N;i++)  
+        scanf("%lf",&array[i]);  
+    sort(array,array+N);  
+    for(int i=0;i<N;i++)            //遍历，将a[i]作为最小数  
+        for(int j=i+count;j<N;j++){ //j置为要满足可以更新数列长度的值，减少循环次数  
+            if(array[j]>array[i]*p) //如果不满足条件了，则将下一个元素最为最小值  
+            break;  
+            if(j-i+1>count)         //如果此次的长度大于上一次，更新数列长度  
+                count=j-i+1;  
+        }  
+    printf("%d",count);  
+    return 0;  
+}    
+*/  
+
+/*  
+1031  
+查验身份证 前十七位给权值，算乘积和的取模11，对应效验码是否正确  
+
+***思路：字符串读入，字符串转数组，再数组乘权重数组，再求和，算模，与效验码数组比较***  
  
-#include<iostream>
-using namespace std;
-int main()
-{
-	int quanzhong[17]={7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2}; 
-	char jiaoyanma[11]={'1','0','X','9','8','7','6','5','4','3','2'};
-	int n;
-	cin>>n;
-//	char *p[n];
-	int k=0;
-	char num[18];
-	for(int j=0;j<n;j++)
-	{	
-	for(int i=0;i<18;i++)
-	{
-		cin>>num[i];
-	}
-	int number[18];
-	for(int i=0;i<17;i++)  //取前17位放入数值数组 
-	{
-		if('0'<=num[i]&&num[i]<='9')
-		number[i]=num[i]-'0';
-		else
-		number[i]=10;
-	}
-	//加权求和并取模11
-	int sum=0;
-	for(int i=0;i<17;i++)
-	{
-		sum+=number[i]*quanzhong[i];
-	}
-	int mo;
-	mo=sum%11;
-	if(jiaoyanma[mo]!=num[17])
-	{
-		for(int i=0;i<18;i++)
-		{
-			cout<<num[i];
-		}
-		cout<<endl;
-		k=1;
-	}
-	}
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int quanzhong[17]={7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2};   
+	char jiaoyanma[11]={'1','0','X','9','8','7','6','5','4','3','2'};  
+	int n;  
+	cin>>n;  
+//	char *p[n];  
+	int k=0;  
+	char num[18];  
+	for(int j=0;j<n;j++)  
+	{	  
+	for(int i=0;i<18;i++)  
+	{  
+		cin>>num[i];  
+	}  
+	int number[18];  
+	for(int i=0;i<17;i++)  //取前17位放入数值数组   
+	{  
+		if('0'<=num[i]&&num[i]<='9')  
+		number[i]=num[i]-'0';   
+		else  
+		number[i]=10;  
+	}  
+	//加权求和并取模11  
+	int sum=0;  
+	for(int i=0;i<17;i++)  
+	{  
+		sum+=number[i]*quanzhong[i];  
+	}  
+	int mo;  
+	mo=sum%11;  
+	if(jiaoyanma[mo]!=num[17])  
+	{  
+		for(int i=0;i<18;i++)  
+		{   
+			cout<<num[i];   
+		}  
+		cout<<endl;  
+		k=1;  
+	}  
+	}  	
+	if(k==0)  
+	{  
+		cout<<"All passed";  
+	}  
+	return 0;  
+}  
+*/  
+
+/*  
+1032  
+输入序号与成绩，涉及到序号重复，最后输出成绩最高的序号和成绩  
+
+***思路：用数组对应装数，找最大*** 
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int chengj[100001]={0};  
+	int name,score,max=0,max_name;  
+	int n;  
+	cin>>n;  
+	for(int i=0;i<n;i++)  
+	{  
+		cin>>name>>score;  
+		chengj[name]+=score;  
+		if(chengj[name]>max)  
+		{  
+			max=chengj[name];  
+			max_name=name;  
+		}  
+	 }   
+	 cout<<max_name<<" "<<max<<endl;  
+	return 0;  
+}  
+*/     
 	
-	if(k==0)
-	{
-		cout<<"All passed";
-	}
-	return 0;
-}
-*/
+/*  
+1033  
+旧键盘打字  设定某些键坏掉，给定字符串，输出实际能输出的字符串  
 
-/*
-1032
-输入序号与成绩，涉及到序号重复，最后输出成绩最高的序号和成绩
-
-思路：用数组对应装数，找最大 
-#include<iostream>
-using namespace std;
-int main()
-{
-	int chengj[100001]={0};
-	int name,score,max=0,max_name;
-	int n;
-	cin>>n;
-	for(int i=0;i<n;i++)
-	{
-		cin>>name>>score;
-		chengj[name]+=score;
-		if(chengj[name]>max)
-		{
-			max=chengj[name];
-			max_name=name;
-		}
-	 } 
-	 cout<<max_name<<" "<<max<<endl;
-	return 0;
-}
-*/ 
-/*
-1033
-旧键盘打字  设定某些键坏掉，给定字符串，输出实际能输出的字符串
-
-思路：大神思路，将ASCii码的127个位置，先读坏键置为1，再去读好键，为零即可输出，注意大小写同时都置一，注意上档键导致大写全为一
-#include <stdio.h>
-#include <cctype>
-
-int main()
-{
-    int list[128] = {0}, bad_key = 0, input;
-
-    while ((bad_key = getchar()) != '\n')   //输入坏键都是大写 
-	{
-        list[bad_key] = 1;
-        list[tolower(bad_key)] = 1; // 将所有坏键赋值为1，如果是字母，相应的大小写字符都要赋值为1
-    }
-    if (list['+'] == 1) // 检查上档键
-        for (int i = 65; i < 91; i++)
-            list[i] = 1;
-    while ((input = getchar()) != '\n')
-        if (list[input] == 0) // 查验字符表，并进行输出
-            printf("%c", input);
-
-    return 0;
-}
-*/
+***思路：大神思路，将ASCii码的127个位置，先读坏键置为1，再去读好键，为零即可输出，注意大小写同时都置一，注意上档键导致大写全为一***     
+>#include <stdio.h>  
+#include <cctype>  
+int main()  
+{  
+    int list[128] = {0}, bad_key = 0, input;  
+    while ((bad_key = getchar()) != '\n')   //输入坏键都是大写   
+	{  
+        list[bad_key] = 1;  
+        list[tolower(bad_key)] = 1; // 将所有坏键赋值为1，如果是字母，相应的大小写字符都要赋值为1  
+    }  
+    if (list['+'] == 1) // 检查上档键  
+        for (int i = 65; i < 91; i++)  
+            list[i] = 1;  
+    while ((input = getchar()) != '\n')  
+        if (list[input] == 0) // 查验字符表，并进行输出  
+            printf("%c", input);  
+    return 0;  
+}  
+*/  
 
 /*
 1034  

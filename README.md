@@ -5259,496 +5259,494 @@ int main() {
 }  
 */  
 
-/*
-1081
-检查密码 判断密码的合理性，不同错误输出对应字符串
+/*  
+1081  
+检查密码 判断密码的合理性，不同错误输出对应字符串  
 
-思路：置标志位去输出每种结果
+***思路：置标志位去输出每种结果***  
  
-#include<iostream>
-using namespace std;
-int main()
-{
-	int n;
-	cin>>n;
-	getchar();   //在这里可以理解为读取n值完毕，否则n会为第一个getline被读到 
-	for(int i=0;i<n;i++)
-	{
-		int taiduan=0,buhefazifu=0,zhiyouzimu=0,zhiyoushuzi=0,buhefa=0;
-		string s;
-		getline(cin,s);  //测试点中含空格，用getline读取 
-		if(s.size()<6)
-		{
-		    taiduan=1;
-		}
-		else
-		{
-			int yingwen=0,shuzi=0,xiaoshudian=0;
-			for(int j=0;j<s.size();j++)
-			{   if(s[j]=='.')xiaoshudian++;    //判断语句中间取等是==  切记！！ 
-				else if(s[j]>='0'&&s[j]<='9')shuzi++;
-				else if((s[j]>='a'&&s[j]<='z')||(s[j]>='A'&&s[j]<='Z'))yingwen++;	
-			}
-			if(shuzi+xiaoshudian==s.size())zhiyoushuzi=1;
-			else if(yingwen+xiaoshudian==s.size())zhiyouzimu=1;
-			else if(shuzi+yingwen+xiaoshudian<s.size())buhefa=1;
-		}
-		if(taiduan)cout<<"Your password is tai duan le."<<endl;
-		else if(zhiyouzimu)cout<<"Your password needs shu zi."<<endl;
-		else if(buhefa)cout<<"Your password is tai luan le."<<endl; 
-		else if(zhiyoushuzi)cout<<"Your password needs zi mu."<<endl;
-		else cout<<"Your password is wan mei."<<endl; 
-	} 
-	return 0;
-} 
-*/
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	getchar();   //在这里可以理解为读取n值完毕，否则n会为第一个getline被读到   
+	for(int i=0;i<n;i++)  
+	{  
+		int taiduan=0,buhefazifu=0,zhiyouzimu=0,zhiyoushuzi=0,buhefa=0;  
+		string s;  
+		getline(cin,s);  //测试点中含空格，用getline读取    
+		if(s.size()<6)    
+		{  
+		    taiduan=1;   
+		}  
+		else    
+		{   
+			int yingwen=0,shuzi=0,xiaoshudian=0;  
+			for(int j=0;j<s.size();j++)   
+			{   if(s[j]=='.')xiaoshudian++;    //判断语句中间取等是==  切记！！   
+				else if(s[j]>='0'&&s[j]<='9')shuzi++;  
+				else if((s[j]>='a'&&s[j]<='z')||(s[j]>='A'&&s[j]<='Z'))yingwen++;	  
+			}   
+			if(shuzi+xiaoshudian==s.size())zhiyoushuzi=1;  
+			else if(yingwen+xiaoshudian==s.size())zhiyouzimu=1;  
+			else if(shuzi+yingwen+xiaoshudian<s.size())buhefa=1;  
+		}  
+		if(taiduan)cout<<"Your password is tai duan le."<<endl;  
+		else if(zhiyouzimu)cout<<"Your password needs shu zi."<<endl;  
+		else if(buhefa)cout<<"Your password is tai luan le."<<endl;   
+		else if(zhiyoushuzi)cout<<"Your password needs zi mu."<<endl;  
+		else cout<<"Your password is wan mei."<<endl;   
+	}    
+	return 0;  
+}   
+*/  
 
-/*
-1082 
-射击比赛  给出id与两点坐标，输出冠军与最差的id，涉及距离判断
+/*  
+1082   
+射击比赛  给出id与两点坐标，输出冠军与最差的id，涉及距离判断  
 
-思路：用类做，用返回距离函数进行比较再输出 
-//输出结果结尾有个“口” 
-class Player
-{
-	char ID[4];
-	int X;
-	int Y;
-public:
-	void Init(char *id,int x,int y)
-	{
-		strcpy(ID,id);
-		X=x;
-		Y=y;
-	}
-	int juli()
-	{
-		return (X*X+Y*Y); 
-	}
-	void show()
-	{
-		cout<<ID;
-	} 
-}; 
-int main()
-{
-	int n;
-	cin>>n;
-	char id[4];
-	int x;
-	int y;
-	Player player[n];
-	for(int i=0;i<n;i++)
-	{
-		cin>>id>>x>>y;
-		player[i].Init(id,x,y);
-	}
-	for(int i=0;i<n-1;i++)   
-	{
-		for(int j=i+1;j<n;j++)
-		{
-			if(player[i].juli()<=player[j].juli())  //距离最大的在前面 
-			{
-				int temp;
-				temp=i;
-				i=j;
-				j=temp;				
-			}
-		}
-	}
-	player[n-1].show();
-	cout<<" ";
-	player[0].show(); 
-	return 0;
+***思路：用类做，用返回距离函数进行比较再输出***   
+//输出结果结尾有个“口”   
+class Player  
+{  
+	char ID[4];   
+	int X;  
+	int Y;  
+public:  
+	void Init(char *id,int x,int y)  
+	{  
+		strcpy(ID,id);   
+		X=x;  
+		Y=y;  
+	}  
+	int juli()  
+	{  
+		return (X*X+Y*Y);   
+	}  
+	void show()  
+	{  
+		cout<<ID;  
+	}   
+};   
+int main()  
+{  
+	int n;  
+	cin>>n; 
+	char id[4];   
+	int x;  
+	int y;  
+	Player player[n];  
+	for(int i=0;i<n;i++)  
+	{  
+		cin>>id>>x>>y;  
+		player[i].Init(id,x,y);  
+	}  
+	for(int i=0;i<n-1;i++)     
+	{  
+		for(int j=i+1;j<n;j++)  
+		{  
+			if(player[i].juli()<=player[j].juli())  //距离最大的在前面   
+			{  
+				int temp;  
+				temp=i;  
+				i=j;  
+				j=temp;	  			
+			}  
+		}  
+	}  
+	player[n-1].show();  
+	cout<<" ";  
+	player[0].show();   
+	return 0;  
 }
-//借鉴答案 
-#include<iostream>
-#include<cstring>
-using namespace std;
-int main()
-{
-	int n,x,y,max=0,min=10000;
-	float juli;
-	int id,pmax,pmin;
-	cin>>n;
-	for(int i=0;i<n;i++)
-	{
-		cin>>id>>x>>y;
-		juli=(x*x+y*y);
-		if(juli>max)
-		{
-			max=juli;
-			pmax=id;
-		}
-		if(juli<min)
-		{
-			min=juli;
-			pmin=id;
-		}
-	}
-	printf("%04d %04d",pmin,pmax);
-}
-*/
+  
+//借鉴答案    
+>#include<iostream>  
+#include<cstring>  
+using namespace std;  
+int main()  
+{  
+	int n,x,y,max=0,min=10000;  
+	float juli;  
+	int id,pmax,pmin;  
+	cin>>n;  
+	for(int i=0;i<n;i++)  
+	{  
+		cin>>id>>x>>y;  
+		juli=(x*x+y*y);  
+		if(juli>max)   
+		{  
+			max=juli;  
+			pmax=id;   
+		}  
+		if(juli<min)  
+		{  
+			min=juli;   
+			pmin=id;  
+		}  
+	}  
+	printf("%04d %04d",pmin,pmax);  
+}  
+*/  
 
-/*
-1083
-是否存在相等的差
+/*  
+1083  
+是否存在相等的差  
 
-思路：将数读入从一开始的数列，数列值与序号做绝对值函数，对应值数组++ 
-绝对值函数 对于整数abs()  对于浮点数 fabs()
+***思路：将数读入从一开始的数列，数列值与序号做绝对值函数，对应值数组++ 
+绝对值函数 对于整数abs()  对于浮点数 fabs()***  
 
-#include<iostream>
-#include<cmath> 
-using namespace std;
-//返回绝对值
-int ab(int a,int b)
-{
-	int c;
-	c=a-b;
-	return abs(c);
-} 
-int main()
-{
-	int n;
-	cin>>n;
-	int a[n+1];
-	int b[10000]={0};
-	int max=0;
-	for(int i=1;i<=n;i++)
-	{
-		cin>>a[i];
-		int temp;
-		temp=ab(a[i],i);
-		b[temp]++;
-		if(temp>max)max=temp;
-	} 
-	for(int j=max;j>=0;j--)   //取等于 
-	{
-		if(b[j]>1)
-		{
-			cout<<j<<" "<<b[j]<<endl;
-		}
-	}
-	return 0;
-}
-*/
+>#include<iostream>  
+#include<cmath>   
+using namespace std;  
+//返回绝对值  
+int ab(int a,int b)  
+{  
+	int c;  
+	c=a-b;  
+	return abs(c);  
+}   
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	int a[n+1];  
+	int b[10000]={0};  
+	int max=0;     
+	for(int i=1;i<=n;i++)  
+	{  
+		cin>>a[i];  
+		int temp;  
+		temp=ab(a[i],i);  
+		b[temp]++;  
+		if(temp>max)max=temp;  
+	}   
+	for(int j=max;j>=0;j--)   //取等于   
+	{  
+		if(b[j]>1)  
+		{  
+			cout<<j<<" "<<b[j]<<endl;  
+		}  
+	}  
+	return 0;  
+}  
+*/  
 
-/*
-1084
-外观数列  对每位数字的描述的迭代
-str=str+char;直接在字符串里面加字符，允许 
+/*  
+1084  
+外观数列  对每位数字的描述的迭代  
+str=str+char;直接在字符串里面加字符，允许   
 
-#include<iostream> 
-using namespace std;
-int main()
-{
-	int n;
-	string s;
-	cin>>s>>n;
-	for(int i=1;i<n;i++)
-	{
-		string str;
-		int count=0;
-		char c=s[0];
-		for(int j=0;j<s.size();j++)
-		{
-			if(s[j]==c)count++;
-			else{
-				str+=c;
-				str+=count+'0'; //不能写成 str=str+(count+'0'); 
-				c=s[j];
-				count=1;
-			}
-		}
-		if(count)
-		{
-			str+=c;
-			str+=count+'0';		
-		}
-		s=str;
-	}
-	cout<<s<<endl;
-	return 0;
-}
-*/
+>#include<iostream>   
+using namespace std;  
+int main()  
+{  
+	int n;  
+	string s;  
+	cin>>s>>n;  
+	for(int i=1;i<n;i++)  
+	{  
+		string str;  
+		int count=0;  
+		char c=s[0];  
+		for(int j=0;j<s.size();j++)  
+		{  
+			if(s[j]==c)count++;  
+			else{   
+				str+=c;  
+				str+=count+'0'; //不能写成 str=str+(count+'0');   
+				c=s[j];  
+				count=1;  
+			}  
+		}  
+		if(count)  
+		{  
+			str+=c;  
+			str+=count+'0';	  	
+		}  
+		s=str;  
+	}  
+	cout<<s<<endl;  
+	return 0;   
+}  
+*/  
 
-/*
-1085
-PAT单位排行 
-#include <iostream>
-#include <cstdio>
-#include <cstring>
-#include <algorithm>
-#include <map>
-#include <algorithm>
-using namespace std;
-struct pat
-{
-    char num[7],school[7];
-    int af,bf,tf,snum,f;
-}s[100001];
-int n,c,f;
-char num[7],school[7];
-map<string,int> q;
-bool cmp(pat a,pat b)
-{
-    if(a.f == b.f)
-    {
-        if(a.snum == b.snum)
-        {
-            return strcmp(a.school,b.school) < 0;
-        }
-        return a.snum < b.snum;
-    }
-    return a.f > b.f;
-}
-void low(char *t)
-{
-    for(int i = 0;t[i];i ++)
-    t[i] = tolower(t[i]);
-}
-int main()
-{
-    scanf("%d",&n);
-    for(int i = 0;i < n;i ++)
-    {
-        scanf("%s%d%s",num,&f,school);
-        low(school);
-        if(!q[school])q[school] = ++ c,strcpy(s[c].school,school);
-        s[q[school]].snum ++;
-        if(num[0] == 'A')s[q[school]].af += f;
-        else if(num[0] == 'B')s[q[school]].bf += f;
-        else s[q[school]].tf += f;
-    }
-    for(int i = 1;i <= c;i ++)
-    {
-        s[i].f = s[i].af + s[i].bf / 1.5 + s[i].tf * 1.5;
-    }
-    sort(s + 1,s + c + 1,cmp);
-    int d = 1;
-    printf("%d\n",c);
-    for(int i = 1;i <= c;i ++)
-    {
-        if(s[i].f != s[i - 1].f)d = i;
-        printf("%d %s %d %d\n",d,s[i].school,s[i].f,s[i].snum);
-    }
-}
-*/ 
+/*  
+1085  
+PAT单位排行   
+>#include <iostream>  
+#include <cstdio>  
+#include <cstring>  
+#include <algorithm>  
+#include <map>  
+#include <algorithm>  
+using namespace std;  
+struct pat  
+{  
+    char num[7],school[7];   
+    int af,bf,tf,snum,f;  
+}s[100001];  
+int n,c,f;  
+char num[7],school[7];  
+map<string,int> q;  
+bool cmp(pat a,pat b)  
+{  
+    if(a.f == b.f)  
+    {  
+        if(a.snum == b.snum)  
+        {  
+            return strcmp(a.school,b.school) < 0;  
+        }  
+        return a.snum < b.snum;  
+    }  
+    return a.f > b.f;  
+}  
+void low(char *t)  
+{  
+    for(int i = 0;t[i];i ++)  
+    t[i] = tolower(t[i]);  
+}  
+int main()  
+{    
+    scanf("%d",&n);  
+    for(int i = 0;i < n;i ++)  
+    {  
+        scanf("%s%d%s",num,&f,school);  
+        low(school);  
+        if(!q[school])q[school] = ++ c,strcpy(s[c].school,school);  
+        s[q[school]].snum ++;  
+        if(num[0] == 'A')s[q[school]].af += f;  
+        else if(num[0] == 'B')s[q[school]].bf += f;  
+        else s[q[school]].tf += f;  
+    }  
+    for(int i = 1;i <= c;i ++)  
+    {  
+        s[i].f = s[i].af + s[i].bf / 1.5 + s[i].tf * 1.5;  
+    }  
+    sort(s + 1,s + c + 1,cmp);  
+    int d = 1;  
+    printf("%d\n",c);  
+    for(int i = 1;i <= c;i ++)  
+    {     
+        if(s[i].f != s[i - 1].f)d = i;  
+        printf("%d %s %d %d\n",d,s[i].school,s[i].f,s[i].snum);   
+    }  
+}  
+*/   
 
-/*
-1086
-就不告诉你 给定两个数，逆序输出乘积  对于100*100 = 10000 逆序输出的时候只有1 就要找到左起第一个不为零的下标 
+/*  
+1086  
+就不告诉你 给定两个数，逆序输出乘积  对于100*100 = 10000 逆序输出的时候只有1 就要找到左起第一个不为零的下标   
 
-#include<iostream>
-using namespace std;
-int main()
-{
-	int m,n;
-	cin>>m>>n;
-	int count;
-	count = m*n;
-	int a[10] = {0};
-	int k = 0;
-	 
-	while(count>0){
-		a[k] = count%10;
-		k++;
-		count /= 10;
-	}
-	int t;
-	for(int i = 0; i<k; i++){
-		if(a[i])
-		{
-			t = i;
-		    break;
-		}		
-	}
-	for(int j = t; j<k; j++){
-		cout<<a[j];
-	}  	
-	return 0;
-} 
-*/
+>#include<iostream>  
+using namespace std;  
+int main()  
+{  
+	int m,n;  
+	cin>>m>>n;  
+	int count;  
+	count = m*n;  
+	int a[10] = {0};  
+	int k = 0;  
+	while(count>0){  
+		a[k] = count%10;  
+		k++;  
+		count /= 10;  
+	}  
+	int t;  
+	for(int i = 0; i<k; i++){  
+		if(a[i])  
+		{  
+			t = i;  
+		    break;  
+		}	  	
+	}  
+	for(int j = t; j<k; j++){  
+		cout<<a[j];  
+	}  	  
+	return 0;  
+}   
+*/  
 
-/*
-1087
-有多少不同的值 对于一个自然数，范围内的数，用一个取整函数去计算方程式不同值的个数
+/*  
+1087  
+有多少不同的值 对于一个自然数，范围内的数，用一个取整函数去计算方程式不同值的个数  
 
-思路：显然堆最方便，但是我不会用，很尴尬，我可以用vector，因为排序方便 再去遍历计数 
+***思路：显然堆最方便，但是我不会用，很尴尬，我可以用vector，因为排序方便 再去遍历计数***   
 
-#include<iostream>
-#include<vector>
-#include<algorithm>
-using namespace std;
-int main()
-{
-	vector<int> v;//存放结果
-	int N;
-	cin>>N;
-	for(int i = 1; i<=N; i++){
-		int temp,temp1,temp2,temp3;
-		temp1 = i/2;
-		temp2 = i/3;
-		temp3 = i/5;
-		temp = temp1+temp2+temp3;
-		v.push_back(temp);
-	} 
-	sort(v.begin(),v.end());
-	vector<int> ::iterator it;
-	int count = 1;
-	for(it = v.begin(); it<v.end()-1; it++){
-		if(*it != *(it+1)){
-			count++;
-		}
-	}
-	cout<<count;
-	return 0;
-}
-*/
+>#include<iostream>  
+#include<vector>  
+#include<algorithm>  
+using namespace std;  
+int main()  
+{  
+	vector<int> v;//存放结果  
+	int N;  
+	cin>>N;  
+	for(int i = 1; i<=N; i++){  
+		int temp,temp1,temp2,temp3;  
+		temp1 = i/2;  
+		temp2 = i/3;  
+		temp3 = i/5;  
+		temp = temp1+temp2+temp3;  
+		v.push_back(temp);  
+	}   
+	sort(v.begin(),v.end());  
+	vector<int> ::iterator it;  
+	int count = 1;  
+	for(it = v.begin(); it<v.end()-1; it++){  
+		if(*it != *(it+1)){  
+			count++;  
+		}  
+	}  
+	cout<<count;  
+	return 0;  
+}  
+*/  
 
-/*
-1088
-三人行 给定关系，求出三个人的成绩，与自己比较并输出结果 
+/*  
+1088  
+三人行 给定关系，求出三个人的成绩，与自己比较并输出结果   
 
-思路：遍历jia所有的取值，判断最后一个倍数的条件，满足就break  遍历这种方法是最牛皮的 
+***思路：遍历jia所有的取值，判断最后一个倍数的条件，满足就break  遍历这种方法是最牛皮的***   
  
-#include<iostream>
-#include<cmath>
-using namespace std;
-const string out1 = "Cong"; 
-const string out2 = "Ping";
-const string out3 = "Gai";
-const string out4 = "No Solution";
-void oout(int a, int b)
-{
-	if(a == b) cout<<out2;
-	else if(a > b) cout<<out3;
-	else cout<<out1;
-}
-void ooout(int a, double b)
-{
-	if(a == b) cout<<out2;
-	else if(a > b) cout<<out3;
-	else cout<<out1;
-}
-int main()
-{
-	int me_score,x,y;
-	cin>>me_score>>x>>y;
-	int jia,yi;
-	double bing;
-	for(jia = 99; jia>9; jia--){
-		yi = jia/10+jia%10*10;
-		bing = double(abs(jia-yi))/x;
-		if(bing*y == yi)break;
-	}
-	if(jia == 9){
-		cout<<out4;
-	}
-	else{
-		cout<<jia<<" ";
-		oout(me_score,jia);
-		cout<<" ";
-		oout(me_score,yi);
-		cout<<" ";
-		ooout(me_score,bing);		
-	}
-	return 0;
-} 
-*/
-
-/*
-1089
-狼人杀-简单版 有两个狼 有两个人说假话 
-
-思路：遍历，冒泡假设狼 再去遍历所有说的话，若两个与事实不符，就输出
-      第一个固定数组读入每个人说的话 第二个数组全为零，随机狼对应位置为-1，只是为了比较
+>#include<iostream>  
+#include<cmath>  
+using namespace std;  
+const string out1 = "Cong";   
+const string out2 = "Ping";  
+const string out3 = "Gai";  
+const string out4 = "No Solution";  
+void oout(int a, int b)  
+{  
+	if(a == b) cout<<out2;  
+	else if(a > b) cout<<out3;  
+	else cout<<out1;  
+}  
+void ooout(int a, double b)  
+{  
+	if(a == b) cout<<out2;  
+	else if(a > b) cout<<out3;  
+	else cout<<out1;  
+}  
+int main()  
+{  
+	int me_score,x,y;  
+	cin>>me_score>>x>>y;  
+	int jia,yi;  
+	double bing;  
+	for(jia = 99; jia>9; jia--){  
+		yi = jia/10+jia%10*10;  
+		bing = double(abs(jia-yi))/x;  
+		if(bing*y == yi)break;  
+	}  
+	if(jia == 9){  
+		cout<<out4;  
+	}  
+	else{  
+		cout<<jia<<" ";  
+		oout(me_score,jia);  
+		cout<<" ";  
+		oout(me_score,yi);   
+		cout<<" ";  
+		ooout(me_score,bing);	  	
+	}  
+	return 0;  
+}   
+*/  
  
-#include<iostream>
-#include<cmath>
-using namespace std;
-int main()
-{
-	int n;
-	cin>>n;
-	int a[n+1];
-	for(int i = 1; i<=n; i++){
-		cin>>a[i];
-	}
-	
-	for(int i = 1; i<n; i++){
-		for(int j = i+1; j<n+1; j++){
-			int b[n+1] = {0};
-		    int flag = 0;
-		    int flag1 = 0;
-			b[i] = -1;
-			b[j] = -1;
-			for(int k = 1; k<n+1; k++){
-				if(a[k]<0 && (b[abs(a[k])]==0)){
-					flag++;
-					if(k == i || k == j) flag1++;
-				}
-				else if(a[k]>0 && (b[a[k]] == -1)){
-					flag++;
-					if(k == i || k == j) flag1++;
-				}
-			}
-			if(flag == 2)
-			{
-				if(flag1 == 1){
-					cout<<i<<" "<<j;
-				    return 0;
-				}
-			}
-		}
-	}
-	cout<<"No Solution";
-	return 0;
-} 
-*/
+/*  
+1089  
+狼人杀-简单版 有两个狼 有两个人说假话   
 
-/*
-1090
-危险品装箱
+***思路：遍历，冒泡假设狼 再去遍历所有说的话，若两个与事实不符，就输出
+      第一个固定数组读入每个人说的话 第二个数组全为零，随机狼对应位置为-1，只是为了比较***  
+ 
+>#include<iostream>  
+#include<cmath>  
+using namespace std;  
+int main()  
+{  
+	int n;  
+	cin>>n;  
+	int a[n+1];  
+	for(int i = 1; i<=n; i++){  
+		cin>>a[i];  
+	}  
+	for(int i = 1; i<n; i++){  
+		for(int j = i+1; j<n+1; j++){  
+			int b[n+1] = {0};  
+		    int flag = 0;  
+		    int flag1 = 0;  
+			b[i] = -1;  
+			b[j] = -1;  
+			for(int k = 1; k<n+1; k++){  
+				if(a[k]<0 && (b[abs(a[k])]==0)){  
+					flag++;  
+					if(k == i || k == j) flag1++;  
+				}  
+				else if(a[k]>0 && (b[a[k]] == -1)){  
+					flag++;  
+					if(k == i || k == j) flag1++;  
+				}  
+			}  
+			if(flag == 2)  
+			{  
+				if(flag1 == 1){  
+					cout<<i<<" "<<j;  
+				    return 0;  
+				}  
+			}  
+		}  
+	}  
+	cout<<"No Solution";  
+	return 0;  
+}   
+*/  
 
-思路：用vector<set<int>> v用堆去做，添加是insert ，查找是find 
+/*  
+1090  
+危险品装箱  
 
-#include<iostream>
-#include<vector>
-#include<set>
-using namespace std; 
-bool judge(vector<set<int> > v,int *a,int count)
-{
-	for(int i = 0; i<count-1; i++){
-		for(int j = i+1; j<count; j++){
-			if(i != j && v[a[i]].find(a[j])!=v[a[i]].end()){
-				return false;
-			}
-		}
-	}
-	return true;
-}
-int main()
+***思路：用vector<set<int>> v用堆去做，添加是insert ，查找是find***
 
-{
-	vector<set<int> > v(100010);  //一定要初始化！！！！！！！！ 
-	int m,n;
-	cin>>m>>n;
-	for(int i = 0; i<m; i++){
-		int a,b;
-		cin>>a>>b; 
-		v[a].insert(b);
-		v[b].insert(a);
-	}
-	for(int j = 0; j<n; j++){
-		int count;
-		cin>>count;
-		int a[count];
-		for(int k = 0; k<count; k++){
-			cin>>a[k];
-		}
-		printf("%s\n",judge(v,a,count)?"Yes":"No");
-	}
-	return 0;
-}
-*/
+>#include<iostream>  
+#include<vector>  
+#include<set>  
+using namespace std;   
+bool judge(vector<set<int> > v,int *a,int count)  
+{  
+	for(int i = 0; i<count-1; i++){  
+		for(int j = i+1; j<count; j++){  
+			if(i != j && v[a[i]].find(a[j])!=v[a[i]].end()){  
+				return false;  
+			}  
+		}  
+	}  
+	return true;  
+}  
+int main()  
+{  
+	vector<set<int> > v(100010);  //一定要初始化！！！！！！！！   
+	int m,n;  
+	cin>>m>>n;  
+	for(int i = 0; i<m; i++){  
+		int a,b;  
+		cin>>a>>b;   
+		v[a].insert(b);  
+		v[b].insert(a);  
+	}  
+	for(int j = 0; j<n; j++){  
+		int count;  
+		cin>>count;  
+		int a[count];  
+		for(int k = 0; k<count; k++){  
+			cin>>a[k];  
+		}  
+		printf("%s\n",judge(v,a,count)?"Yes":"No");  
+	}  
+	return 0;  
+}  
+*/  
